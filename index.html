@@ -1,170 +1,390 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>Anuj Sharma</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700' rel='stylesheet' type='text/css'>
-    <link rel="icon" href="/favicon.png">
-
-    <!-- Chrome, Firefox OS, Opera and Vivaldi -->
-    <meta name="theme-color" content="#42a5f5">
-    <!-- Windows Phone -->
-    <meta name="msapplication-navbutton-color" content="#42a5f5">
-    <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-status-bar-style" content="#42a5f5">
-    <style>
-        html,
-        body {
-            overflow: hidden;
-            margin: 0;
-        }
-
-        body {
-            font-family: 'Open Sans', 'Helvetica Neue', 'Hiragino Sans GB', 'LiHei Pro', Arial, sans-serif;
-            color: #333;
-        }
-
-        #wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            height: 100vh;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-        }
-
-        h1 {
-            font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
-            font-weight: 700;
-            font-size: 30px;
-            letter-spacing: 9px;
-            text-transform: uppercase;
-            margin: 12px 0;
-            left: 4px;
-        }
-
-        h2 {
-            color: #999;
-            font-weight: normal;
-            font-size: 15px;
-            letter-spacing: .12em;
-            margin-bottom: 30px;
-            left: 3px;
-        }
-
-        h1,
-        h2 {
-            position: relative;
-        }
-
-        p {
-            font-size: 14px;
-            line-height: 2em;
-            margin: 0;
-            letter-spacing: 2px;
-        }
-
-        canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        a {
-            color: #999;
-            text-decoration: none;
-            transition: color .2s ease;
-        }
-
-        a:hover {
-            color: #14e6b4;
-        }
-
-        .job-role {
-            display: inline-flex;
-            align-items: center;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anuj Sharma — Senior AI Engineer FullStack</title>
+    <meta name="description" content="7+ years building and scaling products. Senior AI Engineer FullStack at delta.exchange.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
-    <div id="wrapper">
-        <h1>Anuj Sharma</h1>
-        <h2 class="job-role">Building&nbsp;<p><a href="https://shipstation.ai" target="_blank">ShipStation.ai</a></p>
-        </h2>
-        <p><a href="Resume-AnujSharma.pdf" target="_blank">Résumé</a></p>
-        <p><a href="https://github.com/ptmaroct" target="_blank">Github</a></p>
-        <p><a href="https://www.linkedin.com/in/ptmaroct/" target="_blank">LinkedIn</a></p>
-        <p><a href="https://x.com/waahbete" target="_blank">Twitter</a></p>
+    <div class="bg-grid" id="bgGrid"></div>
+
+    <nav class="nav" id="nav">
+        <a href="#" class="nav-logo">anuj.sh</a>
+        <div class="nav-links">
+            <a href="#proof">proof</a>
+            <a href="#work">work</a>
+            <a href="#experience">experience</a>
+            <a href="#skills">skills</a>
+            <a href="#about">about</a>
+            <a href="#contact">contact</a>
+            <button class="nav-resume" id="resumeBtn">resume ↓</button>
+        </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#proof">proof</a>
+        <a href="#work">work</a>
+        <a href="#experience">experience</a>
+        <a href="#skills">skills</a>
+        <a href="#about">about</a>
+        <a href="#contact">contact</a>
+        <button class="mobile-resume" id="mobileResumeBtn">resume ↓</button>
     </div>
-    <canvas></canvas>
-    <script>
-        document.addEventListener('touchmove', function (e) {
-            e.preventDefault()
-        })
-        var c = document.getElementsByTagName('canvas')[0],
-            x = c.getContext('2d'),
-            pr = window.devicePixelRatio || 1,
-            w = window.innerWidth,
-            h = window.innerHeight,
-            f = 90,
-            q,
-            m = Math,
-            r = 0,
-            u = m.PI * 2,
-            v = m.cos,
-            z = m.random
-        c.width = w * pr
-        c.height = h * pr
-        x.scale(pr, pr)
-        x.globalAlpha = 0.6
-        function i() {
-            x.clearRect(0, 0, w, h)
-            q = [{ x: 0, y: h * .7 + f }, { x: 0, y: h * .7 - f }]
-            while (q[1].x < w + f) d(q[0], q[1])
-        }
-        function d(i, j) {
-            x.beginPath()
-            x.moveTo(i.x, i.y)
-            x.lineTo(j.x, j.y)
-            var k = j.x + (z() * 2 - 0.25) * f,
-                n = y(j.y)
-            x.lineTo(k, n)
-            x.closePath()
-            r -= u / -50
-            x.fillStyle = '#' + (v(r) * 127 + 128 << 16 | v(r + u / 3) * 127 + 128 << 8 | v(r + u / 3 * 2) * 127 + 128).toString(16)
-            x.fill()
-            q[0] = q[1]
-            q[1] = { x: k, y: n }
-        }
-        function y(p) {
-            var t = p + (z() * 2 - 1.1) * f
-            return (t > h || t < 0) ? y(p) : t
-        }
-        document.onclick = i
-        document.ontouchstart = i
-        i()
-    </script>
-    <script>
-            (function (i, s, o, g, r, a, m) {
-                i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                    (i[r].q = i[r].q || []).push(arguments)
-                }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                    m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-        ga('create', 'UA-82198265-1', 'auto');
-        ga('send', 'pageview');
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <div class="terminal-badge">
+                    <span class="terminal-prompt">$</span>
+                    <span class="terminal-text" id="terminalText"></span>
+                    <span class="terminal-cursor">|</span>
+                </div>
+                <h1 class="hero-title">
+                    <span class="hero-line">I build for the</span>
+                    <span class="hero-line">web with <em>taste</em>.</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Senior AI Engineer FullStack @ <a href="https://delta.exchange" target="_blank" rel="noopener">delta.exchange</a><br>
+                    Based in Bangalore — shipping AI products, polished interfaces, and systems that hold up under real use.
+                </p>
+                <div class="hero-cta">
+                    <a href="#work" class="btn btn-primary">View work ↓</a>
+                    <a href="#contact" class="btn btn-secondary">Get in touch</a>
+                </div>
+            </div>
+        </section>
 
-    </script>
+        <section class="proof" id="proof">
+            <h2 class="section-title">Worked across</h2>
+            <div class="logo-grid">
+                <a class="logo-card" href="https://delta.exchange" target="_blank" rel="noopener" aria-label="Delta Exchange">
+                    <img src="assets/logos/delta.svg" alt="Delta Exchange logo">
+                </a>
+                <a class="logo-card" href="https://www.getsaral.com/" target="_blank" rel="noopener" aria-label="Saral">
+                    <img src="assets/logos/saral.svg" alt="Saral logo">
+                </a>
+                <a class="logo-card" href="https://mydukaan.io/" target="_blank" rel="noopener" aria-label="Dukaan">
+                    <img src="assets/logos/dukaan.svg" alt="Dukaan logo">
+                </a>
+                <a class="logo-card" href="https://bot9.ai/" target="_blank" rel="noopener" aria-label="Bot9">
+                    <img src="assets/logos/bot9.svg" alt="Bot9 logo">
+                </a>
+            </div>
+        </section>
+
+        <section class="work" id="work">
+            <h2 class="section-title">Open source & selected work</h2>
+            <div class="projects-grid">
+                <article class="project-card">
+                    <div class="project-header">
+                        <span class="project-year">2024</span>
+                        <span class="project-type">Open Source</span>
+                    </div>
+                    <h3 class="project-title">ShipStation.ai</h3>
+                    <p class="project-description">
+                        Open-source AI portfolio website builder. 87 GitHub stars, 1000+ users.
+                        Built with Anthropic, OAuth, Supabase, deployed on Coolify.
+                    </p>
+                    <div class="project-tags">
+                        <span>TypeScript</span>
+                        <span>Next.js</span>
+                        <span>AI</span>
+                        <span>Supabase</span>
+                    </div>
+                    <div class="project-actions">
+                        <a href="https://github.com/daytimedrinkingclub/shipstation" target="_blank" rel="noopener" class="project-link">
+                            View GitHub ↗
+                        </a>
+                        <a href="https://shipstation.ai" target="_blank" rel="noopener" class="project-link project-link-muted">
+                            Live site ↗
+                        </a>
+                    </div>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-header">
+                        <span class="project-year">2025</span>
+                        <span class="project-type">AI Platform</span>
+                    </div>
+                    <h3 class="project-title">Delta.exchange AI Help Center</h3>
+                    <p class="project-description">
+                        Support/debugging system reducing response time from 2 days to 2 minutes.
+                        RAG pipeline with Pinecone + Anthropic.
+                    </p>
+                    <div class="project-tags">
+                        <span>RAG</span>
+                        <span>Pinecone</span>
+                        <span>Anthropic</span>
+                        <span>AI</span>
+                    </div>
+                    <a href="https://delta.exchange" target="_blank" rel="noopener" class="project-link">
+                        View project →
+                    </a>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-header">
+                        <span class="project-year">2020</span>
+                        <span class="project-type">Hackathon</span>
+                    </div>
+                    <h3 class="project-title">iheardthis.live</h3>
+                    <p class="project-description">
+                        A six-hour internet experiment for live-music memories.
+                        It pulled in 40+ users in the first day with no ads — just taste, speed, and shipping momentum.
+                    </p>
+                    <div class="project-tags">
+                        <span>Rapid Build</span>
+                        <span>Product Taste</span>
+                        <span>Distribution</span>
+                    </div>
+                    <div class="project-actions">
+                        <a href="https://github.com/daytimedrinkingclub/iheardthis.live" target="_blank" rel="noopener" class="project-link">
+                            View GitHub ↗
+                        </a>
+                        <a href="#contact" class="project-link project-link-muted">
+                            Ask me about it →
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="experience" id="experience">
+            <h2 class="section-title">Experience</h2>
+            <div class="experience-list">
+                <article class="experience-card fade-in">
+                    <div class="experience-brand single-brand light-brand">
+                        <img src="assets/logos/delta.svg" alt="Delta Exchange logo">
+                    </div>
+                    <div class="experience-copy">
+                        <span class="experience-period">2025 — present</span>
+                        <h3>Senior AI Engineer FullStack · delta.exchange</h3>
+                        <p>Building AI support and product workflows for a crypto derivatives platform where correctness and responsiveness both matter.</p>
+                    </div>
+                </article>
+
+                <article class="experience-card fade-in">
+                    <div class="experience-brand single-brand light-brand">
+                        <img src="assets/logos/saral.svg" alt="Saral logo">
+                    </div>
+                    <div class="experience-copy">
+                        <span class="experience-period">Nov 2024 — Jul 2025</span>
+                        <h3>Senior Software Engineer · Saral</h3>
+                        <p>Built social listening and influencer workflow tooling, shipped AI features like intelligent naming, sentiment analysis, and address detection, and tightened CI + delivery confidence.</p>
+                    </div>
+                </article>
+
+                <article class="experience-card fade-in">
+                    <div class="experience-brand dual-brand light-brand">
+                        <img src="assets/logos/dukaan.svg" alt="Dukaan logo">
+                        <img src="assets/logos/bot9.svg" alt="Bot9 logo">
+                    </div>
+                    <div class="experience-copy">
+                        <span class="experience-period">Jan 2021 — May 2024</span>
+                        <h3>Technical Lead · MyDukaan.io / Bot9.ai</h3>
+                        <p>First frontend engineer in the room, later a lead. Scaled the product from MVP to 40+ production features, served 60k+ merchants, built Bot9’s conversational AI product, and helped grow the team from 1 to 15+ developers.</p>
+                    </div>
+                </article>
+
+                <article class="experience-card fade-in">
+                    <div class="experience-brand text-brand">
+                        <span>React · Angular · Vue · React Native · Kotlin</span>
+                    </div>
+                    <div class="experience-copy">
+                        <span class="experience-period">Feb 2018 — Jan 2021</span>
+                        <h3>Software Engineer · Service companies</h3>
+                        <p>Cut teeth across frontend delivery, mobile apps, and ETL-heavy enterprise work. Good place to learn how to ship under constraints and not panic when requirements move.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="skills" id="skills">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Frontend</h3>
+                    <div class="skill-tags">
+                        <span>TypeScript</span>
+                        <span>React</span>
+                        <span>Next.js</span>
+                        <span>React Native</span>
+                        <span>Tailwind</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Backend</h3>
+                    <div class="skill-tags">
+                        <span>Node.js</span>
+                        <span>Express</span>
+                        <span>MongoDB</span>
+                        <span>Redis</span>
+                        <span>Python</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3 class="skill-category-title">AI & Data</h3>
+                    <div class="skill-tags">
+                        <span>LLM APIs</span>
+                        <span>RAG</span>
+                        <span>Pinecone</span>
+                        <span>Anthropic</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3 class="skill-category-title">DevOps & Cloud</h3>
+                    <div class="skill-tags">
+                        <span>AWS</span>
+                        <span>Supabase</span>
+                        <span>Coolify</span>
+                        <span>Docker</span>
+                        <span>Kubernetes</span>
+                        <span>Vercel</span>
+                        <span>Netlify</span>
+                        <span>Browserless</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about" id="about">
+            <h2 class="section-title">About</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        I like the part of engineering where product, interface, and systems thinking collide.
+                        Not just whether something works — whether it lands, whether it feels intentional, whether somebody would actually want to use it twice.
+                    </p>
+                    <p>
+                        Over 7+ years, I've gone from shipping frontend-heavy client work to leading teams, building AI systems, and sweating the details on products used by thousands.
+                        I enjoy the full stack, but I especially love the last 10% — motion, spacing, microcopy, and the weird little interactions that make software feel alive.
+                    </p>
+                    <p>
+                        I lead, mentor, and build fast. I care about outcomes, but I also care about craft.
+                        The sweet spot is simple: <span class="highlight-text">serious systems, playful interfaces.</span>
+                    </p>
+                </div>
+                <div class="about-terminal">
+                    <div class="terminal-window">
+                        <div class="terminal-header">
+                            <div class="terminal-dots">
+                                <span></span><span></span><span></span>
+                            </div>
+                            <span class="terminal-title">philosophy.sh</span>
+                        </div>
+                        <div class="terminal-body">
+                            <pre><code>const ship = ({ idea, taste, speed }) => {
+  if (!idea) return "think harder";
+  if (taste && speed) return "launch it";
+  return "iterate";
+};</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact" id="contact">
+            <h2 class="section-title">Let's connect</h2>
+            <div class="contact-content">
+                <p class="contact-text">
+                    If you're building something ambitious on the internet, we’ll probably have plenty to talk about.<br>
+                    Product, AI, frontend craft, weird UI ideas — I’m in.
+                </p>
+                <div class="contact-links">
+                    <a href="mailto:me@anujsh.com" class="contact-link">
+                        <span class="contact-link-icon">@</span>
+                        <span class="contact-link-text">me@anujsh.com</span>
+                    </a>
+                    <a href="https://github.com/ptmaroct" target="_blank" rel="noopener" class="contact-link">
+                        <span class="contact-link-icon">⌘</span>
+                        <span class="contact-link-text">GitHub</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/ptmaroct/" target="_blank" rel="noopener" class="contact-link">
+                        <span class="contact-link-icon">◈</span>
+                        <span class="contact-link-text">LinkedIn</span>
+                    </a>
+                    <a href="https://x.com/waahbete" target="_blank" rel="noopener" class="contact-link">
+                        <span class="contact-link-icon">𝕏</span>
+                        <span class="contact-link-text">X/Twitter</span>
+                    </a>
+                    <a href="https://www.anujsh.com/" target="_blank" rel="noopener" class="contact-link">
+                        <span class="contact-link-icon">◉</span>
+                        <span class="contact-link-text">anujsh.com</span>
+                    </a>
+                </div>
+                <div class="contact-cta">
+                    <a href="Resume-AnujSharma.pdf" download class="btn btn-primary btn-download">
+                        Download Resume ↓
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>© 2026 Anuj Sharma. Built with care and a mildly unhealthy respect for good hover states.</p>
+        <p class="footer-hint" id="footerHint">Press <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>K</kbd> or try the Konami code if you're nosy.</p>
+    </footer>
+
+    <div class="command-palette" id="commandPalette">
+        <div class="command-palette-overlay" id="paletteOverlay"></div>
+        <div class="command-palette-content">
+            <input type="text" class="command-palette-input" id="paletteInput" placeholder="Type a command...">
+            <div class="command-palette-results" id="paletteResults">
+                <div class="command-item" data-command="email">
+                    <span class="command-icon">@</span>
+                    <span class="command-text">Email Anuj</span>
+                    <span class="command-shortcut">↵</span>
+                </div>
+                <div class="command-item" data-command="github">
+                    <span class="command-icon">⌘</span>
+                    <span class="command-text">Open GitHub</span>
+                    <span class="command-shortcut">↵</span>
+                </div>
+                <div class="command-item" data-command="linkedin">
+                    <span class="command-icon">◈</span>
+                    <span class="command-text">Open LinkedIn</span>
+                    <span class="command-shortcut">↵</span>
+                </div>
+                <div class="command-item" data-command="twitter">
+                    <span class="command-icon">𝕏</span>
+                    <span class="command-text">Open X/Twitter</span>
+                    <span class="command-shortcut">↵</span>
+                </div>
+                <div class="command-item" data-command="resume">
+                    <span class="command-icon">↓</span>
+                    <span class="command-text">Download Resume</span>
+                    <span class="command-shortcut">↵</span>
+                </div>
+                <div class="command-item" data-command="secret">
+                    <span class="command-icon">🫡</span>
+                    <span class="command-text">???</span>
+                    <span class="command-shortcut">↵</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="secret-mode" id="secretMode">
+        <div class="secret-content">
+            <h2>👀 You found it!</h2>
+            <p>Here's a secret: Anuj once built a whole product in &lt;6 hours and it got 40+ users in a day.</p>
+            <p>That's the mindset. Ship fast, learn faster.</p>
+            <button class="btn btn-secondary" id="closeSecret">Got it</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <!-- If you're inspecting the DOM: yes, the command palette is intentional. So are the hover states. -->
 </body>
-
 </html>

@@ -81,8 +81,9 @@ function typeEffect() {
 
 typeEffect();
 
-// Scroll animations - Fade in sections
-const fadeElements = document.querySelectorAll('section');
+// Scroll animations - Fade in sections/cards
+const sectionElements = document.querySelectorAll('section');
+const fadeElements = new Set([...sectionElements, ...document.querySelectorAll('.fade-in')]);
 
 const observerOptions = {
     threshold: 0.1,
@@ -97,10 +98,8 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-fadeElements.forEach(el => {
-    el.classList.add('fade-in');
-    observer.observe(el);
-});
+sectionElements.forEach(el => el.classList.add('fade-in'));
+fadeElements.forEach(el => observer.observe(el));
 
 // Resume download buttons
 const resumeBtn = document.getElementById('resumeBtn');

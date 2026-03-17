@@ -730,7 +730,7 @@ section {
     max-width: 780px;
     font-size: 1.08rem;
     color: var(--text-secondary);
-    margin: 0 auto 2.4rem;
+    margin-bottom: 2.4rem;
     line-height: 1.85;
     text-align: left;
 }

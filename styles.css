@@ -80,7 +80,7 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: env(safe-area-inset-top) 3rem 1rem;
+    padding: 1rem 3rem;
     min-height: 64px;
     z-index: 100;
     background: rgba(10, 10, 11, 0.92);

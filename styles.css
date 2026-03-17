@@ -732,6 +732,7 @@ section {
     color: var(--text-secondary);
     margin: 0 auto 2.4rem;
     line-height: 1.85;
+    text-align: left;
 }
 
 .contact-links {

@@ -71,7 +71,7 @@ a {
 
 /* Navigation */
 .nav {
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     right: 0;
@@ -236,10 +236,11 @@ section {
 /* Hero Section */
 .hero {
     min-height: 100vh;
+    min-height: 100svh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-top: 5rem;
+    padding-top: 3rem;
     gap: 4rem;
 }
 
@@ -993,7 +994,8 @@ section {
     }
 
     .hero {
-        padding-top: calc(4.5rem + env(safe-area-inset-top));
+        min-height: 100svh;
+        padding-top: 2.5rem;
     }
 
     .hero-title {

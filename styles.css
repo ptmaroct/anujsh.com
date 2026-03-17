@@ -23,8 +23,16 @@
     padding: 0;
 }
 
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
 html {
     scroll-behavior: smooth;
+    overflow-x: clip;
 }
 
 body {
@@ -32,7 +40,7 @@ body {
     background: var(--bg-primary);
     color: var(--text-primary);
     line-height: 1.6;
-    overflow-x: hidden;
+    overflow-x: clip;
 }
 
 a {
@@ -67,10 +75,13 @@ a {
     top: 0;
     left: 0;
     right: 0;
+    width: 100%;
+    margin: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: calc(1rem + env(safe-area-inset-top)) max(1.25rem, calc(3rem + env(safe-area-inset-right))) 1rem max(1.25rem, calc(3rem + env(safe-area-inset-left)));
+    padding: env(safe-area-inset-top) 3rem 1rem;
+    min-height: 64px;
     z-index: 100;
     background: rgba(10, 10, 11, 0.92);
     backdrop-filter: blur(12px);

@@ -686,10 +686,12 @@ section {
 
 /* About */
 .about-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    align-items: start;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .about-text {
@@ -755,6 +757,10 @@ section {
 
 .contact-link-text {
     font-size: 0.9rem;
+}
+
+.contact-cta {
+    text-align: center;
 }
 
 .contact-cta .btn-download {

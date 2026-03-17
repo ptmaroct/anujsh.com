@@ -692,8 +692,7 @@ section {
     align-items: start;
 }
 
-.about-text,
-.about-terminal {
+.about-text {
     min-width: 0;
 }
 
@@ -709,31 +708,6 @@ section {
     font-weight: 500;
 }
 
-.about-terminal {
-    position: sticky;
-    top: 6rem;
-}
-
-.terminal-window {
-    background: var(--bg-secondary);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.terminal-window .terminal-header {
-    background: var(--bg-tertiary);
-}
-
-.terminal-window .terminal-body {
-    padding: 1.5rem;
-}
-
-.terminal-window code {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    color: var(--accent);
-    line-height: 1.8;
 }
 
 /* Contact */
@@ -969,10 +943,6 @@ section {
 @media (max-width: 900px) {
     .about-content {
         grid-template-columns: 1fr;
-    }
-
-    .about-terminal {
-        position: static;
     }
 }
 

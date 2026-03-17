@@ -70,9 +70,9 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.25rem 3rem;
+    padding: calc(1rem + env(safe-area-inset-top)) max(1.25rem, calc(3rem + env(safe-area-inset-right))) 1rem max(1.25rem, calc(3rem + env(safe-area-inset-left)));
     z-index: 100;
-    background: rgba(10, 10, 11, 0.8);
+    background: rgba(10, 10, 11, 0.92);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid transparent;
     transition: border-color var(--transition);
@@ -680,6 +680,11 @@ section {
     align-items: start;
 }
 
+.about-text,
+.about-terminal {
+    min-width: 0;
+}
+
 .about-text p {
     font-size: 1.1rem;
     color: var(--text-secondary);
@@ -964,6 +969,10 @@ section {
         display: none;
     }
 
+    .nav {
+        padding: calc(0.9rem + env(safe-area-inset-top)) max(1rem, calc(1.5rem + env(safe-area-inset-right))) 0.9rem max(1rem, calc(1.5rem + env(safe-area-inset-left)));
+    }
+
     .nav-toggle {
         display: flex;
     }
@@ -973,7 +982,7 @@ section {
     }
 
     .hero {
-        padding-top: 4rem;
+        padding-top: calc(4.5rem + env(safe-area-inset-top));
     }
 
     .hero-title {
@@ -1057,6 +1066,12 @@ section {
 ::-webkit-scrollbar-thumb {
     background: var(--border);
     border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--border-hover);
+}
+   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {

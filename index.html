@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <a href="#proof" class="skip-link">Skip to content</a>
     <div class="bg-grid" id="bgGrid"></div>
 
     <nav class="nav" id="nav">
@@ -281,6 +282,7 @@
     <div class="command-palette" id="commandPalette">
         <div class="command-palette-overlay" id="paletteOverlay"></div>
         <div class="command-palette-content">
+            <label for="paletteInput" class="sr-only">Search commands</label>
             <input type="text" class="command-palette-input" id="paletteInput" placeholder="Type a command...">
             <div class="command-palette-results" id="paletteResults">
                 <div class="command-item" data-command="email">

@@ -725,9 +725,7 @@ section {
 }
 
 .contact-content {
-    text-align: center;
     max-width: 760px;
-    margin: 0 auto;
 }
 
 .contact-content-ref {
@@ -745,7 +743,6 @@ section {
 
 .contact-links {
     display: flex;
-    justify-content: center;
     gap: 0.9rem;
     flex-wrap: wrap;
 }

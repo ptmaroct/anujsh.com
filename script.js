@@ -92,29 +92,116 @@ const resumeModal = document.getElementById('resumeModal');
 const resumeModalOverlay = document.getElementById('resumeModalOverlay');
 const resumeCloseBtn = document.getElementById('resumeCloseBtn');
 const resumeDownloadBtn = document.getElementById('resumeDownloadBtn');
-const resumeFrame = document.getElementById('resumeFrame');
+const resumeCanvasContainer = document.getElementById('resumeCanvasContainer');
+const resumePreviewStatus = document.getElementById('resumePreviewStatus');
 
 const RESUME_URL = 'Resume-AnujSharma.pdf';
+const PDFJS_URL = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.min.mjs';
+const PDFJS_WORKER_URL = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.worker.min.mjs';
+
+const isIOS = () => /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
 function downloadResume() {
+    // iOS Safari ignores the download attribute, so open inline and let the user save from there.
+    if (isIOS()) {
+        window.open(RESUME_URL, '_blank', 'noopener');
+        return;
+    }
     const link = document.createElement('a');
     link.href = RESUME_URL;
     link.download = 'Resume-AnujSharma.pdf';
+    link.rel = 'noopener';
+    document.body.appendChild(link);
     link.click();
+    document.body.removeChild(link);
+}
+
+let pdfjsPromise = null;
+function loadPdfJs() {
+    if (!pdfjsPromise) {
+        pdfjsPromise = import(/* @vite-ignore */ PDFJS_URL).then((mod) => {
+            const lib = mod.default || mod;
+            lib.GlobalWorkerOptions.workerSrc = PDFJS_WORKER_URL;
+            return lib;
+        });
+    }
+    return pdfjsPromise;
+}
+
+let resumeRendered = false;
+let resumeRenderPromise = null;
+
+async function renderResumePreview() {
+    if (resumeRendered) return;
+    if (resumeRenderPromise) return resumeRenderPromise;
+
+    resumePreviewStatus.hidden = false;
+    resumePreviewStatus.textContent = 'Loading preview…';
+
+    resumeRenderPromise = (async () => {
+        const pdfjsLib = await loadPdfJs();
+        const pdf = await pdfjsLib.getDocument(RESUME_URL).promise;
+
+        resumeCanvasContainer.innerHTML = '';
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+        // Wait two frames so the modal has finished laying out before we
+        // measure width — otherwise clientWidth can be 0 and we blow up.
+        await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+
+        // Derive a sane CSS width that never exceeds the viewport. Account
+        // for container padding (16px desktop / 10px mobile → use 20px safe).
+        const viewportCap = Math.max(240, window.innerWidth - 24);
+        const measured = resumeCanvasContainer.clientWidth;
+        const targetCssWidth = Math.min(
+            measured > 0 ? measured - 20 : viewportCap,
+            viewportCap,
+            960
+        );
+
+        for (let i = 1; i <= pdf.numPages; i++) {
+            const page = await pdf.getPage(i);
+            const baseViewport = page.getViewport({ scale: 1 });
+            const cssScale = targetCssWidth / baseViewport.width;
+            const viewport = page.getViewport({ scale: cssScale * dpr });
+
+            const canvas = document.createElement('canvas');
+            canvas.className = 'resume-page-canvas';
+            // Intrinsic (bitmap) resolution for crispness.
+            canvas.width = viewport.width;
+            canvas.height = viewport.height;
+            // Display size: exactly targetCssWidth, height auto-scaled to
+            // preserve aspect ratio. Using % avoids overshooting viewport.
+            canvas.style.width = `${targetCssWidth}px`;
+            canvas.style.maxWidth = '100%';
+            canvas.style.height = 'auto';
+
+            resumeCanvasContainer.appendChild(canvas);
+            await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+        }
+
+        resumeRendered = true;
+        resumePreviewStatus.hidden = true;
+    })().catch((err) => {
+        console.warn('[resume] preview failed', err);
+        resumePreviewStatus.hidden = false;
+        resumePreviewStatus.textContent = 'Preview unavailable. Use Download to open the PDF.';
+        resumeRenderPromise = null;
+        throw err;
+    });
+
+    return resumeRenderPromise;
 }
 
 let lastFocusedBeforeResume = null;
 
 function openResumeModal() {
     lastFocusedBeforeResume = document.activeElement;
-    // Lazy-load iframe on first open so no bandwidth until needed
-    if (!resumeFrame.dataset.loaded) {
-        resumeFrame.src = `${RESUME_URL}#toolbar=0&view=FitH`;
-        resumeFrame.dataset.loaded = '1';
-    }
     resumeModal.classList.add('open');
     resumeModal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('resume-open');
+    // Kick off rendering; it resolves async while the modal animates in.
+    renderResumePreview().catch(() => {});
     // Focus download button after transition starts
     requestAnimationFrame(() => resumeDownloadBtn.focus());
 }

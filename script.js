@@ -272,6 +272,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         precision highp float;
         uniform float uTime;
         uniform vec2 uRes;
+        uniform vec2 uMouse;
         uniform vec3 uColorA;
         uniform vec3 uColorB;
         uniform vec3 uColorC;
@@ -321,13 +322,17 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
             float t = uTime * 0.035;
 
+            // Mouse offset in normalized-ish space (-1..1 range on both axes)
+            vec2 m = (uMouse * 2.0 - 1.0);
+            m.x *= uRes.x / uRes.y;
+
             vec2 warp = vec2(
-                fbm(p * 0.55 + vec2(t, t * 0.6)),
-                fbm(p * 0.55 + vec2(-t * 0.8, t * 0.4))
+                fbm(p * 0.55 + vec2(t, t * 0.6) + m * 0.22),
+                fbm(p * 0.55 + vec2(-t * 0.8, t * 0.4) - m * 0.22)
             );
 
-            float field  = fbm(p * 0.95 + warp * 1.35 + vec2(t * 0.25, 0.0));
-            float field2 = fbm(p * 0.45 + vec2(-t * 0.5, t * 0.7));
+            float field  = fbm(p * 0.95 + warp * 1.35 + vec2(t * 0.25, 0.0) + m * 0.12);
+            float field2 = fbm(p * 0.45 + vec2(-t * 0.5, t * 0.7) + m * 0.08);
 
             float f  = smoothstep(-0.55, 0.70, field);
             float f2 = smoothstep(-0.35, 0.55, field2);
@@ -335,10 +340,15 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             vec3 col = mix(uColorA, uColorB, f);
             col = mix(col, uColorC, f2 * 0.45);
 
+            // Soft spotlight that trails the cursor
+            float spot = 1.0 - smoothstep(0.0, 1.1, length(p - m * 0.9));
+            col += spot * 0.09;
+
             // gentle top-weighted falloff, soft edge vignette
             float vy = smoothstep(1.35, -0.15, uv.y);
             float vx = smoothstep(1.25, 0.25, abs(uv.x - 0.5) * 2.0);
             float a = uIntensity * vy * mix(0.55, 1.0, vx);
+            a += spot * 0.05 * uIntensity;
 
             gl_FragColor = vec4(col * a, a);
         }
@@ -379,10 +389,28 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
     const uTime = gl.getUniformLocation(prog, 'uTime');
     const uRes = gl.getUniformLocation(prog, 'uRes');
+    const uMouse = gl.getUniformLocation(prog, 'uMouse');
     const uColA = gl.getUniformLocation(prog, 'uColorA');
     const uColB = gl.getUniformLocation(prog, 'uColorB');
     const uColC = gl.getUniformLocation(prog, 'uColorC');
     const uIntensity = gl.getUniformLocation(prog, 'uIntensity');
+
+    // Mouse tracking — target updated on move, actual lerps toward it each frame
+    const mouseTarget = { x: 0.5, y: 0.4 };
+    const mouse = { x: 0.5, y: 0.4 };
+
+    function onPointerMove(e) {
+        const rect = canvas.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = 1.0 - (e.clientY - rect.top) / rect.height;
+        mouseTarget.x = Math.max(-0.2, Math.min(1.2, x));
+        mouseTarget.y = Math.max(-0.2, Math.min(1.2, y));
+    }
+    window.addEventListener('pointermove', onPointerMove, { passive: true });
+    window.addEventListener('pointerleave', () => {
+        mouseTarget.x = 0.5;
+        mouseTarget.y = 0.4;
+    }, { passive: true });
 
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
@@ -396,10 +424,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             intensity: 0.28,
           }
         : {
-            a: [0.86, 0.85, 0.97],
-            b: [0.94, 0.90, 0.95],
-            c: [0.91, 0.93, 1.00],
-            intensity: 0.22,
+            a: [0.78, 0.76, 0.94],  // soft lavender
+            b: [0.90, 0.82, 0.92],  // pale mauve
+            c: [0.82, 0.88, 0.99],  // pale sky
+            intensity: 0.38,
           };
 
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -432,9 +460,15 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         last = now;
         if (!reduced.matches) t += dt;
 
+        // Ease mouse toward target — frame-rate independent
+        const k = 1 - Math.pow(0.001, dt);
+        mouse.x += (mouseTarget.x - mouse.x) * k;
+        mouse.y += (mouseTarget.y - mouse.y) * k;
+
         const p = palette();
         gl.uniform1f(uTime, t);
         gl.uniform2f(uRes, canvas.width, canvas.height);
+        gl.uniform2f(uMouse, mouse.x, mouse.y);
         gl.uniform3fv(uColA, p.a);
         gl.uniform3fv(uColB, p.b);
         gl.uniform3fv(uColC, p.c);

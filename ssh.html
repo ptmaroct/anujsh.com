@@ -1,436 +1,405 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>SSH Keys | Anuj Sharma</title>
-  <meta name="description" content="One-command SSH key setup for Anuj Sharma's servers. Add passwordless access instantly.">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    /* SSH page-specific styles — inherits all tokens from styles.css */
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>SSH Keys · Anuj Sharma</title>
+    <meta name="description" content="One-command SSH key setup for Anuj Sharma's servers. Add passwordless access instantly.">
+    <meta name="theme-color" content="#fbfbfa" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#08090a" media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        .ssh-main {
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: 128px 24px 96px;
+        }
 
-    .ssh-container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 6rem 3rem;
-      position: relative;
-      z-index: 1;
-    }
+        .ssh-header {
+            margin-bottom: 56px;
+        }
 
-    .ssh-header {
-      margin-bottom: 3rem;
-    }
+        .ssh-title {
+            font-size: clamp(40px, 6.2vw, 68px);
+            font-weight: 500;
+            line-height: 1.04;
+            letter-spacing: -0.035em;
+            color: var(--ink);
+            margin-bottom: 20px;
+            text-wrap: balance;
+            max-width: 18ch;
+        }
 
-    .ssh-header .section-title {
-      margin-bottom: 0.75rem;
-    }
+        .ssh-title em {
+            font-style: italic;
+            font-weight: 400;
+            color: var(--ink-3);
+        }
 
-    .ssh-title {
-      font-size: clamp(2.5rem, 8vw, 3.5rem);
-      font-weight: 600;
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-      margin-bottom: 0.75rem;
-    }
+        .ssh-lead {
+            font-size: 17px;
+            line-height: 1.6;
+            color: var(--ink-2);
+            max-width: 58ch;
+        }
 
-    .ssh-subtitle {
-      color: var(--text-secondary);
-      font-size: 1.1rem;
-      font-weight: 300;
-      line-height: 1.6;
-    }
+        .ssh-card {
+            background: var(--bg-elevated);
+            border: 1px solid var(--line);
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            margin-bottom: 20px;
+            transition: border-color var(--dur) var(--ease);
+        }
 
-    /* Hero install card */
-    .hero-install {
-      background: var(--bg-secondary);
-      border: 1px solid var(--accent-dim);
-      border-radius: 10px;
-      padding: 2rem;
-      margin-bottom: 1.5rem;
-      position: relative;
-      overflow: hidden;
-      transition: border-color var(--transition), transform var(--transition);
-    }
+        .ssh-card:hover {
+            border-color: var(--line-strong);
+        }
 
-    .hero-install::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, var(--accent), transparent);
-      opacity: 0.6;
-    }
+        .ssh-card-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--ink-4);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 16px;
+        }
 
-    .hero-install:hover {
-      border-color: var(--accent);
-      transform: translateY(-2px);
-    }
+        .ssh-card-title {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--ink);
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+        }
 
-    .hero-label {
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      margin-bottom: 1rem;
-    }
+        .ssh-card-sub {
+            font-size: 14px;
+            color: var(--ink-3);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
 
-    .hero-command-wrapper {
-      background: var(--bg-primary);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.25rem 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
+        .ssh-cmd {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: var(--radius-md);
+            padding: 14px 16px;
+        }
 
-    .hero-command-wrapper code {
-      font-family: var(--font-mono);
-      font-size: clamp(0.85rem, 2.5vw, 1.15rem);
-      color: var(--accent);
-      white-space: nowrap;
-      overflow-x: auto;
-      min-width: 0;
-      flex: 1;
-      animation: glow-pulse 3s ease-in-out infinite;
-    }
+        .ssh-cmd code {
+            flex: 1;
+            min-width: 0;
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--ink);
+            white-space: nowrap;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
 
-    @keyframes glow-pulse {
-      0%, 100% { text-shadow: 0 0 8px rgba(34, 211, 238, 0.15); }
-      50% { text-shadow: 0 0 16px rgba(34, 211, 238, 0.3); }
-    }
+        .ssh-cmd code::-webkit-scrollbar {
+            display: none;
+        }
 
-    .copy-btn {
-      background: var(--bg-tertiary);
-      border: 1px solid var(--border);
-      color: var(--text-secondary);
-      padding: 0.4rem 0.75rem;
-      border-radius: 5px;
-      cursor: pointer;
-      font-family: var(--font-sans);
-      font-size: 0.75rem;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      white-space: nowrap;
-      flex-shrink: 0;
-      transition: all var(--transition);
-    }
+        .ssh-cmd-prompt {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--ink-4);
+            user-select: none;
+        }
 
-    .copy-btn:hover {
-      background: var(--accent);
-      color: var(--bg-primary);
-      border-color: var(--accent);
-    }
+        .copy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--line);
+            color: var(--ink-2);
+            padding: 6px 10px;
+            border-radius: var(--radius-sm);
+            font-family: var(--font-sans);
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            white-space: nowrap;
+            flex-shrink: 0;
+            transition: background var(--dur) var(--ease), color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+        }
 
-    .copy-btn:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 2px;
-    }
+        .copy-btn:hover {
+            background: var(--bg-hover);
+            color: var(--ink);
+            border-color: var(--line-strong);
+        }
 
-    .copy-btn.copied {
-      background: var(--success);
-      color: var(--bg-primary);
-      border-color: var(--success);
-    }
+        .copy-btn.copied {
+            background: var(--accent-soft);
+            color: var(--accent-ink);
+            border-color: var(--accent);
+        }
 
-    .copy-btn svg {
-      width: 12px;
-      height: 12px;
-    }
+        .copy-btn svg {
+            width: 12px;
+            height: 12px;
+        }
 
-    .hero-sub {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-top: 0.75rem;
-      font-family: var(--font-mono);
-      letter-spacing: 0.02em;
-    }
+        .ssh-hint {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--ink-4);
+            margin-top: 14px;
+        }
 
-    /* Instructions card */
-    .instructions {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.75rem;
-      margin-bottom: 1.5rem;
-      transition: border-color var(--transition), transform var(--transition);
-    }
+        .ssh-steps {
+            list-style: none;
+            counter-reset: step;
+            padding: 0;
+            margin: 0 0 20px;
+        }
 
-    .instructions:hover {
-      border-color: var(--border-hover);
-      transform: translateY(-2px);
-    }
+        .ssh-steps li {
+            counter-increment: step;
+            display: flex;
+            gap: 14px;
+            align-items: baseline;
+            font-size: 15px;
+            color: var(--ink-2);
+            padding: 6px 0;
+        }
 
-    .instructions h2 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      letter-spacing: -0.02em;
-    }
+        .ssh-steps li::before {
+            content: counter(step, decimal-leading-zero);
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--ink-4);
+            flex-shrink: 0;
+        }
 
-    .instructions ol {
-      padding-left: 1.25rem;
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      line-height: 1.75;
-    }
+        .ssh-code-block {
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+        }
 
-    .instructions li {
-      margin-bottom: 0.5rem;
-    }
+        .ssh-code-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--line);
+            background: var(--bg-elevated);
+        }
 
-    .instructions code {
-      background: var(--bg-primary);
-      padding: 0.15rem 0.5rem;
-      border-radius: 4px;
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      color: var(--text-primary);
-    }
+        .ssh-code-head-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--ink-4);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
 
-    .commands-block {
-      background: var(--bg-primary);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      margin-top: 1rem;
-    }
+        .ssh-code-body {
+            display: grid;
+            grid-template-columns: 40px 1fr;
+            padding: 12px 0;
+        }
 
-    .commands-block-header {
-      display: flex;
-      justify-content: flex-end;
-      padding: 0.5rem 0.75rem;
-      border-bottom: 1px solid var(--border);
-    }
+        .ssh-code-body .ln {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            line-height: 1.9;
+            color: var(--ink-4);
+            text-align: right;
+            padding-right: 12px;
+            user-select: none;
+            opacity: 0.6;
+        }
 
-    .commands-block-code {
-      display: grid;
-      grid-template-columns: 2.5rem 1fr;
-      padding: 0.75rem 0;
-      counter-reset: line;
-    }
+        .ssh-code-body .lc {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            line-height: 1.9;
+            color: var(--ink-2);
+            white-space: pre;
+            padding-right: 16px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
 
-    .commands-block-code .line-num {
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      line-height: 2;
-      color: var(--text-muted);
-      text-align: right;
-      padding-right: 0.75rem;
-      opacity: 0.5;
-      user-select: none;
-      position: sticky;
-      left: 0;
-    }
+        .ssh-code-body .lc::-webkit-scrollbar {
+            display: none;
+        }
 
-    .commands-block-code .line-content {
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      color: var(--text-secondary);
-      line-height: 2;
-      white-space: pre;
-      padding-right: 1.25rem;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
+        .ssh-footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid var(--line);
+            font-size: 13px;
+            color: var(--ink-3);
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
 
-    .commands-block-code .line-content::-webkit-scrollbar {
-      display: none;
-    }
+        .ssh-footer a {
+            color: var(--ink);
+            border-bottom: 1px solid var(--line-strong);
+            padding-bottom: 1px;
+            transition: border-color var(--dur) var(--ease), color var(--dur) var(--ease);
+        }
 
-    /* SSH footer */
-    .ssh-footer {
-      text-align: center;
-      margin-top: 3rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--border);
-      color: var(--text-muted);
-      font-size: 0.85rem;
-    }
+        .ssh-footer a:hover {
+            color: var(--accent-ink);
+            border-color: var(--accent);
+        }
 
-    .ssh-footer a {
-      color: var(--accent);
-      transition: opacity var(--transition);
-    }
+        @media (max-width: 640px) {
+            .ssh-main {
+                padding: 112px 20px 72px;
+            }
 
-    .ssh-footer a:hover {
-      opacity: 0.8;
-    }
+            .ssh-card {
+                padding: 20px;
+            }
 
-    /* Entrance animations */
-    .ssh-fade-in {
-      opacity: 0;
-      transform: translateY(20px);
-      animation: sshFadeIn 0.6s ease forwards;
-    }
+            .ssh-cmd {
+                padding: 12px 14px;
+            }
 
-    .ssh-fade-in:nth-child(1) { animation-delay: 0.1s; }
-    .ssh-fade-in:nth-child(2) { animation-delay: 0.25s; }
-    .ssh-fade-in:nth-child(3) { animation-delay: 0.4s; }
-    .ssh-fade-in:nth-child(4) { animation-delay: 0.55s; }
-
-    @keyframes sshFadeIn {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .ssh-container {
-        padding: 4rem 1.5rem;
-      }
-
-      .hero-command-wrapper {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0.75rem;
-      }
-
-      .hero-command-wrapper code {
-        font-size: 0.82rem;
-        -webkit-overflow-scrolling: touch;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .ssh-container {
-        padding: 3rem 1rem;
-      }
-
-      .hero-install,
-      .instructions {
-        padding: 1.25rem;
-      }
-    }
-  </style>
+            .ssh-cmd code {
+                font-size: 12px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="bg-grid" id="bgGrid"></div>
-
-  <nav class="nav" id="nav">
-    <a href="/" class="nav-logo">anuj.sh</a>
-    <div class="nav-links">
-      <a href="/#proof">proof</a>
-      <a href="/#work">work</a>
-      <a href="/#experience">experience</a>
-      <a href="/#craft">craft</a>
-      <a href="/#principles">principles</a>
-      <a href="/#contact">contact</a>
-      <a href="/ssh" class="nav-link-active">ssh</a>
-    </div>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
-      <span></span>
-      <span></span>
-    </button>
-  </nav>
-
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="/#proof">proof</a>
-    <a href="/#work">work</a>
-    <a href="/#experience">experience</a>
-    <a href="/#craft">craft</a>
-    <a href="/#principles">principles</a>
-    <a href="/#contact">contact</a>
-    <a href="/ssh">ssh</a>
-  </div>
-
-  <main class="ssh-container">
-    <header class="ssh-header ssh-fade-in">
-      <p class="section-title">SSH Keys</p>
-      <h1 class="ssh-title">Give Anuj access</h1>
-      <p class="ssh-subtitle">Add Anuj's public key to any server, instantly.</p>
-    </header>
-
-    <section class="hero-install ssh-fade-in" aria-label="Quick install">
-      <div class="hero-label">Quick install</div>
-      <div class="hero-command-wrapper">
-        <code id="heroCmd">curl -fsSL https://anujsh.com/ssh.sh | sh</code>
-        <button class="copy-btn" onclick="copyText(this, 'curl -fsSL https://anujsh.com/ssh.sh | sh')" aria-label="Copy install command">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-          Copy
+    <nav class="nav" id="nav">
+        <a href="/" class="nav-logo">Anuj Sharma</a>
+        <div class="nav-links">
+            <a href="/#work">Work</a>
+            <a href="/#experience">Experience</a>
+            <a href="/#notes">Notes</a>
+            <a href="/#contact">Contact</a>
+            <a href="/ssh" class="nav-link-active">SSH</a>
+        </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
         </button>
-      </div>
-      <p class="hero-sub">Safe & idempotent — run on any server</p>
-    </section>
+    </nav>
 
-    <section class="instructions ssh-fade-in" aria-label="Manual setup">
-      <h2>Or add manually</h2>
-      <ol>
-        <li>Copy the commands below</li>
-        <li>Run on your target server:</li>
-      </ol>
-      <div class="commands-block">
-        <div class="commands-block-header">
-          <button class="copy-btn" onclick="copyLines(this, 'manualCmds')" aria-label="Copy manual commands">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            Copy
-          </button>
-        </div>
-        <div class="commands-block-code" id="manualCmds">
-          <span class="line-num">1</span><span class="line-content">mkdir -p ~/.ssh && chmod 700 ~/.ssh</span>
-          <span class="line-num">2</span><span class="line-content">echo "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBGdaNTFylN4rZ2OR6D326SPpEOIIoFRHsK1/jvIZjd7S9lahefifkCfQ9DoDT+AyOFBq1+yOsb5UTQoACttQ01M= #ssh.id - @ptmaroct" >> ~/.ssh/authorized_keys</span>
-          <span class="line-num">3</span><span class="line-content">chmod 600 ~/.ssh/authorized_keys</span>
-        </div>
-      </div>
-    </section>
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="/#work">Work</a>
+        <a href="/#experience">Experience</a>
+        <a href="/#notes">Notes</a>
+        <a href="/#contact">Contact</a>
+        <a href="/ssh">SSH</a>
+    </div>
 
-    <footer class="ssh-footer ssh-fade-in">
-      <p><a href="/">anujsh.com</a></p>
-    </footer>
-  </main>
+    <main class="ssh-main">
+        <header class="ssh-header reveal visible">
+            <div class="section-head">
+                <span class="section-kicker">·</span>
+                <span class="section-title">SSH access</span>
+            </div>
+            <h1 class="ssh-title">Give me a key, <em>in one command.</em></h1>
+            <p class="ssh-lead">
+                Drop my public key on any server so I can help without passwords flying around. Safe, idempotent, and reversible.
+            </p>
+        </header>
 
-  <script>
-    // Background grid — show immediately on this short page
-    const bgGrid = document.getElementById('bgGrid');
-    bgGrid.classList.add('visible');
+        <section class="ssh-card reveal visible" aria-label="Quick install">
+            <div class="ssh-card-label">01 · Quick install</div>
+            <p class="ssh-card-sub">Paste into a shell on the target machine. No side effects beyond <code style="font-family:var(--font-mono);font-size:12px;color:var(--ink)">~/.ssh/authorized_keys</code>.</p>
+            <div class="ssh-cmd">
+                <span class="ssh-cmd-prompt">$</span>
+                <code id="heroCmd">curl -fsSL https://anujsh.com/ssh.sh | sh</code>
+                <button class="copy-btn" onclick="copyText(this, 'curl -fsSL https://anujsh.com/ssh.sh | sh')" aria-label="Copy install command">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    Copy
+                </button>
+            </div>
+            <p class="ssh-hint">Re-running is safe — the script checks before appending.</p>
+        </section>
 
-    // Nav scroll effect
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 50);
-    });
+        <section class="ssh-card reveal visible" aria-label="Manual setup">
+            <div class="ssh-card-label">02 · Manual setup</div>
+            <p class="ssh-card-sub">If piping curl into sh is not your thing, run these three lines instead.</p>
+            <ol class="ssh-steps">
+                <li>Open a shell on the target server.</li>
+                <li>Paste the block below, hit enter.</li>
+                <li>Done — test with <code style="font-family:var(--font-mono);font-size:12px;color:var(--ink)">ssh user@host</code>.</li>
+            </ol>
+            <div class="ssh-code-block">
+                <div class="ssh-code-head">
+                    <span class="ssh-code-head-label">shell</span>
+                    <button class="copy-btn" onclick="copyLines(this, 'manualCmds')" aria-label="Copy manual commands">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                        Copy
+                    </button>
+                </div>
+                <div class="ssh-code-body" id="manualCmds">
+                    <span class="ln">1</span><span class="lc">mkdir -p ~/.ssh && chmod 700 ~/.ssh</span>
+                    <span class="ln">2</span><span class="lc">echo "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBGdaNTFylN4rZ2OR6D326SPpEOIIoFRHsK1/jvIZjd7S9lahefifkCfQ9DoDT+AyOFBq1+yOsb5UTQoACttQ01M= #ssh.id - @ptmaroct" >> ~/.ssh/authorized_keys</span>
+                    <span class="ln">3</span><span class="lc">chmod 600 ~/.ssh/authorized_keys</span>
+                </div>
+            </div>
+        </section>
 
-    // Mobile menu
-    const navToggle = document.getElementById('navToggle');
-    const mobileMenu = document.getElementById('mobileMenu');
-    navToggle.addEventListener('click', () => {
-      mobileMenu.classList.toggle('open');
-      navToggle.classList.toggle('active');
-    });
-    document.querySelectorAll('.mobile-menu a').forEach(el => {
-      el.addEventListener('click', () => {
-        mobileMenu.classList.remove('open');
-        navToggle.classList.remove('active');
-      });
-    });
+        <footer class="ssh-footer">
+            <span>© 2026 Anuj Sharma</span>
+            <a href="/">← Back to anujsh.com</a>
+        </footer>
+    </main>
 
-    // Copy code lines (joins line-content spans with newlines)
-    function copyLines(btn, id) {
-      const lines = document.getElementById(id).querySelectorAll('.line-content');
-      const text = Array.from(lines).map(l => l.textContent).join('\n');
-      copyText(btn, text);
-    }
+    <script>
+        const nav = document.getElementById('nav');
+        const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 8);
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
 
-    // Copy to clipboard
-    function copyText(btn, text) {
-      navigator.clipboard.writeText(text).then(() => {
-        btn.classList.add('copied');
-        const original = btn.innerHTML;
-        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
-        setTimeout(() => {
-          btn.classList.remove('copied');
-          btn.innerHTML = original;
-        }, 2000);
-      });
-    }
-  </script>
+        const navToggle = document.getElementById('navToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        navToggle.addEventListener('click', () => {
+            const open = mobileMenu.classList.toggle('open');
+            navToggle.classList.toggle('active', open);
+            document.body.style.overflow = open ? 'hidden' : '';
+        });
+        document.querySelectorAll('.mobile-menu a').forEach(el => {
+            el.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                navToggle.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        function copyLines(btn, id) {
+            const lines = document.getElementById(id).querySelectorAll('.lc');
+            const text = Array.from(lines).map(l => l.textContent).join('\n');
+            copyText(btn, text);
+        }
+
+        function copyText(btn, text) {
+            navigator.clipboard.writeText(text).then(() => {
+                btn.classList.add('copied');
+                const original = btn.innerHTML;
+                btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Copied';
+                setTimeout(() => {
+                    btn.classList.remove('copied');
+                    btn.innerHTML = original;
+                }, 1800);
+            });
+        }
+    </script>
 </body>
 </html>

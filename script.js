@@ -1,107 +1,91 @@
-// Background Grid
-const bgGrid = document.getElementById('bgGrid');
+// anujsh.com — minimal script
 
-function handleScroll() {
-    if (window.scrollY > 50) {
-        bgGrid.classList.add('visible');
-    } else {
-        bgGrid.classList.remove('visible');
-    }
-}
-
-window.addEventListener('scroll', handleScroll);
-
-// Navigation scroll effect
+// ---- Nav scroll state ----
 const nav = document.getElementById('nav');
+const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 8);
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
 
-function handleNavScroll() {
-    if (window.scrollY > 50) {
-        nav.classList.add('scrolled');
-    } else {
-        nav.classList.remove('scrolled');
-    }
-}
-
-window.addEventListener('scroll', handleNavScroll);
-
-// Mobile menu toggle
+// ---- Mobile menu ----
 const navToggle = document.getElementById('navToggle');
 const mobileMenu = document.getElementById('mobileMenu');
 
 navToggle.addEventListener('click', () => {
-    mobileMenu.classList.toggle('open');
-    navToggle.classList.toggle('active');
+    const open = mobileMenu.classList.toggle('open');
+    navToggle.classList.toggle('active', open);
+    document.body.style.overflow = open ? 'hidden' : '';
 });
 
-// Close mobile menu on link click
 document.querySelectorAll('.mobile-menu a, .mobile-menu button').forEach(el => {
     el.addEventListener('click', () => {
         mobileMenu.classList.remove('open');
         navToggle.classList.remove('active');
+        document.body.style.overflow = '';
     });
 });
 
-// Terminal typing effect
-const terminalText = document.getElementById('terminalText');
-const phrases = [
-    'booting taste_engine...',
-    'loading web obsession...',
-    'ready to ship fast',
-    'const craft = interface + intent'
-];
-
-let phraseIndex = 0;
-let charIndex = 0;
-let isDeleting = false;
-
-function typeEffect() {
-    const currentPhrase = phrases[phraseIndex];
-
-    if (isDeleting) {
-        terminalText.textContent = currentPhrase.substring(0, charIndex - 1);
-        charIndex--;
-    } else {
-        terminalText.textContent = currentPhrase.substring(0, charIndex + 1);
-        charIndex++;
-    }
-
-    let typeSpeed = isDeleting ? 30 : 60;
-
-    if (!isDeleting && charIndex === currentPhrase.length) {
-        typeSpeed = 2000;
-        isDeleting = true;
-    } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        phraseIndex = (phraseIndex + 1) % phrases.length;
-        typeSpeed = 500;
-    }
-
-    setTimeout(typeEffect, typeSpeed);
-}
-
-typeEffect();
-
-// Scroll animations - Fade in sections/cards
-const sectionElements = document.querySelectorAll('section');
-const fadeElements = new Set([...sectionElements, ...document.querySelectorAll('.fade-in')]);
-
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
+// ---- Scroll reveal (staggered; progressive enhancement) ----
+// Auto-stagger siblings within the same section when no explicit delay is set
+document.querySelectorAll('.work-list, .experience-list').forEach(list => {
+    [...list.children].forEach((child, i) => {
+        if (!child.style.getPropertyValue('--reveal-delay')) {
+            child.style.setProperty('--reveal-delay', `${i * 60}ms`);
         }
     });
-}, observerOptions);
+});
 
-sectionElements.forEach(el => el.classList.add('fade-in'));
-fadeElements.forEach(el => observer.observe(el));
+// Enable the "hidden until revealed" state only after JS is running
+document.body.classList.add('js-ready');
 
-// Resume download buttons
+const revealables = document.querySelectorAll('.reveal');
+
+// Anything already in viewport on first paint: mark visible immediately.
+// Everything below the fold: animate in via IntersectionObserver on scroll.
+requestAnimationFrame(() => {
+    const vh = window.innerHeight;
+    revealables.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < vh && rect.bottom > 0) {
+            el.classList.add('visible');
+        }
+    });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+    revealables.forEach(el => {
+        if (!el.classList.contains('visible')) revealObserver.observe(el);
+    });
+});
+
+// ---- Active section highlight ----
+const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
+const sections = [...navAnchors]
+    .map(a => document.querySelector(a.getAttribute('href')))
+    .filter(Boolean);
+
+if (sections.length) {
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.id;
+                navAnchors.forEach(a => {
+                    a.classList.toggle('nav-link-active', a.getAttribute('href') === `#${id}`);
+                });
+            }
+        });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+
+    sections.forEach(s => sectionObserver.observe(s));
+}
+
+// ---- Résumé download ----
 const resumeBtn = document.getElementById('resumeBtn');
 const mobileResumeBtn = document.getElementById('mobileResumeBtn');
 
@@ -115,68 +99,37 @@ function downloadResume() {
 resumeBtn.addEventListener('click', downloadResume);
 mobileResumeBtn.addEventListener('click', downloadResume);
 
-// ==================== EASTER EGGS ====================
-
-// Easter Egg 1: Command Palette (Ctrl+K or Cmd+K)
+// ---- Command palette ----
 const commandPalette = document.getElementById('commandPalette');
 const paletteOverlay = document.getElementById('paletteOverlay');
 const paletteInput = document.getElementById('paletteInput');
-const paletteResults = document.getElementById('paletteResults');
-const commandItems = document.querySelectorAll('.command-item');
+const commandItems = [...document.querySelectorAll('.command-item')];
 
 let selectedIndex = 0;
+
+function visibleItems() {
+    return commandItems.filter(i => i.style.display !== 'none');
+}
+
+function updateSelected() {
+    const items = visibleItems();
+    commandItems.forEach(i => i.classList.remove('selected'));
+    if (items[selectedIndex]) items[selectedIndex].classList.add('selected');
+}
 
 function openPalette() {
     commandPalette.classList.add('open');
     paletteInput.focus();
     selectedIndex = 0;
-    updateSelectedItem();
+    updateSelected();
 }
 
 function closePalette() {
     commandPalette.classList.remove('open');
     paletteInput.value = '';
-}
-
-document.addEventListener('keydown', (e) => {
-    // Command palette shortcut
-    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        e.preventDefault();
-        if (commandPalette.classList.contains('open')) {
-            closePalette();
-        } else {
-            openPalette();
-        }
-    }
-
-    // Close palette with Escape
-    if (e.key === 'Escape' && commandPalette.classList.contains('open')) {
-        closePalette();
-    }
-
-    // Navigate palette with arrow keys
-    if (commandPalette.classList.contains('open')) {
-        if (e.key === 'ArrowDown') {
-            e.preventDefault();
-            selectedIndex = (selectedIndex + 1) % commandItems.length;
-            updateSelectedItem();
-        } else if (e.key === 'ArrowUp') {
-            e.preventDefault();
-            selectedIndex = (selectedIndex - 1 + commandItems.length) % commandItems.length;
-            updateSelectedItem();
-        } else if (e.key === 'Enter') {
-            e.preventDefault();
-            executeCommand(commandItems[selectedIndex].dataset.command);
-        }
-    }
-});
-
-paletteOverlay.addEventListener('click', closePalette);
-
-function updateSelectedItem() {
-    commandItems.forEach((item, index) => {
-        item.classList.toggle('selected', index === selectedIndex);
-    });
+    commandItems.forEach(i => { i.style.display = ''; });
+    selectedIndex = 0;
+    updateSelected();
 }
 
 function executeCommand(command) {
@@ -186,7 +139,6 @@ function executeCommand(command) {
         linkedin: 'https://www.linkedin.com/in/ptmaroct/',
         twitter: 'https://x.com/waahbete',
         resume: 'Resume-AnujSharma.pdf',
-        secret: null
     };
 
     if (command === 'secret') {
@@ -198,31 +150,71 @@ function executeCommand(command) {
     if (command === 'resume') {
         downloadResume();
     } else if (urls[command]) {
-        window.open(urls[command], '_blank');
+        window.open(urls[command], '_blank', 'noopener');
     }
 
     closePalette();
 }
 
-commandItems.forEach((item, index) => {
-    item.addEventListener('click', () => {
-        executeCommand(item.dataset.command);
+paletteInput.addEventListener('input', () => {
+    const q = paletteInput.value.toLowerCase().trim();
+    commandItems.forEach(item => {
+        const text = item.querySelector('.command-text').textContent.toLowerCase();
+        item.style.display = text.includes(q) ? '' : 'none';
     });
+    selectedIndex = 0;
+    updateSelected();
+});
 
+paletteOverlay.addEventListener('click', closePalette);
+
+commandItems.forEach((item) => {
+    item.addEventListener('click', () => executeCommand(item.dataset.command));
     item.addEventListener('mouseenter', () => {
-        selectedIndex = index;
-        updateSelectedItem();
+        const vis = visibleItems();
+        selectedIndex = vis.indexOf(item);
+        updateSelected();
     });
 });
 
-// Easter Egg 2: Konami Code
-const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
+document.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        commandPalette.classList.contains('open') ? closePalette() : openPalette();
+        return;
+    }
+
+    if (!commandPalette.classList.contains('open')) return;
+
+    if (e.key === 'Escape') {
+        closePalette();
+    } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        const vis = visibleItems();
+        if (!vis.length) return;
+        selectedIndex = (selectedIndex + 1) % vis.length;
+        updateSelected();
+    } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        const vis = visibleItems();
+        if (!vis.length) return;
+        selectedIndex = (selectedIndex - 1 + vis.length) % vis.length;
+        updateSelected();
+    } else if (e.key === 'Enter') {
+        e.preventDefault();
+        const vis = visibleItems();
+        if (vis[selectedIndex]) executeCommand(vis[selectedIndex].dataset.command);
+    }
+});
+
+// ---- Konami code easter egg ----
+const konami = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
 let konamiIndex = 0;
 
 document.addEventListener('keydown', (e) => {
-    if (e.code === konamiCode[konamiIndex]) {
+    if (e.code === konami[konamiIndex]) {
         konamiIndex++;
-        if (konamiIndex === konamiCode.length) {
+        if (konamiIndex === konami.length) {
             openSecretMode();
             konamiIndex = 0;
         }
@@ -231,67 +223,32 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// Easter Egg 3: Secret Mode
+// ---- Secret mode ----
 const secretMode = document.getElementById('secretMode');
 const closeSecretBtn = document.getElementById('closeSecret');
-const footerHint = document.getElementById('footerHint');
 
 function openSecretMode() {
     secretMode.classList.add('open');
-    footerHint.style.opacity = '0';
 }
 
-closeSecretBtn.addEventListener('click', () => {
-    secretMode.classList.remove('open');
+closeSecretBtn.addEventListener('click', () => secretMode.classList.remove('open'));
+secretMode.addEventListener('click', (e) => {
+    if (e.target === secretMode) secretMode.classList.remove('open');
 });
 
-// Easter Egg 4: Console joke
-const secrets = [
-    'Anuj\'s code: no bugs, only features 🫡',
-    'console.log("Ship it!")',
-    'Warning: This portfolio may cause extreme competence',
-    '404: Excuses not found',
-    'Building something awesome...',
-    'Anuj.exe has stopped working — Just kidding, never!'
-];
-
-console.log('%c👋 Hey there!', 'font-size: 24px; color: #22d3ee;');
-console.log(secrets[Math.floor(Math.random() * secrets.length)]);
-
-// Add hover effect hint for the discerning developer
-document.querySelectorAll('.project-card').forEach(card => {
-    card.addEventListener('mouseenter', () => {
-        console.log('%c✨ Nice hover!', 'color: #22d3ee;');
-    });
-});
-
-// Easter Egg 5: Double-click on logo for matrix effect (subtle)
-let logoClickCount = 0;
-const navLogo = document.querySelector('.nav-logo');
-
-navLogo.addEventListener('click', () => {
-    logoClickCount++;
-    if (logoClickCount === 7) {
-        // Subtle matrix rain on hero section
-        const hero = document.querySelector('.hero');
-        hero.style.filter = 'hue-rotate(90deg)';
-        setTimeout(() => {
-            hero.style.filter = '';
-        }, 500);
-        logoClickCount = 0;
-    }
-});
-
-// Smooth scroll for anchor links
+// ---- Smooth anchor scroll ----
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+    anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href === '#' || href.length < 2) return;
+        const target = document.querySelector(href);
         if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     });
 });
+
+// ---- Console greeting ----
+console.log('%c anuj.sh ', 'background:#8b8fff;color:#08090a;padding:2px 6px;border-radius:3px;font-weight:600');
+console.log('%cLooking under the hood? Say hi — me@anujsh.com', 'color:#8a8f98');

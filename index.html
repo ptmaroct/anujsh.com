@@ -3,27 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <title>Anuj Sharma — Senior AI Engineer FullStack</title>
-    <meta name="description" content="7+ years building and scaling products. Senior AI Engineer FullStack at delta.exchange.">
+    <title>Anuj Sharma — Senior AI Engineer, Fullstack</title>
+    <meta name="description" content="7+ years building and scaling products. Senior AI Engineer, Fullstack at delta.exchange.">
+    <meta name="theme-color" content="#fbfbfa" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#08090a" media="(prefers-color-scheme: dark)">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="bg-grid" id="bgGrid"></div>
-
     <nav class="nav" id="nav">
         <a href="#" class="nav-logo">anuj.sh</a>
         <div class="nav-links">
-            <a href="#proof">proof</a>
-            <a href="#work">work</a>
-            <a href="#experience">experience</a>
-            <a href="#craft">craft</a>
-            <a href="#principles">principles</a>
-            <a href="#contact">contact</a>
-            <a href="/ssh">ssh</a>
-            <button class="nav-resume" id="resumeBtn">resume ↓</button>
+            <a href="#work">Work</a>
+            <a href="#experience">Experience</a>
+            <a href="#notes">Notes</a>
+            <a href="#contact">Contact</a>
+            <a href="/ssh">SSH</a>
+            <button class="nav-resume" id="resumeBtn">Résumé</button>
         </div>
         <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
             <span></span>
@@ -32,256 +30,301 @@
     </nav>
 
     <div class="mobile-menu" id="mobileMenu">
-        <a href="#proof">proof</a>
-        <a href="#work">work</a>
-        <a href="#experience">experience</a>
-        <a href="#craft">craft</a>
-        <a href="#principles">principles</a>
-        <a href="#contact">contact</a>
-            <a href="/ssh">ssh</a>
-        <button class="mobile-resume" id="mobileResumeBtn">resume ↓</button>
+        <a href="#work">Work</a>
+        <a href="#experience">Experience</a>
+        <a href="#notes">Notes</a>
+        <a href="#contact">Contact</a>
+        <a href="/ssh">SSH</a>
+        <button class="mobile-resume" id="mobileResumeBtn">Résumé ↓</button>
     </div>
 
     <main>
         <section class="hero">
-            <div class="hero-content">
-                <div class="terminal-badge">
-                    <span class="terminal-prompt">$</span>
-                    <span class="terminal-text" id="terminalText"></span>
-                    <span class="terminal-cursor">|</span>
+            <div class="reveal">
+                <div class="hero-meta">
+                    <span class="hero-meta-dot" aria-hidden="true"></span>
+                    <span>Available for new work</span>
+                    <span class="hero-meta-sep">·</span>
+                    <span>Bangalore, IN</span>
                 </div>
-                <h1 class="hero-title">
-                    <span class="hero-line">I build for the</span>
-                    <span class="hero-line">web with <em>taste</em>.</span>
-                </h1>
-                <p class="hero-subtitle">
-                    Senior AI Engineer FullStack @ <a href="https://delta.exchange" target="_blank" rel="noopener">delta.exchange</a><br>
-                    Based in Bangalore — shipping AI products, polished interfaces, and systems that hold up under real use.
-                </p>
-                <div class="hero-cta">
-                    <a href="#work" class="btn btn-primary">View work ↓</a>
-                    <a href="#contact" class="btn btn-secondary">Get in touch</a>
-                </div>
+            </div>
+            <h1 class="hero-title reveal" style="--reveal-delay: 80ms">
+                I build for the web, <em>with taste.</em>
+            </h1>
+            <p class="hero-subtitle reveal" style="--reveal-delay: 160ms">
+                Senior AI Engineer, Fullstack at <a href="https://delta.exchange" target="_blank" rel="noopener">delta.exchange</a>. Seven years shipping AI products, polished interfaces, and systems that hold up under real use.
+            </p>
+            <div class="hero-cta reveal" style="--reveal-delay: 240ms">
+                <a href="#work" class="btn btn-primary">View work</a>
+                <a href="#contact" class="btn btn-secondary">Get in touch</a>
             </div>
         </section>
 
         <section class="proof" id="proof">
-            <h2 class="section-title">Worked across</h2>
-            <div class="logo-grid">
+            <div class="section-head reveal">
+                <span class="section-kicker">01</span>
+                <span class="section-title">Worked across</span>
+            </div>
+            <div class="logo-row reveal" style="--reveal-delay: 80ms">
                 <a class="logo-card" href="https://delta.exchange" target="_blank" rel="noopener" aria-label="Delta Exchange">
-                    <img src="assets/logos/delta.svg" alt="Delta Exchange logo">
+                    <img src="assets/logos/delta.svg" alt="Delta Exchange">
                 </a>
                 <a class="logo-card" href="https://www.getsaral.com/" target="_blank" rel="noopener" aria-label="Saral">
-                    <img src="assets/logos/saral.svg" alt="Saral logo">
+                    <img src="assets/logos/saral.svg" alt="Saral">
                 </a>
                 <a class="logo-card" href="https://mydukaan.io/" target="_blank" rel="noopener" aria-label="Dukaan">
-                    <img src="assets/logos/dukaan.svg" alt="Dukaan logo">
+                    <img src="assets/logos/dukaan.svg" alt="Dukaan">
                 </a>
                 <a class="logo-card" href="https://bot9.ai/" target="_blank" rel="noopener" aria-label="Bot9">
-                    <img src="assets/logos/bot9.svg" alt="Bot9 logo">
+                    <img src="assets/logos/bot9.svg" alt="Bot9">
                 </a>
             </div>
         </section>
 
         <section class="work" id="work">
-            <h2 class="section-title">Open source & selected work</h2>
-            <div class="projects-grid">
-                <article class="project-card">
-                    <div class="project-header">
-                        <span class="project-year">2024</span>
-                        <span class="project-type">Open Source</span>
+            <div class="section-head reveal">
+                <span class="section-kicker">02</span>
+                <span class="section-title">Selected work</span>
+            </div>
+            <h3 class="section-lead reveal" style="--reveal-delay: 60ms">
+                Open source and shipped work — the projects <em>I'm still proud of.</em>
+            </h3>
+
+            <div class="work-list">
+                <article class="work-item reveal">
+                    <div class="work-index">001</div>
+                    <div class="work-body">
+                        <div class="work-title-row">
+                            <h3 class="work-title">ShipStation.ai</h3>
+                            <span class="work-type">Open source</span>
+                        </div>
+                        <p class="work-desc">
+                            AI portfolio website builder. 87 GitHub stars, 1,000+ users. Built with Anthropic, OAuth, Supabase, deployed on Coolify.
+                        </p>
+                        <div class="work-tags">
+                            <span>TypeScript</span>
+                            <span>Next.js</span>
+                            <span>Supabase</span>
+                            <span>Anthropic</span>
+                        </div>
                     </div>
-                    <h3 class="project-title">ShipStation.ai</h3>
-                    <p class="project-description">
-                        Open-source AI portfolio website builder. 87 GitHub stars, 1000+ users.
-                        Built with Anthropic, OAuth, Supabase, deployed on Coolify.
-                    </p>
-                    <div class="project-tags">
-                        <span>TypeScript</span>
-                        <span>Next.js</span>
-                        <span>AI</span>
-                        <span>Supabase</span>
-                    </div>
-                    <div class="project-actions">
-                        <a href="https://github.com/daytimedrinkingclub/shipstation" target="_blank" rel="noopener" class="project-link">
-                            View GitHub ↗
-                        </a>
-                        <a href="https://shipstation.ai" target="_blank" rel="noopener" class="project-link project-link-muted">
-                            Live site ↗
-                        </a>
+                    <div class="work-meta">
+                        <span class="work-year">2024</span>
+                        <div class="work-links">
+                            <a href="https://github.com/daytimedrinkingclub/shipstation" target="_blank" rel="noopener" class="work-link">
+                                GitHub
+                                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h6v6M3 9l6-6"/></svg>
+                            </a>
+                            <a href="https://shipstation.ai" target="_blank" rel="noopener" class="work-link">
+                                Live
+                                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h6v6M3 9l6-6"/></svg>
+                            </a>
+                        </div>
                     </div>
                 </article>
 
-                <article class="project-card">
-                    <div class="project-header">
-                        <span class="project-year">2025</span>
-                        <span class="project-type">AI Platform</span>
+                <article class="work-item reveal">
+                    <div class="work-index">002</div>
+                    <div class="work-body">
+                        <div class="work-title-row">
+                            <h3 class="work-title">Delta Help Center</h3>
+                            <span class="work-type">AI platform</span>
+                        </div>
+                        <p class="work-desc">
+                            Support and debugging system that cut response time from two days to two minutes. RAG pipeline on Pinecone + Anthropic.
+                        </p>
+                        <div class="work-tags">
+                            <span>RAG</span>
+                            <span>Pinecone</span>
+                            <span>Anthropic</span>
+                            <span>Evals</span>
+                        </div>
                     </div>
-                    <h3 class="project-title">Delta.exchange AI Help Center</h3>
-                    <p class="project-description">
-                        Support/debugging system reducing response time from 2 days to 2 minutes.
-                        RAG pipeline with Pinecone + Anthropic.
-                    </p>
-                    <div class="project-tags">
-                        <span>RAG</span>
-                        <span>Pinecone</span>
-                        <span>Anthropic</span>
-                        <span>AI</span>
+                    <div class="work-meta">
+                        <span class="work-year">2025</span>
+                        <div class="work-links">
+                            <a href="https://delta.exchange" target="_blank" rel="noopener" class="work-link">
+                                Visit
+                                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h6v6M3 9l6-6"/></svg>
+                            </a>
+                        </div>
                     </div>
-                    <a href="https://delta.exchange" target="_blank" rel="noopener" class="project-link">
-                        View project →
-                    </a>
                 </article>
 
-                <article class="project-card">
-                    <div class="project-header">
-                        <span class="project-year">2020</span>
-                        <span class="project-type">Hackathon</span>
+                <article class="work-item reveal">
+                    <div class="work-index">003</div>
+                    <div class="work-body">
+                        <div class="work-title-row">
+                            <h3 class="work-title">iheardthis.live</h3>
+                            <span class="work-type">Hackathon</span>
+                        </div>
+                        <p class="work-desc">
+                            Six-hour internet experiment for live-music memories. 40+ users on day one with zero ads — just taste and shipping momentum.
+                        </p>
+                        <div class="work-tags">
+                            <span>Rapid build</span>
+                            <span>Product taste</span>
+                            <span>Distribution</span>
+                        </div>
                     </div>
-                    <h3 class="project-title">iheardthis.live</h3>
-                    <p class="project-description">
-                        A six-hour internet experiment for live-music memories.
-                        It pulled in 40+ users in the first day with no ads — just taste, speed, and shipping momentum.
-                    </p>
-                    <div class="project-tags">
-                        <span>Rapid Build</span>
-                        <span>Product Taste</span>
-                        <span>Distribution</span>
-                    </div>
-                    <div class="project-actions">
-                        <a href="https://github.com/daytimedrinkingclub/iheardthis.live" target="_blank" rel="noopener" class="project-link">
-                            View GitHub ↗
-                        </a>
-                        <a href="#contact" class="project-link project-link-muted">
-                            Ask me about it →
-                        </a>
+                    <div class="work-meta">
+                        <span class="work-year">2020</span>
+                        <div class="work-links">
+                            <a href="https://github.com/daytimedrinkingclub/iheardthis.live" target="_blank" rel="noopener" class="work-link">
+                                GitHub
+                                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h6v6M3 9l6-6"/></svg>
+                            </a>
+                        </div>
                     </div>
                 </article>
             </div>
         </section>
 
         <section class="experience" id="experience">
-            <h2 class="section-title">Experience</h2>
-            <h3 class="section-lead">Roles where I shipped, led, and cleaned up the hard bits.</h3>
+            <div class="section-head reveal">
+                <span class="section-kicker">03</span>
+                <span class="section-title">Experience</span>
+            </div>
+            <h3 class="section-lead reveal" style="--reveal-delay: 60ms">
+                Roles where I shipped, led, and <em>cleaned up the hard bits.</em>
+            </h3>
+
             <div class="experience-list">
-                <article class="experience-card fade-in">
-                    <div class="experience-brand single-brand light-brand">
-                        <img src="assets/logos/delta.svg" alt="Delta Exchange logo">
+                <article class="experience-card reveal">
+                    <div class="experience-brand">
+                        <img src="assets/logos/delta.svg" alt="Delta Exchange">
                     </div>
                     <div class="experience-copy">
-                        <span class="experience-period">2025 — present</span>
-                        <h3>Senior AI Engineer FullStack · delta.exchange</h3>
-                        <p>Building AI support and product workflows for a crypto derivatives platform where correctness and responsiveness both matter.</p>
+                        <h3 class="experience-role">Senior AI Engineer, Fullstack · delta.exchange</h3>
+                        <p class="experience-desc">Building AI support and product workflows for a crypto derivatives platform where correctness and responsiveness both matter.</p>
                     </div>
+                    <span class="experience-period">2025 — Present</span>
                 </article>
 
-                <article class="experience-card fade-in">
-                    <div class="experience-brand single-brand light-brand">
-                        <img src="assets/logos/saral.svg" alt="Saral logo">
+                <article class="experience-card reveal">
+                    <div class="experience-brand">
+                        <img src="assets/logos/saral.svg" alt="Saral">
                     </div>
                     <div class="experience-copy">
-                        <span class="experience-period">Nov 2024 — Jul 2025</span>
-                        <h3>Senior Software Engineer · Saral</h3>
-                        <p>Built social listening and influencer workflow tooling, shipped AI features like intelligent naming, sentiment analysis, and address detection, and tightened CI + delivery confidence.</p>
+                        <h3 class="experience-role">Senior Software Engineer · Saral</h3>
+                        <p class="experience-desc">Built social listening and influencer workflow tooling, shipped AI features like intelligent naming, sentiment analysis, and address detection, and tightened CI + delivery confidence.</p>
                     </div>
+                    <span class="experience-period">Nov 2024 — Jul 2025</span>
                 </article>
 
-                <article class="experience-card fade-in">
-                    <div class="experience-brand dual-brand light-brand">
-                        <img src="assets/logos/dukaan.svg" alt="Dukaan logo">
-                        <img src="assets/logos/bot9.svg" alt="Bot9 logo">
+                <article class="experience-card reveal">
+                    <div class="experience-brand dual-brand">
+                        <img src="assets/logos/dukaan.svg" alt="Dukaan">
+                        <img src="assets/logos/bot9.svg" alt="Bot9">
                     </div>
                     <div class="experience-copy">
-                        <span class="experience-period">Jan 2021 — May 2024</span>
-                        <h3>Technical Lead · MyDukaan.io / Bot9.ai</h3>
-                        <p>First frontend engineer in the room, later a lead. Scaled the product from MVP to 40+ production features, served 60k+ merchants, built Bot9’s conversational AI product, and helped grow the team from 1 to 15+ developers.</p>
+                        <h3 class="experience-role">Technical Lead · MyDukaan / Bot9.ai</h3>
+                        <p class="experience-desc">First frontend engineer in the room, later a lead. Scaled the product from MVP to 40+ production features, served 60k+ merchants, built Bot9's conversational AI, and helped grow the team from 1 to 15+ engineers.</p>
                     </div>
+                    <span class="experience-period">Jan 2021 — May 2024</span>
                 </article>
 
-                <article class="experience-card fade-in">
+                <article class="experience-card reveal">
                     <div class="experience-brand text-brand">
-                        <span>React · Angular · Vue · React Native · Kotlin</span>
+                        <span>React · Angular · Vue<br>React Native · Kotlin</span>
                     </div>
                     <div class="experience-copy">
-                        <span class="experience-period">Feb 2018 — Jan 2021</span>
-                        <h3>Software Engineer · Service companies</h3>
-                        <p>Cut teeth across frontend delivery, mobile apps, and ETL-heavy enterprise work. Good place to learn how to ship under constraints and not panic when requirements move.</p>
+                        <h3 class="experience-role">Software Engineer · Service companies</h3>
+                        <p class="experience-desc">Cut teeth across frontend delivery, mobile apps, and ETL-heavy enterprise work. Good place to learn how to ship under constraints and not panic when requirements move.</p>
                     </div>
+                    <span class="experience-period">Feb 2018 — Jan 2021</span>
                 </article>
             </div>
         </section>
 
-        <section class="craft" id="craft">
-            <h2 class="section-title">Craft</h2>
-            <h3 class="section-lead">What I actually bring to a team.</h3>
-            <div class="craft-grid">
-                <article class="craft-card fade-in">
-                    <h3>Product-minded frontend</h3>
-                    <p>React, Next.js, TypeScript, motion, responsive systems, and interfaces that feel thought-through instead of assembled.</p>
-                </article>
-                <article class="craft-card fade-in">
-                    <h3>AI with product sense</h3>
-                    <p>LLM APIs, RAG, Pinecone, prompt/tool workflows, evaluation instincts, and a healthy allergy to gimmicks.</p>
-                </article>
-                <article class="craft-card fade-in">
-                    <h3>Full-stack execution</h3>
-                    <p>Node.js, Express, MongoDB, Redis, WebSockets, auth flows, infrastructure glue, and the parts nobody shows in launch tweets.</p>
-                </article>
-                <article class="craft-card fade-in">
-                    <h3>Leadership without theatre</h3>
-                    <p>Mentoring, hiring loops, review culture, support SOPs, and helping teams move faster without lowering standards.</p>
-                </article>
+        <section class="notes" id="notes">
+            <div class="section-head reveal">
+                <span class="section-kicker">04</span>
+                <span class="section-title">Notes</span>
             </div>
-        </section>
+            <h3 class="section-lead reveal" style="--reveal-delay: 60ms">
+                My bias is simple — make it useful, then make it beautiful, then <em>make it harder to break.</em>
+            </h3>
 
-        <section class="principles" id="principles">
-            <h2 class="section-title">Principles</h2>
-            <h3 class="section-lead">My bias is simple: make it useful, then make it beautiful, then make it harder to break.</h3>
-            <div class="principles-grid">
-                <article class="principle-card fade-in">
-                    <span class="principle-number">01</span>
-                    <h3>Interfaces should feel obvious.</h3>
-                    <p>If someone needs a walkthrough for the happy path, the product is still lying to itself.</p>
-                </article>
-                <article class="principle-card fade-in">
-                    <span class="principle-number">02</span>
-                    <h3>Speed is a product feature.</h3>
-                    <p>Not just render time — decision speed, iteration speed, support speed, and how quickly a team can ship the next thing.</p>
-                </article>
-                <article class="principle-card fade-in">
-                    <span class="principle-number">03</span>
-                    <h3>Details earn trust.</h3>
-                    <p>Copy, empty states, spacing, failure modes, keyboard flows — the stuff people call “small” is usually doing the trust-building.</p>
-                </article>
+            <div class="notes-grid">
+                <div class="note-card reveal">
+                    <span class="note-index">01 — Craft</span>
+                    <h3 class="note-title">Product-minded frontend</h3>
+                    <p class="note-desc">React, Next.js, TypeScript, motion, responsive systems, and interfaces that feel thought-through instead of assembled.</p>
+                </div>
+                <div class="note-card reveal" style="--reveal-delay: 60ms">
+                    <span class="note-index">02 — Craft</span>
+                    <h3 class="note-title">AI with product sense</h3>
+                    <p class="note-desc">LLM APIs, RAG, Pinecone, prompt and tool workflows, evaluation instincts, and a healthy allergy to gimmicks.</p>
+                </div>
+                <div class="note-card reveal" style="--reveal-delay: 120ms">
+                    <span class="note-index">03 — Craft</span>
+                    <h3 class="note-title">Full-stack execution</h3>
+                    <p class="note-desc">Node.js, Express, MongoDB, Redis, WebSockets, auth flows, infrastructure glue — the parts nobody shows in launch tweets.</p>
+                </div>
+                <div class="note-card reveal" style="--reveal-delay: 180ms">
+                    <span class="note-index">04 — Craft</span>
+                    <h3 class="note-title">Leadership without theatre</h3>
+                    <p class="note-desc">Mentoring, hiring loops, review culture, support SOPs, and helping teams move faster without lowering standards.</p>
+                </div>
+                <div class="note-card reveal" style="--reveal-delay: 240ms">
+                    <span class="note-index">05 — Principle</span>
+                    <h3 class="note-title">Interfaces should feel obvious</h3>
+                    <p class="note-desc">If someone needs a walkthrough for the happy path, the product is still lying to itself.</p>
+                </div>
+                <div class="note-card reveal" style="--reveal-delay: 300ms">
+                    <span class="note-index">06 — Principle</span>
+                    <h3 class="note-title">Speed is a product feature</h3>
+                    <p class="note-desc">Not just render time — decision speed, iteration speed, support speed, and how quickly a team can ship the next thing.</p>
+                </div>
             </div>
         </section>
 
         <section class="contact" id="contact">
-            <h2 class="section-title">Contact</h2>
-            <h3 class="section-lead">Need someone who can ship the product and make it feel good?</h3>
-            <div class="contact-content contact-content-ref">
-                <p class="contact-text">
-                    I’m always up for smart product conversations, sharp design discussions, and ambitious internet ideas that need both engineering depth and taste.
-                </p>
-                <div class="contact-links contact-links-minimal">
-                    <a href="mailto:me@anujsh.com" class="contact-link contact-link-minimal">me@anujsh.com</a>
-                    <a href="https://github.com/ptmaroct" target="_blank" rel="noopener" class="contact-link contact-link-minimal">GitHub</a>
-                    <a href="https://www.linkedin.com/in/ptmaroct/" target="_blank" rel="noopener" class="contact-link contact-link-minimal">LinkedIn</a>
-                    <a href="https://x.com/waahbete" target="_blank" rel="noopener" class="contact-link contact-link-minimal">X / Twitter</a>
-                </div>
+            <div class="section-head reveal">
+                <span class="section-kicker">05</span>
+                <span class="section-title">Contact</span>
+            </div>
+            <h3 class="section-lead reveal" style="--reveal-delay: 60ms">
+                Need someone who can ship the product and <em>make it feel good?</em>
+            </h3>
+            <p class="contact-text reveal" style="--reveal-delay: 120ms">
+                I'm up for smart product conversations, sharp design discussions, and ambitious internet ideas that need both engineering depth and taste.
+            </p>
+            <div class="contact-links reveal" style="--reveal-delay: 180ms">
+                <a href="mailto:me@anujsh.com" class="contact-link">
+                    <span>Email</span>
+                    me@anujsh.com
+                    <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 6h6M6 3l3 3-3 3"/></svg>
+                </a>
+                <a href="https://github.com/ptmaroct" target="_blank" rel="noopener" class="contact-link">
+                    <span>GitHub</span>
+                    @ptmaroct
+                    <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 6h6M6 3l3 3-3 3"/></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/ptmaroct/" target="_blank" rel="noopener" class="contact-link">
+                    <span>LinkedIn</span>
+                    in/ptmaroct
+                    <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 6h6M6 3l3 3-3 3"/></svg>
+                </a>
+                <a href="https://x.com/waahbete" target="_blank" rel="noopener" class="contact-link">
+                    <span>X / Twitter</span>
+                    @waahbete
+                    <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 6h6M6 3l3 3-3 3"/></svg>
+                </a>
             </div>
         </section>
     </main>
 
     <footer class="footer">
-        <p>© 2026 Anuj Sharma. Built with care and a mildly unhealthy respect for good hover states.</p>
-        <p class="footer-hint" id="footerHint">Press <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>K</kbd> or try the Konami code if you're nosy.</p>
+        <p>© 2026 Anuj Sharma.</p>
+        <p class="footer-hint" id="footerHint">Press <kbd>⌘</kbd> <kbd>K</kbd> for commands</p>
     </footer>
 
     <div class="command-palette" id="commandPalette">
         <div class="command-palette-overlay" id="paletteOverlay"></div>
         <div class="command-palette-content">
-            <input type="text" class="command-palette-input" id="paletteInput" placeholder="Type a command...">
+            <input type="text" class="command-palette-input" id="paletteInput" placeholder="Type a command…">
             <div class="command-palette-results" id="paletteResults">
                 <div class="command-item" data-command="email">
                     <span class="command-icon">@</span>
@@ -289,27 +332,27 @@
                     <span class="command-shortcut">↵</span>
                 </div>
                 <div class="command-item" data-command="github">
-                    <span class="command-icon">⌘</span>
+                    <span class="command-icon">gh</span>
                     <span class="command-text">Open GitHub</span>
                     <span class="command-shortcut">↵</span>
                 </div>
                 <div class="command-item" data-command="linkedin">
-                    <span class="command-icon">◈</span>
+                    <span class="command-icon">in</span>
                     <span class="command-text">Open LinkedIn</span>
                     <span class="command-shortcut">↵</span>
                 </div>
                 <div class="command-item" data-command="twitter">
                     <span class="command-icon">𝕏</span>
-                    <span class="command-text">Open X/Twitter</span>
+                    <span class="command-text">Open X / Twitter</span>
                     <span class="command-shortcut">↵</span>
                 </div>
                 <div class="command-item" data-command="resume">
                     <span class="command-icon">↓</span>
-                    <span class="command-text">Download Resume</span>
+                    <span class="command-text">Download résumé</span>
                     <span class="command-shortcut">↵</span>
                 </div>
                 <div class="command-item" data-command="secret">
-                    <span class="command-icon">🫡</span>
+                    <span class="command-icon">·</span>
                     <span class="command-text">???</span>
                     <span class="command-shortcut">↵</span>
                 </div>
@@ -319,14 +362,13 @@
 
     <div class="secret-mode" id="secretMode">
         <div class="secret-content">
-            <h2>👀 You found it!</h2>
-            <p>Here's a secret: Anuj once built a whole product in &lt;6 hours and it got 40+ users in a day.</p>
-            <p>That's the mindset. Ship fast, learn faster.</p>
+            <h2>You found it.</h2>
+            <p>Anuj once built a whole product in under six hours — 40+ users on day one.</p>
+            <p>That's the mindset: ship fast, learn faster.</p>
             <button class="btn btn-secondary" id="closeSecret">Got it</button>
         </div>
     </div>
 
     <script src="script.js"></script>
-    <!-- If you're inspecting the DOM: yes, the command palette is intentional. So are the hover states. -->
 </body>
 </html>

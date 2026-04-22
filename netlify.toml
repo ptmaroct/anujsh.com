@@ -5,16 +5,6 @@
 [build.environment]
   NODE_VERSION = "22"
 
-# Normalize /blog (no trailing slash) -> /blog/
-[[redirects]]
-  from = "/blog"
-  to = "/blog/"
-  status = 301
-  force = true
-
-# Normalize /blog/<slug> (no trailing slash) -> /blog/<slug>/
-[[redirects]]
-  from = "/blog/:slug"
-  to = "/blog/:slug/"
-  status = 301
-  force = false
+# Trailing-slash normalization is handled by Netlify's default Pretty URLs.
+# Custom redirect rules were removed because `force = true` caused a redirect
+# loop on /blog/ (Netlify strips the trailing slash before matching the rule).

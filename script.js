@@ -85,19 +85,79 @@ if (sections.length) {
     sections.forEach(s => sectionObserver.observe(s));
 }
 
-// ---- Résumé download ----
+// ---- Résumé preview modal + download ----
 const resumeBtn = document.getElementById('resumeBtn');
 const mobileResumeBtn = document.getElementById('mobileResumeBtn');
+const resumeModal = document.getElementById('resumeModal');
+const resumeModalOverlay = document.getElementById('resumeModalOverlay');
+const resumeCloseBtn = document.getElementById('resumeCloseBtn');
+const resumeDownloadBtn = document.getElementById('resumeDownloadBtn');
+const resumeFrame = document.getElementById('resumeFrame');
+
+const RESUME_URL = 'Resume-AnujSharma.pdf';
 
 function downloadResume() {
     const link = document.createElement('a');
-    link.href = 'Resume-AnujSharma.pdf';
+    link.href = RESUME_URL;
     link.download = 'Resume-AnujSharma.pdf';
     link.click();
 }
 
-resumeBtn.addEventListener('click', downloadResume);
-mobileResumeBtn.addEventListener('click', downloadResume);
+let lastFocusedBeforeResume = null;
+
+function openResumeModal() {
+    lastFocusedBeforeResume = document.activeElement;
+    // Lazy-load iframe on first open so no bandwidth until needed
+    if (!resumeFrame.dataset.loaded) {
+        resumeFrame.src = `${RESUME_URL}#toolbar=0&view=FitH`;
+        resumeFrame.dataset.loaded = '1';
+    }
+    resumeModal.classList.add('open');
+    resumeModal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('resume-open');
+    // Focus download button after transition starts
+    requestAnimationFrame(() => resumeDownloadBtn.focus());
+}
+
+function closeResumeModal() {
+    resumeModal.classList.remove('open');
+    resumeModal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('resume-open');
+    if (lastFocusedBeforeResume && typeof lastFocusedBeforeResume.focus === 'function') {
+        lastFocusedBeforeResume.focus();
+    }
+}
+
+resumeBtn.addEventListener('click', openResumeModal);
+mobileResumeBtn.addEventListener('click', openResumeModal);
+resumeCloseBtn.addEventListener('click', closeResumeModal);
+resumeModalOverlay.addEventListener('click', closeResumeModal);
+resumeDownloadBtn.addEventListener('click', downloadResume);
+
+document.addEventListener('keydown', (e) => {
+    if (!resumeModal.classList.contains('open')) return;
+
+    if (e.key === 'Escape') {
+        e.preventDefault();
+        closeResumeModal();
+        return;
+    }
+
+    if (e.key === 'Tab') {
+        const focusable = [resumeDownloadBtn, resumeCloseBtn];
+        const currentIndex = focusable.indexOf(document.activeElement);
+        if (currentIndex === -1) {
+            e.preventDefault();
+            focusable[0].focus();
+            return;
+        }
+        const nextIndex = e.shiftKey
+            ? (currentIndex - 1 + focusable.length) % focusable.length
+            : (currentIndex + 1) % focusable.length;
+        e.preventDefault();
+        focusable[nextIndex].focus();
+    }
+});
 
 // ---- Command palette ----
 const commandPalette = document.getElementById('commandPalette');

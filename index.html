@@ -370,6 +370,35 @@
         </div>
     </div>
 
+    <div class="resume-modal" id="resumeModal" role="dialog" aria-modal="true" aria-label="Résumé preview" aria-hidden="true">
+        <div class="resume-modal-overlay" id="resumeModalOverlay"></div>
+        <div class="resume-modal-shell" role="document">
+            <header class="resume-modal-bar">
+                <div class="resume-modal-title">
+                    <span class="resume-modal-tag">Résumé</span>
+                    <span class="resume-modal-sep" aria-hidden="true">·</span>
+                    <span class="resume-modal-file">Resume-AnujSharma.pdf</span>
+                </div>
+                <div class="resume-modal-actions">
+                    <button class="resume-modal-download" id="resumeDownloadBtn" type="button">
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                            <path d="M8 2.5v8M4.5 7l3.5 3.5L11.5 7M3 13h10"/>
+                        </svg>
+                        Download
+                    </button>
+                    <button class="resume-modal-close" id="resumeCloseBtn" type="button" aria-label="Close résumé preview">
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                            <path d="M4 4l8 8M12 4l-8 8"/>
+                        </svg>
+                    </button>
+                </div>
+            </header>
+            <div class="resume-modal-body">
+                <iframe id="resumeFrame" title="Résumé preview" src="about:blank" loading="lazy"></iframe>
+            </div>
+        </div>
+    </div>
+
     <div class="secret-mode" id="secretMode">
         <div class="secret-content">
             <h2>You found it.</h2>

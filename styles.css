@@ -403,13 +403,13 @@ section {
     opacity: 0;
     transition: opacity 800ms var(--ease);
     mix-blend-mode: screen;
-    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 100%);
-    mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 100%);
 }
 
 @media (prefers-color-scheme: light) {
     .hero-bg {
         mix-blend-mode: normal;
+        -webkit-mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 100%);
+        mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 100%);
     }
 }
 
@@ -1166,6 +1166,208 @@ section {
     font-family: var(--font-mono);
     font-size: 11px;
     color: var(--ink-4);
+}
+
+/* ---- Resume Modal (full-screen preview) ----------------- */
+.resume-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 250;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--dur) var(--ease);
+}
+
+.resume-modal.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.resume-modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: color-mix(in srgb, var(--bg) 86%, #000);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.resume-modal-shell {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    transform: scale(0.985) translateY(6px);
+    opacity: 0.9;
+    transition: transform var(--dur) var(--ease), opacity var(--dur) var(--ease);
+}
+
+.resume-modal.open .resume-modal-shell {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+}
+
+.resume-modal-bar {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 20px;
+    background: var(--bg-elevated);
+    border-bottom: 1px solid var(--line);
+}
+
+.resume-modal-title {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    min-width: 0;
+}
+
+.resume-modal-tag {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+}
+
+.resume-modal-sep {
+    color: var(--ink-4);
+    font-size: 12px;
+}
+
+.resume-modal-file {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--ink-3);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.resume-modal-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.resume-modal-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    background: var(--btn-primary-bg);
+    color: var(--btn-primary-fg);
+    border: 1px solid var(--btn-primary-bg);
+    border-radius: var(--radius-md);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background var(--dur) var(--ease), transform var(--dur-fast) var(--ease);
+}
+
+.resume-modal-download:hover {
+    background: var(--btn-primary-hover);
+    border-color: var(--btn-primary-hover);
+}
+
+.resume-modal-download:active {
+    transform: scale(0.97);
+}
+
+.resume-modal-download svg {
+    width: 14px;
+    height: 14px;
+}
+
+.resume-modal-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--ink-2);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background var(--dur) var(--ease), color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+
+.resume-modal-close:hover {
+    background: var(--bg-hover);
+    color: var(--ink);
+    border-color: var(--line-strong);
+}
+
+.resume-modal-close svg {
+    width: 14px;
+    height: 14px;
+}
+
+.resume-modal-body {
+    flex: 1;
+    min-height: 0;
+    background: var(--bg);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.resume-modal-body iframe {
+    width: 100%;
+    max-width: 960px;
+    height: 100%;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    display: block;
+    background: var(--bg-elevated);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+}
+
+@media (max-width: 640px) {
+    .resume-modal-body {
+        padding: 0;
+    }
+
+    .resume-modal-body iframe {
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+        max-width: 100%;
+    }
+}
+
+body.resume-open {
+    overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .resume-modal,
+    .resume-modal-shell {
+        transition: none;
+    }
+}
+
+@media (max-width: 640px) {
+    .resume-modal-bar {
+        padding: 10px 14px;
+    }
+
+    .resume-modal-file {
+        display: none;
+    }
+
+    .resume-modal-download {
+        padding: 7px 12px;
+        font-size: 12.5px;
+    }
 }
 
 /* ---- Secret Mode ---------------------------------------- */

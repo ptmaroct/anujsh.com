@@ -96,8 +96,10 @@ const resumeCanvasContainer = document.getElementById('resumeCanvasContainer');
 const resumePreviewStatus = document.getElementById('resumePreviewStatus');
 
 const RESUME_URL = 'Resume-AnujSharma.pdf';
-const PDFJS_URL = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.min.mjs';
-const PDFJS_WORKER_URL = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.worker.min.mjs';
+const PDFJS_VERSION = '4.0.379';
+const PDFJS_BASE = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${PDFJS_VERSION}`;
+const PDFJS_MODULE = `${PDFJS_BASE}/pdf.min.mjs`;
+const PDFJS_WORKER = `${PDFJS_BASE}/pdf.worker.min.mjs`;
 
 const isIOS = () => /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
@@ -116,81 +118,72 @@ function downloadResume() {
     document.body.removeChild(link);
 }
 
-let pdfjsPromise = null;
+let pdfjsLibPromise = null;
 function loadPdfJs() {
-    if (!pdfjsPromise) {
-        pdfjsPromise = import(/* @vite-ignore */ PDFJS_URL).then((mod) => {
-            const lib = mod.default || mod;
-            lib.GlobalWorkerOptions.workerSrc = PDFJS_WORKER_URL;
-            return lib;
+    if (!pdfjsLibPromise) {
+        pdfjsLibPromise = import(/* @vite-ignore */ PDFJS_MODULE).then(mod => {
+            mod.GlobalWorkerOptions.workerSrc = PDFJS_WORKER;
+            return mod;
         });
     }
-    return pdfjsPromise;
+    return pdfjsLibPromise;
+}
+
+let pdfDocPromise = null;
+function loadPdfDoc() {
+    if (!pdfDocPromise) {
+        pdfDocPromise = loadPdfJs().then(pdfjsLib =>
+            pdfjsLib.getDocument(RESUME_URL).promise
+        );
+    }
+    return pdfDocPromise;
 }
 
 let resumeRendered = false;
-let resumeRenderPromise = null;
+let resumeRendering = false;
 
 async function renderResumePreview() {
-    if (resumeRendered) return;
-    if (resumeRenderPromise) return resumeRenderPromise;
+    if (resumeRendered || resumeRendering) return;
+    resumeRendering = true;
+    try {
+        const pdf = await loadPdfDoc();
 
-    resumePreviewStatus.hidden = false;
-    resumePreviewStatus.textContent = 'Loading preview…';
+        const cssWidth = resumeCanvasContainer.clientWidth;
+        if (!cssWidth) throw new Error('container has zero width');
 
-    resumeRenderPromise = (async () => {
-        const pdfjsLib = await loadPdfJs();
-        const pdf = await pdfjsLib.getDocument(RESUME_URL).promise;
+        const dpr = window.devicePixelRatio || 1;
+        // Oversample: bitmap = cssWidth * dpr * 1.25. No cap — DPR=3 iPhones
+        // render at 3.75x for near-native crispness. Display size stays cssWidth.
+        const bitmapScale = dpr * 1.25;
 
-        resumeCanvasContainer.innerHTML = '';
-        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        resumeCanvasContainer.replaceChildren();
 
-        // Wait two frames so the modal has finished laying out before we
-        // measure width — otherwise clientWidth can be 0 and we blow up.
-        await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
-
-        // Derive a sane CSS width that never exceeds the viewport. Account
-        // for container padding (16px desktop / 10px mobile → use 20px safe).
-        const viewportCap = Math.max(240, window.innerWidth - 24);
-        const measured = resumeCanvasContainer.clientWidth;
-        const targetCssWidth = Math.min(
-            measured > 0 ? measured - 20 : viewportCap,
-            viewportCap,
-            960
-        );
-
-        for (let i = 1; i <= pdf.numPages; i++) {
-            const page = await pdf.getPage(i);
+        for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+            const page = await pdf.getPage(pageNum);
             const baseViewport = page.getViewport({ scale: 1 });
-            const cssScale = targetCssWidth / baseViewport.width;
-            const viewport = page.getViewport({ scale: cssScale * dpr });
+            const cssScale = cssWidth / baseViewport.width;
+            const renderViewport = page.getViewport({ scale: cssScale * bitmapScale });
 
             const canvas = document.createElement('canvas');
             canvas.className = 'resume-page-canvas';
-            // Intrinsic (bitmap) resolution for crispness.
-            canvas.width = viewport.width;
-            canvas.height = viewport.height;
-            // Display size: exactly targetCssWidth, height auto-scaled to
-            // preserve aspect ratio. Using % avoids overshooting viewport.
-            canvas.style.width = `${targetCssWidth}px`;
-            canvas.style.maxWidth = '100%';
-            canvas.style.height = 'auto';
+            canvas.width = Math.floor(renderViewport.width);
+            canvas.height = Math.floor(renderViewport.height);
 
+            const ctx = canvas.getContext('2d');
             resumeCanvasContainer.appendChild(canvas);
-            await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
+
+            await page.render({ canvasContext: ctx, viewport: renderViewport }).promise;
         }
 
-        resumeRendered = true;
         resumePreviewStatus.hidden = true;
-    })().catch((err) => {
-        console.warn('[resume] preview failed', err);
+        resumeRendered = true;
+    } catch (err) {
+        console.warn('[resume] preview failed:', err);
+        resumePreviewStatus.textContent = 'Preview unavailable';
         resumePreviewStatus.hidden = false;
-        resumePreviewStatus.textContent = 'Preview unavailable. Use Download to open the PDF.';
-        resumeRenderPromise = null;
-        throw err;
-    });
-
-    return resumeRenderPromise;
+    } finally {
+        resumeRendering = false;
+    }
 }
 
 let lastFocusedBeforeResume = null;
@@ -200,10 +193,12 @@ function openResumeModal() {
     resumeModal.classList.add('open');
     resumeModal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('resume-open');
-    // Kick off rendering; it resolves async while the modal animates in.
-    renderResumePreview().catch(() => {});
-    // Focus download button after transition starts
-    requestAnimationFrame(() => resumeDownloadBtn.focus());
+
+    // Two rAFs so the modal has finished laying out before we measure container width.
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+        renderResumePreview();
+        resumeDownloadBtn.focus();
+    }));
 }
 
 function closeResumeModal() {

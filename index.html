@@ -394,8 +394,10 @@
                 </div>
             </header>
             <div class="resume-modal-body">
-                <div class="resume-canvas-container" id="resumeCanvasContainer" aria-label="Résumé preview"></div>
-                <div class="resume-preview-status" id="resumePreviewStatus" role="status" aria-live="polite">Loading preview…</div>
+                <div class="resume-preview" id="resumePreview">
+                    <div class="resume-preview-status" id="resumePreviewStatus">Loading preview…</div>
+                    <div class="resume-canvas-container" id="resumeCanvasContainer"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -409,6 +411,6 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script type="module" src="script.js?v=pdfjs-1"></script>
 </body>
 </html>

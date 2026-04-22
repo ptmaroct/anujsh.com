@@ -1,0 +1,25 @@
+---
+layout: base.njk
+title: Blog
+description: Notes on AI engineering, frontend craft, and whatever else.
+permalink: /blog/index.html
+---
+<section class="blog-index">
+  <h1>Blog</h1>
+  {% set posts = collections.post | reverse %}
+  {% if posts.length %}
+    <ul class="blog-list">
+      {% for post in posts %}
+        <li class="blog-item">
+          <a href="{{ post.url }}">
+            <h2>{{ post.data.title }}</h2>
+            <time datetime="{{ post.date | isoDate }}">{{ post.date | readableDate }}</time>
+            {% if post.data.description %}<p>{{ post.data.description }}</p>{% endif %}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="blog-empty">No posts yet.</p>
+  {% endif %}
+</section>

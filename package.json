@@ -1,0 +1,14 @@
+{
+  "name": "anujsh.com",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Personal site + blog for anujsh.com",
+  "scripts": {
+    "build": "eleventy",
+    "dev": "eleventy --serve",
+    "clean": "rm -rf _site"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0"
+  }
+}

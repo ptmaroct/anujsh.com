@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{{ title }} · Anuj Sharma</title>
+  <meta name="description" content="{{ description or (title + ' — Anuj Sharma') }}">
+  <meta name="theme-color" content="#fbfbfa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#08090a" media="(prefers-color-scheme: dark)">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    .blog-main { max-width: 720px; margin: 0 auto; padding: 120px 24px 96px; }
+    .blog-back { display: inline-block; margin-bottom: 32px; font-size: 14px; opacity: 0.7; text-decoration: none; }
+    .blog-back:hover { opacity: 1; }
+    .post-title { font-size: clamp(32px, 5vw, 48px); line-height: 1.15; margin: 0 0 12px; letter-spacing: -0.02em; }
+    .post-date { font-size: 14px; opacity: 0.6; font-family: 'JetBrains Mono', monospace; }
+    .post-body { margin-top: 48px; font-size: 18px; line-height: 1.7; }
+    .post-body h2 { font-size: 28px; margin: 56px 0 16px; letter-spacing: -0.01em; }
+    .post-body h3 { font-size: 22px; margin: 40px 0 12px; }
+    .post-body p { margin: 0 0 24px; }
+    .post-body a { text-decoration: underline; text-underline-offset: 3px; }
+    .post-body code { font-family: 'JetBrains Mono', monospace; font-size: 0.9em; padding: 2px 6px; border-radius: 4px; background: rgba(127,127,127,0.12); }
+    .post-body pre { padding: 20px; border-radius: 8px; background: rgba(127,127,127,0.08); overflow-x: auto; margin: 24px 0; }
+    .post-body pre code { background: none; padding: 0; }
+    .post-body blockquote { border-left: 3px solid currentColor; padding-left: 20px; opacity: 0.8; margin: 24px 0; }
+    .post-body ul, .post-body ol { padding-left: 24px; margin: 0 0 24px; }
+    .post-body li { margin: 6px 0; }
+    .post-body img { max-width: 100%; border-radius: 8px; margin: 24px 0; }
+    .blog-index h1 { font-size: clamp(40px, 6vw, 64px); margin: 0 0 48px; letter-spacing: -0.02em; }
+    .blog-list { list-style: none; padding: 0; margin: 0; }
+    .blog-item { border-top: 1px solid rgba(127,127,127,0.2); }
+    .blog-item:last-child { border-bottom: 1px solid rgba(127,127,127,0.2); }
+    .blog-item a { display: block; padding: 24px 0; text-decoration: none; color: inherit; }
+    .blog-item a:hover { opacity: 0.75; }
+    .blog-item h2 { font-size: 24px; margin: 0 0 6px; letter-spacing: -0.01em; }
+    .blog-item time { font-size: 13px; opacity: 0.55; font-family: 'JetBrains Mono', monospace; }
+    .blog-item p { margin: 10px 0 0; opacity: 0.75; font-size: 15px; line-height: 1.5; }
+    .blog-empty { opacity: 0.6; font-size: 16px; }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="/" class="nav-logo">Anuj Sharma</a>
+    <div class="nav-links">
+      <a href="/#work">Work</a>
+      <a href="/#experience">Experience</a>
+      <a href="/blog/">Blog</a>
+      <a href="/#contact">Contact</a>
+    </div>
+  </nav>
+  <main class="blog-main">
+    {{ content | safe }}
+  </main>
+</body>
+</html>

@@ -16,7 +16,7 @@
     <nav class="nav" id="nav">
         <a href="#" class="nav-logo">Anuj Sharma</a>
         <div class="nav-links">
-            <a href="#work">Work</a>
+            <a href="#work">Projects</a>
             <a href="#experience">Experience</a>
             <a href="#notes">Notes</a>
             <a href="/blog/">Blog</a>
@@ -30,7 +30,7 @@
     </nav>
 
     <div class="mobile-menu" id="mobileMenu">
-        <a href="#work">Work</a>
+        <a href="#work">Projects</a>
         <a href="#experience">Experience</a>
         <a href="#notes">Notes</a>
         <a href="/blog/">Blog</a>
@@ -48,8 +48,14 @@
                 Senior AI Engineer, Fullstack at <a href="https://delta.exchange" target="_blank" rel="noopener">delta.exchange</a>. Eight years shipping AI products, polished interfaces, and systems that hold up under real use.
             </p>
             <div class="hero-cta reveal" style="--reveal-delay: 240ms">
-                <a href="#work" class="btn btn-primary">View work</a>
-                <a href="#contact" class="btn btn-secondary">Get in touch</a>
+                <a href="#work" class="hero-btn hero-btn-primary">
+                    View projects
+                    <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h6M6.5 3l3 3-3 3"/></svg>
+                </a>
+                <a href="#contact" class="hero-btn hero-btn-ghost">
+                    Say hi
+                    <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2H6.5L4.5 10v-2H4a2 2 0 0 1-2-2V4z"/></svg>
+                </a>
             </div>
         </section>
 
@@ -80,95 +86,64 @@
         <section class="work" id="work">
             <div class="section-head reveal">
                 <span class="section-kicker">02</span>
-                <span class="section-title">Selected work</span>
+                <span class="section-title">Selected projects</span>
             </div>
             <h3 class="section-lead reveal" style="--reveal-delay: 60ms">
                 Open source and shipped work. <em>The projects I'm still proud of.</em>
             </h3>
 
-            <div class="work-list">
-                <article class="work-item reveal">
-                    <div class="work-index">001</div>
-                    <div class="work-body">
-                        <div class="work-title-row">
-                            <h3 class="work-title">Delta Help Center</h3>
-                            <span class="work-type">AI platform</span>
-                        </div>
-                        <p class="work-desc">
-                            Support and debugging system that cut response time from two days to two minutes. RAG pipeline on Pinecone + Anthropic.
-                        </p>
-                        <div class="work-tags">
-                            <span>RAG</span>
-                            <span>Pinecone</span>
-                            <span>Anthropic</span>
-                            <span>Evals</span>
-                        </div>
-                    </div>
-                    <div class="work-meta">
-                        <span class="work-year">2025</span>
-                        <div class="work-links">
-                            <a href="https://delta.exchange" target="_blank" rel="noopener" class="work-link">
-                                Visit
-                                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h6v6M3 9l6-6"/></svg>
-                            </a>
-                        </div>
-                    </div>
-                </article>
+            <div class="project-grid">
+                <a href="https://github.com/ptmaroct/lfg" target="_blank" rel="noopener" class="project-card reveal">
+                    <span class="project-num">01</span>
+                    <h3 class="project-title">LFG</h3>
+                    <p class="project-desc">
+                        Terminal UI that bootstraps a fresh Mac or Linux dev machine — installs your toolchain, restores dotfiles, and distributes SSH identity.
+                    </p>
+                    <span class="project-cta">
+                        <svg class="project-cta-mark" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+                        <span class="project-cta-path">github.com/ptmaroct/lfg</span>
+                        <svg class="project-cta-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 3h6v6M3 9l6-6"/></svg>
+                    </span>
+                </a>
 
-                <article class="work-item reveal">
-                    <div class="work-index">002</div>
-                    <div class="work-body">
-                        <div class="work-title-row">
-                            <h3 class="work-title">iheardthis.live</h3>
-                            <span class="work-type">Hackathon</span>
-                        </div>
-                        <p class="work-desc">
-                            Six-hour internet experiment for live-music memories. 40+ users on day one with zero ads. Just taste and shipping momentum.
-                        </p>
-                        <div class="work-tags">
-                            <span>Rapid build</span>
-                            <span>Product taste</span>
-                            <span>Distribution</span>
-                        </div>
-                    </div>
-                    <div class="work-meta">
-                        <span class="work-year">2025</span>
-                        <div class="work-links">
-                            <a href="https://github.com/daytimedrinkingclub/iheardthis.live" target="_blank" rel="noopener" class="work-link">
-                                GitHub
-                                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h6v6M3 9l6-6"/></svg>
-                            </a>
-                        </div>
-                    </div>
-                </article>
+                <a href="https://github.com/ptmaroct/kubera" target="_blank" rel="noopener" class="project-card reveal">
+                    <span class="project-num">02</span>
+                    <h3 class="project-title">Kubera</h3>
+                    <p class="project-desc">
+                        macOS menubar app to search and manage Infisical secrets without the dock-icon noise. Native Swift, keyboard-first.
+                    </p>
+                    <span class="project-cta">
+                        <svg class="project-cta-mark" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+                        <span class="project-cta-path">github.com/ptmaroct/kubera</span>
+                        <svg class="project-cta-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 3h6v6M3 9l6-6"/></svg>
+                    </span>
+                </a>
 
-                <article class="work-item reveal">
-                    <div class="work-index">003</div>
-                    <div class="work-body">
-                        <div class="work-title-row">
-                            <h3 class="work-title">ShipStation.ai</h3>
-                            <span class="work-type">Open source</span>
-                        </div>
-                        <p class="work-desc">
-                            AI portfolio website builder. 87 GitHub stars, 1,000+ users. Built with Anthropic, OAuth, Supabase, deployed on Coolify.
-                        </p>
-                        <div class="work-tags">
-                            <span>TypeScript</span>
-                            <span>Next.js</span>
-                            <span>Supabase</span>
-                            <span>Anthropic</span>
-                        </div>
-                    </div>
-                    <div class="work-meta">
-                        <span class="work-year">2024</span>
-                        <div class="work-links">
-                            <a href="https://github.com/daytimedrinkingclub/shipstation" target="_blank" rel="noopener" class="work-link">
-                                GitHub
-                                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h6v6M3 9l6-6"/></svg>
-                            </a>
-                        </div>
-                    </div>
-                </article>
+                <a href="https://iheardthis.live" target="_blank" rel="noopener" class="project-card reveal">
+                    <span class="project-num">03</span>
+                    <h3 class="project-title">iheardthis.live</h3>
+                    <p class="project-desc">
+                        Six-hour internet experiment for live-music memories. 40+ users on day one with zero ads. Just taste and shipping momentum.
+                    </p>
+                    <span class="project-cta">
+                        <svg class="project-cta-mark" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="6.5"/><path d="M1.5 8h13M8 1.5c1.8 2 2.7 4.2 2.7 6.5S9.8 12.5 8 14.5M8 1.5C6.2 3.5 5.3 5.7 5.3 8S6.2 12.5 8 14.5"/></svg>
+                        <span class="project-cta-path">iheardthis.live</span>
+                        <svg class="project-cta-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 3h6v6M3 9l6-6"/></svg>
+                    </span>
+                </a>
+
+                <a href="https://github.com/daytimedrinkingclub/shipstation" target="_blank" rel="noopener" class="project-card reveal">
+                    <span class="project-num">04</span>
+                    <h3 class="project-title">ShipStation.ai</h3>
+                    <p class="project-desc">
+                        AI portfolio website builder. 87 GitHub stars, 1,000+ users. Built with Anthropic, OAuth, Supabase, deployed on Coolify.
+                    </p>
+                    <span class="project-cta">
+                        <svg class="project-cta-mark" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+                        <span class="project-cta-path">github.com/daytimedrinkingclub/shipstation</span>
+                        <svg class="project-cta-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 3h6v6M3 9l6-6"/></svg>
+                    </span>
+                </a>
             </div>
         </section>
 
@@ -285,19 +260,11 @@
             </p>
             <ul class="contact-links reveal" style="--reveal-delay: 180ms">
                 <li>
-                    <a href="mailto:me@anujsh.com" class="contact-row">
-                        <span class="contact-row-num">01</span>
-                        <span class="contact-row-label">Email</span>
-                        <span class="contact-row-value"><span class="contact-row-value-text">me@anujsh.com</span></span>
-                        <span class="contact-row-arrow" aria-hidden="true">
-                            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h6v6M3 9l6-6"/></svg>
-                        </span>
-                    </a>
-                </li>
-                <li>
                     <a href="https://github.com/ptmaroct" target="_blank" rel="noopener" class="contact-row">
-                        <span class="contact-row-num">02</span>
-                        <span class="contact-row-label">GitHub</span>
+                        <span class="contact-row-num">01</span>
+                        <span class="contact-row-icon" aria-hidden="true">
+                            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+                        </span>
                         <span class="contact-row-value"><span class="contact-row-value-text">@ptmaroct</span></span>
                         <span class="contact-row-arrow" aria-hidden="true">
                             <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h6v6M3 9l6-6"/></svg>
@@ -306,8 +273,10 @@
                 </li>
                 <li>
                     <a href="https://www.linkedin.com/in/ptmaroct/" target="_blank" rel="noopener" class="contact-row">
-                        <span class="contact-row-num">03</span>
-                        <span class="contact-row-label">LinkedIn</span>
+                        <span class="contact-row-num">02</span>
+                        <span class="contact-row-icon" aria-hidden="true">
+                            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M13.632 13.635h-2.37V9.922c0-.886-.018-2.025-1.234-2.025-1.235 0-1.424.964-1.424 1.96v3.778h-2.37V6H8.51v1.04h.03c.318-.6 1.092-1.233 2.247-1.233 2.4 0 2.846 1.58 2.846 3.637v4.191zM3.558 4.955a1.376 1.376 0 1 1 .002-2.751 1.376 1.376 0 0 1-.002 2.751zm1.188 8.68H2.37V6h2.376v7.635zM14.816 0H1.18C.528 0 0 .516 0 1.153v13.694C0 15.484.528 16 1.18 16h13.635C15.467 16 16 15.484 16 14.847V1.153C16 .516 15.467 0 14.815 0z"/></svg>
+                        </span>
                         <span class="contact-row-value"><span class="contact-row-value-text">in/ptmaroct</span></span>
                         <span class="contact-row-arrow" aria-hidden="true">
                             <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h6v6M3 9l6-6"/></svg>
@@ -316,8 +285,10 @@
                 </li>
                 <li>
                     <a href="https://x.com/waahbete" target="_blank" rel="noopener" class="contact-row">
-                        <span class="contact-row-num">04</span>
-                        <span class="contact-row-label">X / Twitter</span>
+                        <span class="contact-row-num">03</span>
+                        <span class="contact-row-icon" aria-hidden="true">
+                            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75zm-.86 13.028h1.36L4.323 2.145H2.865l8.875 11.633z"/></svg>
+                        </span>
                         <span class="contact-row-value"><span class="contact-row-value-text">@waahbete</span></span>
                         <span class="contact-row-arrow" aria-hidden="true">
                             <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h6v6M3 9l6-6"/></svg>
@@ -330,47 +301,7 @@
 
     <footer class="footer">
         <p>© 2026 Anuj Sharma.</p>
-        <p class="footer-hint" id="footerHint">Press <kbd>⌘</kbd> <kbd>K</kbd> for commands</p>
     </footer>
-
-    <div class="command-palette" id="commandPalette">
-        <div class="command-palette-overlay" id="paletteOverlay"></div>
-        <div class="command-palette-content">
-            <input type="text" class="command-palette-input" id="paletteInput" placeholder="Type a command…">
-            <div class="command-palette-results" id="paletteResults">
-                <div class="command-item" data-command="email">
-                    <span class="command-icon">@</span>
-                    <span class="command-text">Email Anuj</span>
-                    <span class="command-shortcut">↵</span>
-                </div>
-                <div class="command-item" data-command="github">
-                    <span class="command-icon">gh</span>
-                    <span class="command-text">Open GitHub</span>
-                    <span class="command-shortcut">↵</span>
-                </div>
-                <div class="command-item" data-command="linkedin">
-                    <span class="command-icon">in</span>
-                    <span class="command-text">Open LinkedIn</span>
-                    <span class="command-shortcut">↵</span>
-                </div>
-                <div class="command-item" data-command="twitter">
-                    <span class="command-icon">𝕏</span>
-                    <span class="command-text">Open X / Twitter</span>
-                    <span class="command-shortcut">↵</span>
-                </div>
-                <div class="command-item" data-command="resume">
-                    <span class="command-icon">↓</span>
-                    <span class="command-text">Download résumé</span>
-                    <span class="command-shortcut">↵</span>
-                </div>
-                <div class="command-item" data-command="secret">
-                    <span class="command-icon">·</span>
-                    <span class="command-text">???</span>
-                    <span class="command-shortcut">↵</span>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div class="resume-modal" id="resumeModal" role="dialog" aria-modal="true" aria-label="Résumé preview" aria-hidden="true">
         <div class="resume-modal-overlay" id="resumeModalOverlay"></div>
@@ -401,15 +332,6 @@
                     <div class="resume-canvas-container" id="resumeCanvasContainer"></div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div class="secret-mode" id="secretMode">
-        <div class="secret-content">
-            <h2>You found it.</h2>
-            <p>Anuj once built a whole product in under six hours — 40+ users on day one.</p>
-            <p>That's the mindset: ship fast, learn faster.</p>
-            <button class="btn btn-secondary" id="closeSecret">Got it</button>
         </div>
     </div>
 

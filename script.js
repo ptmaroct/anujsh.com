@@ -1,5 +1,21 @@
 // anujsh.com — minimal script
 
+// ---- Block pinch-zoom + double-tap zoom (iOS Safari ignores user-scalable=no) ----
+['gesturestart', 'gesturechange', 'gestureend'].forEach(evt => {
+    document.addEventListener(evt, (e) => e.preventDefault());
+});
+
+document.addEventListener('touchmove', (e) => {
+    if (e.touches.length > 1) e.preventDefault();
+}, { passive: false });
+
+let lastTouchEnd = 0;
+document.addEventListener('touchend', (e) => {
+    const now = Date.now();
+    if (now - lastTouchEnd <= 300) e.preventDefault();
+    lastTouchEnd = now;
+}, false);
+
 // ---- Nav scroll state ----
 const nav = document.getElementById('nav');
 const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 8);
@@ -10,23 +26,35 @@ onScroll();
 const navToggle = document.getElementById('navToggle');
 const mobileMenu = document.getElementById('mobileMenu');
 
-navToggle.addEventListener('click', () => {
-    const open = mobileMenu.classList.toggle('open');
+function setMenuOpen(open) {
+    mobileMenu.classList.toggle('open', open);
     navToggle.classList.toggle('active', open);
+    mobileMenu.setAttribute('aria-hidden', String(!open));
+    document.body.classList.toggle('menu-open', open);
     document.body.style.overflow = open ? 'hidden' : '';
+}
+
+navToggle.addEventListener('click', () => {
+    setMenuOpen(!mobileMenu.classList.contains('open'));
 });
 
-document.querySelectorAll('.mobile-menu a, .mobile-menu button').forEach(el => {
-    el.addEventListener('click', () => {
-        mobileMenu.classList.remove('open');
-        navToggle.classList.remove('active');
-        document.body.style.overflow = '';
-    });
+mobileMenu.addEventListener('click', (e) => {
+    if (e.target === mobileMenu) setMenuOpen(false);
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+        setMenuOpen(false);
+    }
+});
+
+document.querySelectorAll('.mobile-menu-items a, .mobile-menu-items button').forEach(el => {
+    el.addEventListener('click', () => setMenuOpen(false));
 });
 
 // ---- Scroll reveal (staggered; progressive enhancement) ----
 // Auto-stagger siblings within the same section when no explicit delay is set
-document.querySelectorAll('.project-grid, .experience-list').forEach(list => {
+document.querySelectorAll('.project-grid, .experience-list, .notes-grid, .contact-links').forEach(list => {
     [...list.children].forEach((child, i) => {
         if (!child.style.getPropertyValue('--reveal-delay')) {
             child.style.setProperty('--reveal-delay', `${i * 60}ms`);

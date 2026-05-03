@@ -93,6 +93,7 @@ html {
     scroll-behavior: smooth;
     overflow-x: clip;
     -webkit-text-size-adjust: 100%;
+    touch-action: pan-x pan-y;
 }
 
 body {
@@ -165,6 +166,13 @@ body::before {
 
 .nav.scrolled {
     border-bottom-color: var(--line);
+}
+
+body.menu-open .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
 }
 
 .nav-logo {
@@ -276,12 +284,6 @@ body::before {
     background: color-mix(in srgb, var(--bg) 96%, transparent);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 4px;
-    padding: 120px 32px 32px;
     opacity: 0;
     pointer-events: none;
     transition: opacity var(--dur) var(--ease);
@@ -292,8 +294,19 @@ body::before {
     pointer-events: auto;
 }
 
-.mobile-menu a,
-.mobile-menu button {
+.mobile-menu-items {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 120px 32px 32px;
+}
+
+.mobile-menu-items a,
+.mobile-menu-items button {
     font-size: 28px;
     font-weight: 500;
     letter-spacing: -0.02em;
@@ -302,8 +315,8 @@ body::before {
     transition: color var(--dur) var(--ease);
 }
 
-.mobile-menu a:hover,
-.mobile-menu button:hover {
+.mobile-menu-items a:hover,
+.mobile-menu-items button:hover {
     color: var(--ink);
 }
 
@@ -358,19 +371,25 @@ section {
 }
 
 .section-lead {
-    font-size: clamp(20px, 2.6vw, 28px);
+    font-size: clamp(22px, 4.6vw, 42px);
     font-weight: 500;
-    line-height: 1.25;
-    letter-spacing: -0.02em;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
     color: var(--ink);
-    max-width: 720px;
-    margin-bottom: 40px;
+    margin-bottom: 14px;
     text-wrap: balance;
 }
 
-.section-lead em {
-    font-style: normal;
+.section-copy {
+    font-family: 'Instrument Sans', system-ui, sans-serif;
+    font-size: clamp(16px, 1.8vw, 19px);
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: -0.005em;
     color: var(--ink-3);
+    max-width: 52ch;
+    margin-bottom: 48px;
+    text-wrap: pretty;
 }
 
 /* ---- Hero ------------------------------------------------- */
@@ -447,7 +466,7 @@ section {
 .hero-title {
     font-size: clamp(40px, 6.2vw, 76px);
     font-weight: 500;
-    line-height: 1.02;
+    line-height: 1.04;
     letter-spacing: -0.035em;
     color: var(--ink);
     margin-bottom: 28px;
@@ -462,38 +481,80 @@ section {
 }
 
 .hero-subtitle {
-    font-size: 17px;
-    line-height: 1.6;
-    color: var(--ink-2);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
     max-width: 58ch;
     margin-bottom: 40px;
     text-wrap: pretty;
 }
 
-.hero-subtitle a {
+.hero-subtitle-primary {
+    font-size: 18px;
+    line-height: 1.45;
     color: var(--ink);
-    border-bottom: 1px solid var(--line-strong);
-    padding-bottom: 1px;
-    transition: border-color var(--dur) var(--ease), color var(--dur) var(--ease);
+    letter-spacing: -0.005em;
+    font-weight: 500;
+}
+
+.hero-subtitle-secondary {
+    font-family: 'Instrument Sans', system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--ink-3);
+    letter-spacing: -0.005em;
+    font-weight: 400;
+}
+
+.hero-subtitle a {
+    font-family: inherit;
+    font-weight: inherit;
+    color: var(--ink);
+    text-decoration: none;
+    transition: color var(--dur) var(--ease);
 }
 
 .hero-subtitle a:hover {
-    color: var(--accent-ink);
-    border-color: var(--accent);
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-color: var(--line-strong);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
 }
+
+.hero-subtitle-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    vertical-align: -3px;
+}
+
+.link-favicon {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    flex-shrink: 0;
+    transition: transform var(--dur) var(--ease);
+}
+
+.hero-subtitle a:hover .link-favicon {
+    transform: scale(1.06);
+}
+
 
 .hero-cta {
     display: flex;
-    gap: 10px;
+    gap: 12px;
     flex-wrap: wrap;
     align-items: center;
+    margin-top: 4px;
 }
 
 .hero-btn {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    height: 38px;
+    height: 40px;
     padding: 0 18px;
     border-radius: 999px;
     font-size: 14px;
@@ -501,6 +562,7 @@ section {
     letter-spacing: -0.005em;
     border: 1px solid transparent;
     transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), color var(--dur) var(--ease), transform var(--dur-fast) var(--ease);
+    will-change: transform;
 }
 
 .hero-btn svg {
@@ -510,7 +572,7 @@ section {
 }
 
 .hero-btn:active {
-    transform: scale(0.97);
+    transform: scale(0.96);
 }
 
 .hero-btn-primary {
@@ -655,10 +717,15 @@ section {
     color: inherit;
     transition: background var(--dur) var(--ease);
     min-height: 220px;
+    min-width: 0;
 }
 
 .project-card:hover {
     background: var(--bg-elevated);
+}
+
+.project-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
 }
 
 .project-num {
@@ -691,13 +758,17 @@ section {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    margin-top: 8px;
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--ink-3);
+    margin-top: 12px;
+    padding: 7px 12px 7px 10px;
+    width: fit-content;
+    background: var(--bg-elevated);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--ink-2);
     letter-spacing: -0.005em;
-    transition: color var(--dur) var(--ease);
-    min-width: 0;
+    transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease), color var(--dur) var(--ease);
 }
 
 .project-cta-mark {
@@ -706,11 +777,8 @@ section {
     flex-shrink: 0;
 }
 
-.project-cta-path {
-    overflow: hidden;
-    text-overflow: ellipsis;
+.project-cta-label {
     white-space: nowrap;
-    min-width: 0;
 }
 
 .project-cta-arrow {
@@ -722,6 +790,8 @@ section {
 }
 
 .project-card:hover .project-cta {
+    background: var(--bg-hover);
+    border-color: var(--line-strong);
     color: var(--ink);
 }
 
@@ -789,6 +859,10 @@ section {
     flex-direction: column;
     gap: 8px;
     min-width: 0;
+}
+
+.experience-copy-fullwidth {
+    grid-column: 1 / 3;
 }
 
 .experience-role {
@@ -869,10 +943,12 @@ section {
 }
 
 .contact-text {
-    font-size: 15.5px;
-    line-height: 1.7;
+    font-family: 'Instrument Sans', system-ui, sans-serif;
+    font-size: clamp(16px, 1.6vw, 18px);
+    line-height: 1.55;
     color: var(--ink-2);
-    max-width: 60ch;
+    letter-spacing: 0.005em;
+    max-width: 56ch;
     margin-bottom: 32px;
     text-wrap: pretty;
 }
@@ -1101,78 +1177,67 @@ section {
 
 .resume-modal-bar {
     flex-shrink: 0;
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
     align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    padding: 14px 20px;
+    gap: 12px;
+    padding: 10px 14px;
     background: var(--bg-elevated);
     border-bottom: 1px solid var(--line);
 }
 
 .resume-modal-title {
     display: flex;
-    align-items: baseline;
-    gap: 10px;
+    justify-content: center;
+    align-items: center;
     min-width: 0;
-}
-
-.resume-modal-tag {
-    font-size: 13.5px;
-    font-weight: 500;
-    color: var(--ink);
-    letter-spacing: -0.01em;
-}
-
-.resume-modal-sep {
-    color: var(--ink-4);
-    font-size: 12px;
 }
 
 .resume-modal-file {
     font-family: var(--font-mono);
     font-size: 11.5px;
-    color: var(--ink-3);
+    color: var(--ink-4);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-}
-
-.resume-modal-actions {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-shrink: 0;
+    letter-spacing: 0.01em;
 }
 
 .resume-modal-download {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 8px 14px;
-    background: var(--btn-primary-bg);
-    color: var(--btn-primary-fg);
-    border: 1px solid var(--btn-primary-bg);
-    border-radius: var(--radius-md);
+    gap: 7px;
+    height: 34px;
+    padding: 0 12px;
+    background: transparent;
+    color: var(--ink-2);
+    border: none;
+    border-radius: var(--radius-sm);
     font-family: var(--font-sans);
     font-size: 13px;
     font-weight: 500;
+    letter-spacing: -0.005em;
     cursor: pointer;
-    transition: background var(--dur) var(--ease), transform var(--dur-fast) var(--ease);
+    transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
 }
 
 .resume-modal-download:hover {
-    background: var(--btn-primary-hover);
-    border-color: var(--btn-primary-hover);
+    background: var(--bg-hover);
+    color: var(--ink);
 }
 
 .resume-modal-download:active {
-    transform: scale(0.97);
+    background: var(--bg-hover);
 }
 
 .resume-modal-download svg {
     width: 14px;
     height: 14px;
+    transition: transform var(--dur) var(--ease);
+}
+
+.resume-modal-download:hover svg {
+    transform: translateY(1px);
 }
 
 .resume-modal-close {
@@ -1182,17 +1247,16 @@ section {
     width: 34px;
     height: 34px;
     background: transparent;
-    border: 1px solid var(--line);
-    color: var(--ink-2);
-    border-radius: var(--radius-md);
+    border: none;
+    color: var(--ink-3);
+    border-radius: var(--radius-sm);
     cursor: pointer;
-    transition: background var(--dur) var(--ease), color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+    transition: background var(--dur) var(--ease), color var(--dur) var(--ease);
 }
 
 .resume-modal-close:hover {
     background: var(--bg-hover);
     color: var(--ink);
-    border-color: var(--line-strong);
 }
 
 .resume-modal-close svg {
@@ -1269,8 +1333,14 @@ body.resume-open {
     }
 
     .resume-modal-download {
-        padding: 7px 12px;
+        height: 32px;
+        padding: 0 10px;
         font-size: 12.5px;
+    }
+
+    .resume-modal-close {
+        width: 32px;
+        height: 32px;
     }
 }
 
@@ -1282,14 +1352,14 @@ body.resume-open {
 
 body.js-ready .reveal {
     opacity: 0;
-    transform: translateY(8px);
-    transition: opacity 500ms var(--ease), transform 500ms var(--ease);
+    transform: translateY(10px) scale(0.992);
+    transition: opacity 600ms var(--ease), transform 600ms var(--ease);
     transition-delay: var(--reveal-delay, 0ms);
 }
 
 body.js-ready .reveal.visible {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
 }
 
 /* ---- Scrollbar ------------------------------------------- */

@@ -9,6 +9,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("Resume-AnujSharma.pdf");
   eleventyConfig.addPassthroughCopy("ssh.sh");
   eleventyConfig.addPassthroughCopy("feedback.jpg");
+  eleventyConfig.addPassthroughCopy("news");
+  eleventyConfig.addPassthroughCopy("happy");
 
   // Human-readable date filter
   eleventyConfig.addFilter("readableDate", (date) => {

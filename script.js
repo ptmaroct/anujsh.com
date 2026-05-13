@@ -1,5 +1,14 @@
 // anujsh.com — minimal script
 
+// ---- Easter egg: a small note for the devtools-curious ----
+try {
+    const style = 'color:#ff6a36;font:600 13px/1.4 ui-monospace,monospace;';
+    const dim   = 'color:#a8a8a0;font:400 12px/1.4 ui-monospace,monospace;';
+    console.log('%cwell, hello.', style);
+    console.log('%c  /news  \u2192 daily HN, curated.\n  /happy \u2192 a morning paper for good news.', dim);
+}
+catch (_) { /* no-op */ }
+
 // ---- Block pinch-zoom + double-tap zoom (iOS Safari ignores user-scalable=no) ----
 ['gesturestart', 'gesturechange', 'gestureend'].forEach(evt => {
     document.addEventListener(evt, (e) => e.preventDefault());

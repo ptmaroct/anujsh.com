@@ -1513,3 +1513,44 @@ body.js-ready .reveal.visible {
         font-size: 15px;
     }
 }
+
+/* ---------------------------------------------------------------
+ * Easter-egg dots: turn a sentence-ending period into a hidden
+ * link. Looks identical to a normal "." in flow. The only tell
+ * is the cursor switch on hover + a subtle blossom of color.
+ * --------------------------------------------------------------- */
+.ee-dot {
+    color: inherit;
+    text-decoration: none;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    /* nudge the period a hair tighter to its word so it doesn't
+       break selection or look like a hanging glyph */
+    margin-left: -0.02em;
+    transition: color 220ms ease, transform 220ms ease, text-shadow 220ms ease;
+    display: inline-block;
+    line-height: 1;
+}
+.ee-dot:hover,
+.ee-dot:focus-visible {
+    color: var(--accent, #ff6a36);
+    transform: translateY(-1px) scale(1.4);
+    text-shadow: 0 0 12px rgba(255, 106, 54, 0.45);
+    outline: 0;
+}
+.ee-dot:focus-visible {
+    /* keyboard discoverability without a heavy ring */
+    text-decoration: underline dotted;
+    text-underline-offset: 4px;
+}
+@media (prefers-reduced-motion: reduce) {
+    .ee-dot {
+        transition: color 220ms ease;
+    }
+    .ee-dot:hover,
+    .ee-dot:focus-visible {
+        transform: none;
+        text-shadow: none;
+    }
+}

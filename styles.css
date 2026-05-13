@@ -1513,3 +1513,176 @@ body.js-ready .reveal.visible {
         font-size: 15px;
     }
 }
+
+/* =================================================================
+ * INVITE SECTION
+ * A small editorial bridge between the contact list and the footer.
+ * Asks the reader, in editorial italic, whether they'd like to read
+ * Anuj's daily newspaper (HN digest, /news) or just the happy parts
+ * (wholesome digest, /happy).
+ *
+ * Each link channels the aesthetic of its destination:
+ *   - "my newspaper"   → Bodoni Moda italic, ink-and-letterpress
+ *                       with a double masthead rule, hover
+ *                       transitions toward the HN orange.
+ *   - "the happy parts" → Caveat handwritten in marigold, sits
+ *                       slightly askew, a felt-tip highlight
+ *                       sweeps under it on hover.
+ * ================================================================= */
+.invite {
+    position: relative;
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: clamp(72px, 9vw, 120px) var(--gutter) clamp(56px, 7vw, 96px);
+    text-align: center;
+    border-top: 1px solid var(--line);
+    overflow: hidden;
+}
+
+.invite-line {
+    margin: 0 auto;
+    max-width: 720px;
+    font-family: 'Bodoni Moda', 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(22px, 3vw, 30px);
+    line-height: 1.6;
+    color: var(--ink-2);
+    letter-spacing: 0.005em;
+    position: relative;
+    z-index: 1;
+}
+.invite-clause {
+    /* keep each question on its own line, never orphaning the '?' */
+    display: block;
+    white-space: normal;
+    text-wrap: balance;
+}
+.invite-clause + .invite-clause {
+    margin-top: 10px;
+}
+.invite-q {
+    /* nudge the trailing question mark back toward its link so it
+       hugs the word instead of floating away in italic sidebearing */
+    display: inline-block;
+    margin-left: -0.12em;
+    color: var(--ink-3);
+    font-weight: 400;
+}
+
+/* ===== "my newspaper" link ===================================== */
+.invite-link--paper {
+    color: var(--ink);
+    text-decoration: none;
+    display: inline-block;
+    padding: 0 4px;
+    position: relative;
+    font-style: italic;
+    font-weight: 700;
+    transition: color 280ms var(--ease), transform 320ms cubic-bezier(.2,.7,.2,1);
+    isolation: isolate;
+}
+.invite-link--paper .invite-link-label {
+    position: relative;
+    display: inline-block;
+}
+/* Double masthead rule. The bottom hairline is thicker, the upper
+   one is gossamer, like an old-school newspaper section divider. */
+.invite-link--paper .invite-link-label::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    bottom: -8px;
+    height: 5px;
+    border-top:    2px solid currentColor;
+    border-bottom: 0.6px solid currentColor;
+    transform-origin: left center;
+    transition: transform 360ms cubic-bezier(.2,.7,.2,1),
+                bottom 280ms var(--ease),
+                border-color 280ms var(--ease);
+}
+.invite-link--paper:hover,
+.invite-link--paper:focus-visible {
+    color: #ff6a36;
+    transform: translateY(-2px);
+    outline: 0;
+}
+.invite-link--paper:hover .invite-link-label::after,
+.invite-link--paper:focus-visible .invite-link-label::after {
+    transform: scaleX(1.04);
+    bottom: -10px;
+}
+
+/* ===== "the happy parts" link ================================== */
+.invite-link--bright {
+    color: #d97706;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    padding: 0 6px;
+    font-family: 'Caveat', 'Italiana', cursive;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.45em;
+    line-height: 1;
+    transform: rotate(-2.5deg);
+    transition: transform 320ms cubic-bezier(.2,.7,.2,1),
+                color 220ms var(--ease);
+    isolation: isolate;
+}
+.invite-link--bright .invite-link-label {
+    position: relative;
+    display: inline-block;
+}
+/* Felt-tip highlight that sweeps left-to-right on hover. */
+.invite-link--bright .invite-link-label::before {
+    content: "";
+    position: absolute;
+    left: -2%;
+    right: -2%;
+    bottom: 6%;
+    height: 60%;
+    background: linear-gradient(100deg,
+        rgba(253, 224, 71, 0.55) 0%,
+        rgba(253, 224, 71, 0.90) 50%,
+        rgba(253, 224, 71, 0.55) 100%);
+    border-radius: 2px;
+    transform-origin: left center;
+    transform: scaleX(0) skewX(-6deg);
+    transition: transform 420ms cubic-bezier(.2,.7,.2,1);
+    z-index: -1;
+}
+.invite-link--bright:hover,
+.invite-link--bright:focus-visible {
+    transform: rotate(0deg) translateY(-2px);
+    color: #92400e;
+    outline: 0;
+}
+.invite-link--bright:hover .invite-link-label::before,
+.invite-link--bright:focus-visible .invite-link-label::before {
+    transform: scaleX(1) skewX(-6deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .invite-link--paper,
+    .invite-link--bright {
+        transition: color 220ms var(--ease);
+    }
+    .invite-link--paper:hover,
+    .invite-link--bright:hover {
+        transform: none;
+    }
+    .invite-link--paper:hover .invite-link-label::after,
+    .invite-link--bright:hover .invite-link-label::before {
+        transition: none;
+    }
+}
+
+@media (max-width: 640px) {
+    .invite {
+        padding-top: 56px;
+        padding-bottom: 48px;
+    }
+    .invite-line { font-size: clamp(19px, 5vw, 24px); }
+    .invite-link--bright { font-size: 1.35em; }
+}

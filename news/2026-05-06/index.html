@@ -1,0 +1,744 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Hacker News Digest — Tuesday · 6 May 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:        #f7f4ec;
+    --paper-2:      #efe9d9;
+    --ink:          #16120d;
+    --ink-2:        #3a3329;
+    --ink-3:        #6a604f;
+    --rule:         #1d150c;
+    --rule-soft:    #d3c9b1;
+    --orange:       #b9461b;
+    --orange-warm:  #d65b30;
+    --slate:        #1f3d63;
+    --slate-2:      #335a86;
+    --highlight:    #f4d975;
+    --shadow-soft:  0 1px 0 rgba(20,16,12,.06);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  html{
+    background: var(--paper);
+    background-image:
+      radial-gradient(1300px 700px at 8% -10%, rgba(185,70,27,.045), transparent 55%),
+      radial-gradient(1100px 600px at 110% 8%, rgba(31,61,99,.05), transparent 60%);
+    color: var(--ink);
+    font-family: "Source Serif 4", Georgia, serif;
+    font-optical-sizing: auto;
+    font-variation-settings: "opsz" 14;
+    font-size: 19px;
+    line-height: 1.68;
+    font-feature-settings: "onum","liga","kern","ss01";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    hanging-punctuation: first last;
+  }
+  body{ position:relative; min-height:100vh; }
+
+  ::selection{ background: var(--highlight); color: var(--ink) }
+
+  /* ── links ── */
+  a{ color: var(--slate); text-decoration: none;
+     border-bottom: 1px solid color-mix(in srgb, var(--slate) 25%, transparent);
+     transition: color .18s, border-color .18s, background-color .18s; }
+  a:hover{ color: var(--orange); border-bottom-color: var(--orange); }
+
+  a.lnk{
+    font-family:"JetBrains Mono", ui-monospace, monospace;
+    font-size: 11.5px; letter-spacing:.14em; text-transform:uppercase;
+    color: var(--ink-2); border-bottom:none;
+    padding: 4px 10px; margin-right:6px;
+    background: transparent; border:1px solid var(--rule-soft);
+    transition: all .18s ease;
+    display:inline-flex; align-items:center; gap:6px;
+  }
+  a.lnk:hover{ background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  a.lnk.discuss:hover{ background: var(--orange); border-color: var(--orange); color:#fff }
+  a.lnk.source:hover { background: var(--slate); border-color: var(--slate); color:#fff }
+
+  a.permalink{ color: var(--ink); border-bottom: 1px solid transparent; }
+  a.permalink:hover{ color: var(--orange); border-bottom-color: var(--orange); }
+
+  /* ── reading-progress thread ── */
+  #thread{ position:fixed; top:0; left:0; height:2px; width:0%; background:var(--orange); z-index:50; transition:width .12s linear; box-shadow:0 0 8px rgba(185,70,27,.5) }
+
+  /* ── meta strip / sticky ── */
+  .stripe{
+    position: sticky; top: 0; z-index: 30;
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule-soft);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .stripe-inner{
+    max-width: 1140px; margin: 0 auto; padding: 12px 28px;
+    display:flex; justify-content:space-between; align-items:center; gap:20px;
+    font-family:"JetBrains Mono", monospace;
+    font-size: 11.5px; letter-spacing:.18em; text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .stripe .left{ display:flex; gap:14px; align-items:center; flex-wrap:wrap }
+  .stripe .dot{ width:6px;height:6px;border-radius:50%; background:var(--orange); display:inline-block;
+                box-shadow: 0 0 0 3px rgba(185,70,27,.16); animation: pulse 2.4s ease-in-out infinite }
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 3px rgba(185,70,27,.16)} 50%{box-shadow:0 0 0 6px rgba(185,70,27,.04)}}
+  .stripe .nav{ display:flex; gap:14px; opacity:.85 }
+  .stripe .nav a{ border:none; color: var(--ink-2) }
+  .stripe .nav a:hover{ color: var(--orange) }
+
+  /* ── shell ── */
+  .frame{ max-width: 1140px; margin: 0 auto; padding: 28px 28px 120px; }
+
+  /* ── masthead ── */
+  header.mast{
+    padding: 56px 0 36px;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .mast .eyebrow{
+    display:flex; align-items:center; gap:14px; margin-bottom: 18px;
+    font-family:"JetBrains Mono", monospace; font-size: 11.5px; letter-spacing:.22em; text-transform:uppercase; color: var(--orange);
+  }
+  .mast .eyebrow .rule{ flex:1; height:1px; background: var(--rule-soft); }
+  .mast h1{
+    margin: 0;
+    font-family: "Instrument Serif", Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(60px, 9vw, 132px);
+    line-height: .92;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .mast h1 em{
+    font-style: italic; color: var(--orange);
+    font-family: "Instrument Serif", serif;
+  }
+  .mast .tagline{
+    margin-top: 18px;
+    font-family: "Instrument Serif", serif; font-style: italic;
+    font-size: clamp(20px, 2.4vw, 26px); line-height: 1.4;
+    color: var(--ink-2); max-width: 60ch;
+  }
+  .mast .stat-strip{
+    margin-top: 32px;
+    display:grid; grid-template-columns: repeat(4, 1fr); gap: 32px;
+    border-top: 1px solid var(--rule-soft);
+    padding-top: 22px;
+  }
+  .stat-strip .s{ }
+  .stat-strip .s .v{
+    font-family: "Instrument Serif", serif;
+    font-size: clamp(40px, 4.6vw, 56px);
+    line-height: .9; color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+  .stat-strip .s .v em{ font-style: italic; color: var(--orange); padding-left: 2px }
+  .stat-strip .s .l{
+    font-family:"JetBrains Mono", monospace; font-size: 10.5px; letter-spacing:.22em; text-transform:uppercase; color: var(--ink-3);
+    margin-top: 6px;
+  }
+
+  /* ── shared item helpers ── */
+  .meta-line{
+    font-family:"JetBrains Mono", monospace; font-size: 11.5px; letter-spacing:.14em; text-transform:uppercase;
+    color: var(--ink-3); margin-bottom: 10px;
+    display:flex; flex-wrap:wrap; gap: 10px; align-items:center;
+  }
+  .meta-line .domain{ color: var(--orange); font-weight:500 }
+  .meta-line .dot{ opacity: .55 }
+  .meta-line .pts, .meta-line .cmt{ color: var(--ink-2) }
+
+  .tags{ display:inline-flex; gap:6px; margin-left:10px }
+  .tag{
+    font-family:"JetBrains Mono", monospace; font-size: 10px; letter-spacing:.12em; text-transform:uppercase;
+    color: var(--slate); padding: 3px 7px;
+    background: rgba(31,61,99,.07); border-radius: 1px;
+  }
+
+  /* ── lead item ── */
+  .lead{
+    padding: 56px 0;
+    border-bottom: 1px solid var(--rule-soft);
+    display: grid; grid-template-columns: minmax(0, 1fr); gap: 22px;
+    max-width: 78ch;
+  }
+  .lead-meta{
+    font-family:"JetBrains Mono", monospace; font-size: 11.5px; letter-spacing:.18em; text-transform:uppercase;
+    color: var(--ink-3); display:flex; flex-wrap:wrap; gap:10px; align-items:center;
+  }
+  .lead-meta .rank{ color: var(--orange); font-weight: 600 }
+  .lead-meta .dot{ opacity: .5 }
+  .lead-h{
+    margin: 4px 0 8px;
+    font-family: "Instrument Serif", serif;
+    font-weight: 400;
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1.0;
+    letter-spacing: -0.012em;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .lead-h a{ color: inherit; border:none }
+  .lead-h a:hover{ color: var(--orange) }
+
+  .pull{
+    margin: 18px 0 6px;
+    padding: 18px 0 18px 28px;
+    border-left: 3px solid var(--orange);
+    font-family: "Instrument Serif", serif;
+    font-style: italic;
+    font-size: clamp(22px, 2.4vw, 28px);
+    line-height: 1.35;
+    color: var(--ink); max-width: 60ch;
+    background: linear-gradient(90deg, rgba(244,217,117,.18) 0%, transparent 70%);
+  }
+  .pull .qmark{ color: var(--orange); font-size: 1.4em; line-height:0; vertical-align:-.18em; padding: 0 .04em }
+
+  .lead-take{ font-size: 19px; line-height: 1.72; color: var(--ink-2); max-width: 65ch; }
+  .lead-take p{ margin: 0 0 14px }
+  .lead-take p:first-child::first-letter{
+    font-family: "Instrument Serif", serif;
+    float: left; font-size: 4.6em; line-height: .82;
+    padding: 6px 12px 0 0; color: var(--orange);
+    font-style: italic;
+  }
+
+  /* ── items list ── */
+  .items{ padding: 32px 0 8px; }
+  .items-h{
+    display: flex; align-items: center; gap: 18px; margin-bottom: 22px;
+  }
+  .items-h h3{
+    font-family: "Instrument Serif", serif; font-weight: 400;
+    font-size: clamp(26px, 3vw, 34px); margin: 0; color: var(--ink);
+    letter-spacing:-0.01em;
+  }
+  .items-h h3 em{ font-style: italic; color: var(--orange) }
+  .items-h .rule{ flex: 1; height: 1px; background: var(--rule-soft); }
+  .items-h .ix{
+    font-family:"JetBrains Mono", monospace; font-size: 11px; letter-spacing:.22em; text-transform:uppercase; color: var(--ink-3);
+    white-space: nowrap;
+  }
+
+  .item{
+    display: grid;
+    grid-template-columns: 96px minmax(0, 1fr);
+    gap: 24px;
+    padding: 36px 0;
+    border-top: 1px solid var(--rule-soft);
+    transition: background .25s ease;
+  }
+  .item:hover{ background: rgba(244,217,117,.10) }
+  .item-num{
+    font-family: "Instrument Serif", serif;
+    font-size: 64px; line-height: .85; color: var(--orange);
+    font-style: italic; letter-spacing: -.03em;
+    user-select: none;
+  }
+  .item-num span{
+    display:block; font-family:"JetBrains Mono", monospace; font-style:normal;
+    font-size: 10.5px; letter-spacing:.22em; color: var(--ink-3);
+    margin-bottom: 4px;
+  }
+  .item-body{ min-width: 0 }
+  .item-h{
+    margin: 6px 0 12px;
+    font-family: "Instrument Serif", serif;
+    font-weight: 400;
+    font-size: clamp(26px, 2.8vw, 36px);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .item-h a{ color: inherit; border-bottom:none }
+  .item-h a:hover{ color: var(--orange) }
+  .take{
+    font-size: 18.5px; line-height: 1.7;
+    color: var(--ink-2);
+    max-width: 70ch;
+    margin-bottom: 18px;
+  }
+  .take p{ margin: 0 0 12px }
+
+  .links{ display:flex; flex-wrap:wrap; gap: 8px; align-items:center; margin-top: 6px }
+
+  /* ── mentions ── */
+  .mentions{
+    margin-top: 64px; padding-top: 36px;
+    border-top: 1px solid var(--rule-soft);
+  }
+  .mentions h3{
+    font-family: "Instrument Serif", serif; font-style: italic; font-weight: 400;
+    font-size: clamp(28px, 3.2vw, 38px); margin: 0 0 22px; color: var(--orange);
+    letter-spacing: -0.01em;
+  }
+  .mentions ul{
+    list-style: none; padding: 0; margin: 0;
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 40px;
+  }
+  .mentions li{
+    border-top: 1px solid var(--rule-soft); padding-top: 16px;
+  }
+  .mentions .m-h{
+    font-family: "Instrument Serif", serif; font-size: 22px; line-height: 1.2; margin-bottom: 6px;
+  }
+  .mentions .m-h a{ color: var(--ink); border-bottom: 1px solid transparent }
+  .mentions .m-h a:hover{ color: var(--orange); border-bottom-color: var(--orange) }
+  .mentions .m-meta{
+    font-family:"JetBrains Mono", monospace; font-size: 10.5px; letter-spacing:.18em; text-transform:uppercase;
+    color: var(--ink-3); margin-bottom: 8px;
+  }
+  .mentions .m-meta .dom{ color: var(--orange) }
+  .mentions .m-meta .dot{ opacity:.5; padding: 0 2px }
+  .mentions .m-meta a{ color: var(--ink-2); border:none }
+  .mentions .m-meta a:hover{ color: var(--orange) }
+  .mentions .m-blurb{ font-size: 17px; line-height: 1.55; color: var(--ink-2); max-width: 56ch }
+
+  /* ── colophon ── */
+  footer.colophon{
+    margin-top: 80px; padding-top: 28px;
+    border-top: 1px solid var(--rule-soft);
+    display: flex; justify-content: space-between; align-items: flex-end; gap: 24px;
+    font-family:"JetBrains Mono", monospace; font-size: 11px; letter-spacing:.16em; text-transform:uppercase;
+    color: var(--ink-3);
+  }
+  footer .right{ text-align: right }
+  footer strong{ color: var(--ink) }
+  footer .stamp{
+    color: var(--orange); border:1.5px solid var(--orange);
+    padding: 10px 14px; transform: rotate(-3deg); transform-origin: center;
+    font-weight: 600; line-height: 1.4; text-align:center;
+    box-shadow: 0 0 0 4px var(--paper), 0 0 0 5px rgba(185,70,27,.32);
+  }
+  footer .stamp em{ font-family: "Instrument Serif", serif; font-style: italic; font-size: 13px; letter-spacing: .04em; text-transform: none; color: var(--orange); display:block; margin-top:2px }
+
+  /* ── reveal ── */
+  @keyframes rise { from{ opacity:0; transform: translateY(14px) } to{ opacity:1; transform:none } }
+  header.mast, .lead, .items > .items-h{ animation: rise .9s ease both }
+  header.mast{ animation-delay:.05s }
+  .lead{ animation-delay:.18s }
+  .items > .items-h{ animation-delay:.30s }
+  .item{ opacity:0; transform: translateY(12px); transition: opacity .8s ease, transform .8s ease, background .25s ease }
+  .item.in{ opacity:1; transform:none }
+
+  /* ── responsive ── */
+  @media (max-width: 880px){
+    .frame{ padding: 20px 18px 80px }
+    .stripe-inner{ padding: 10px 18px; gap: 12px }
+    .stripe .nav{ display: none }
+    header.mast{ padding: 32px 0 24px }
+    .mast .stat-strip{ grid-template-columns: repeat(2, 1fr); gap: 22px }
+    .lead{ padding: 32px 0 }
+    .item{ grid-template-columns: 1fr; gap: 8px; padding: 28px 0 }
+    .item-num{ font-size: 36px; display:flex; align-items: baseline; gap: 10px }
+    .item-num span{ display:inline-block; margin: 0 }
+    .mentions{ margin-top: 40px }
+    .mentions ul{ grid-template-columns: 1fr; gap: 22px }
+    footer.colophon{ flex-direction: column; align-items: flex-start; gap: 18px }
+    footer .right{ text-align: left }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{ animation:none !important; transition:none !important }
+    .item{ opacity:1; transform:none }
+  }
+
+  /* ── Reader mode (Safari-Reader style) ── */
+  .reader-toggle{
+    position:fixed; top:16px; right:16px; z-index:60;
+    background:var(--paper); color:var(--ink);
+    border:1px solid var(--rule-soft); border-radius:999px;
+    padding:8px 14px 8px 12px;
+    font-family:"JetBrains Mono", ui-monospace, monospace;
+    font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+    cursor:pointer; box-shadow:0 6px 18px -6px rgba(0,0,0,.18);
+    display:inline-flex; align-items:center; gap:8px;
+    transition:transform .2s ease, background .2s, color .2s, border-color .2s;
+  }
+  .reader-toggle:hover{ background:var(--ink); color:var(--paper); border-color:var(--ink); transform:translateY(-1px); }
+  .reader-toggle .icon{ font-family:"Instrument Serif", serif; font-style:italic; font-weight:400; font-size:16px; line-height:1; letter-spacing:0; padding-bottom:1px; }
+
+  body.reader{ background:#faf6ec !important; background-image:none !important; }
+  body.reader .stripe,
+  body.reader #thread,
+  body.reader .mast .eyebrow,
+  body.reader .stat-strip,
+  body.reader .meta-line,
+  body.reader .lead-meta,
+  body.reader .item-num,
+  body.reader .links,
+  body.reader .tags,
+  body.reader .pull,
+  body.reader .items-h .ix,
+  body.reader .items-h .rule,
+  body.reader .mentions .m-meta,
+  body.reader footer.colophon
+  { display:none !important; }
+
+  body.reader .frame{ max-width:680px; padding:60px 26px 100px; }
+  body.reader header.mast{ padding:0 0 18px; text-align:center; border-bottom:1px solid #ddd1b3; }
+  body.reader .mast h1{ font-size:52px !important; line-height:1; letter-spacing:-0.018em; }
+  body.reader .mast h1 br{ display:none; }
+  body.reader .mast .tagline{ font-size:18px; max-width:none; margin-top:14px; color:var(--ink-2); }
+
+  body.reader .lead{ padding:36px 0 !important; max-width:none; border-bottom:1px solid #ddd1b3; }
+  body.reader .lead-h{ font-size:38px !important; line-height:1.08; margin:0 0 14px; }
+  body.reader .lead-take{ font-size:20px !important; line-height:1.75; color:var(--ink); max-width:none; }
+  body.reader .lead-take p:first-child::first-letter{ all:unset; }
+
+  body.reader .items{ padding:24px 0 0; }
+  body.reader .items-h h3{ font-size:22px; }
+  body.reader .items-h h3 em{ color:var(--ink); }
+  body.reader .item{
+    grid-template-columns:1fr !important; gap:8px !important;
+    padding:24px 0 !important; border-top:1px solid #ddd1b3 !important;
+    opacity:1 !important; transform:none !important;
+  }
+  body.reader .item:hover{ background:transparent; }
+  body.reader .item-h{ font-size:24px !important; line-height:1.2; margin:4px 0 12px; }
+  body.reader .take{ font-size:19px !important; line-height:1.75; color:var(--ink); max-width:none; margin-bottom:10px; }
+  body.reader .item-h a, body.reader .lead-h a{ color:var(--ink); border-bottom:1px solid #b6a37c; }
+  body.reader .item-h a:hover, body.reader .lead-h a:hover{ color:var(--orange); border-bottom-color:var(--orange); }
+
+  body.reader .mentions{ margin-top:32px; padding-top:24px; border-top:1px solid #ddd1b3; }
+  body.reader .mentions h3{ font-size:22px; color:var(--ink); font-style:normal; }
+  body.reader .mentions ul{ display:block; }
+  body.reader .mentions li{ border-top:1px solid #ddd1b3; padding-top:14px; margin-top:14px; }
+  body.reader .mentions .m-h{ font-size:20px; }
+  body.reader .mentions .m-h a{ color:var(--ink); border-bottom:1px solid #b6a37c; }
+  body.reader .mentions .m-blurb{ font-size:18px; color:var(--ink-2); }
+
+  @media (max-width:700px){
+    body.reader .frame{ padding:46px 18px 70px }
+    .reader-toggle{ top:10px; right:10px; padding:6px 12px; font-size:10.5px }
+  }
+</style>
+</head>
+<body>
+
+<div id="thread"></div>
+
+<button class="reader-toggle" type="button" aria-label="Toggle reader mode" title="Reader mode"><span class="icon">Aa</span><span class="label">Reader</span></button>
+
+<div class="stripe">
+  <div class="stripe-inner">
+    <div class="left">
+      <span class="dot" aria-hidden="true"></span>
+      <span><strong>HN</strong> Digest</span>
+      <span style="opacity:.55">·</span>
+      <span>Issue № 92</span>
+      <span style="opacity:.55">·</span>
+      <span>Tuesday · 6 May 2026</span>
+    </div>
+    <nav class="nav">
+      <a href="#i01">Lead</a>
+      <a href="#all">Stories</a>
+      <a href="#mentions">Mentions</a>
+    </nav>
+  </div>
+</div>
+
+<div class="frame">
+
+  <header class="mast">
+    <div class="eyebrow">
+      <span>Filed 06 May 2026 · 18:00 IST</span>
+      <span class="rule"></span>
+      <span>≈ 9 min read</span>
+    </div>
+    <h1>Hacker <em>News</em>,<br>filed for reading.</h1>
+    <p class="tagline">Ten threads worth your attention from yesterday's HN — sorted not by score but by what'll still matter on Friday.</p>
+    <div class="stat-strip">
+      <div class="s"><div class="v">240<em>·</em></div><div class="l">items considered</div></div>
+      <div class="s"><div class="v">1.5k</div><div class="l">top score</div></div>
+      <div class="s"><div class="v">4.3k</div><div class="l">comments aggregated</div></div>
+      <div class="s"><div class="v">10<em>+</em></div><div class="l">curated for you</div></div>
+    </div>
+  </header>
+
+  <article class="lead">
+      <div class="lead-meta">
+        <span class="rank">№ 01 · STORY OF THE DAY</span>
+        <span class="dot">·</span>
+        <span>thatprivacyguy.com</span>
+        <span class="dot">·</span>
+        <span>▲ 1.5k pts · 820 comments</span>
+      </div>
+      <h2 class="lead-h">
+        <a href="https://www.thatprivacyguy.com/blog/chrome-silent-nano-install/" target="_blank" rel="noopener">Google Chrome silently installs a 4 GB AI model on your device without consent.</a>
+      </h2>
+      <blockquote class="pull">
+        <span class="qmark">“</span>If Gemini Nano is becoming a default Chrome dependency, "it's just a browser" stops being true.<span class="qmark">”</span>
+      </blockquote>
+      <div class="lead-take"><p>The story of the day, and deservedly so. Forced on-device model deployment with no opt-in is the kind of thing browsers used to ship competitors over.</p>
+<p>Four gigabytes of weights, dropped onto your disk on a normal update — that's a meaningful new category of "installed software," not a feature flag. The interesting fight over the next year isn't whether AI ends up in browsers; it's who gets to consent to it being there.</p></div>
+      <div class="links">
+        <a class="lnk discuss" href="https://news.ycombinator.com/item?id=48019219" target="_blank" rel="noopener">Discussion →</a>
+        <a class="lnk source"  href="https://www.thatprivacyguy.com/blog/chrome-silent-nano-install/"  target="_blank" rel="noopener">Read source →</a>
+        <span class="tags"><span class="tag">browsers</span> <span class="tag">consent</span> <span class="tag">ai</span> <span class="tag">privacy</span></span>
+      </div>
+    </article>
+
+  <section class="items" id="all">
+    <div class="items-h">
+      <h3>The rest of the thread, <em>filtered.</em></h3>
+      <span class="rule"></span>
+      <span class="ix">10 stories</span>
+    </div>
+    <article class="item" id="i02">
+      <div class="item-num"><span>№</span>02</div>
+      <div class="item-body">
+        <div class="meta-line">
+          <span class="domain">susam.net</span>
+          <span class="dot">·</span>
+          <span class="pts">▲ 612 points</span>
+          <span class="dot">·</span>
+          <span class="cmt">233 comments</span>
+        </div>
+        <h3 class="item-h"><a class="permalink" href="https://susam.net/inverse-laws-of-robotics.html" target="_blank" rel="noopener">Three Inverse Laws of AI</a></h3>
+        <div class="take"><p>A sharp little riff on Asimov inverted for the LLM era. Short, quotable, and the comment thread is unusually thoughtful. Worth five minutes if you've grown numb to AI takes.</p></div>
+        <div class="links">
+          <a class="lnk discuss" href="https://news.ycombinator.com/item?id=48023861" target="_blank" rel="noopener">Discussion →</a>
+          <a class="lnk source"  href="https://susam.net/inverse-laws-of-robotics.html"  target="_blank" rel="noopener">Read source →</a>
+          <span class="tags"><span class="tag">ai</span> <span class="tag">essay</span></span>
+        </div>
+      </div>
+    </article>
+<article class="item" id="i03">
+      <div class="item-num"><span>№</span>03</div>
+      <div class="item-body">
+        <div class="meta-line">
+          <span class="domain">reflex.dev</span>
+          <span class="dot">·</span>
+          <span class="pts">▲ 488 points</span>
+          <span class="dot">·</span>
+          <span class="cmt">197 comments</span>
+        </div>
+        <h3 class="item-h"><a class="permalink" href="https://reflex.dev/blog/computer-use-is-45x-more-expensive-than-structured-apis/" target="_blank" rel="noopener">Computer Use is 45× more expensive than structured APIs.</a></h3>
+        <div class="take"><p>The pricing reality check the agent hype needs. "Let the model click buttons like a human" sounds elegant until the bill arrives. Useful ammunition next time someone proposes a screenshot-based agent for a problem with a perfectly good REST endpoint.</p></div>
+        <div class="links">
+          <a class="lnk discuss" href="https://news.ycombinator.com/item?id=48024859" target="_blank" rel="noopener">Discussion →</a>
+          <a class="lnk source"  href="https://reflex.dev/blog/computer-use-is-45x-more-expensive-than-structured-apis/"  target="_blank" rel="noopener">Read source →</a>
+          <span class="tags"><span class="tag">agents</span> <span class="tag">cost</span> <span class="tag">engineering</span></span>
+        </div>
+      </div>
+    </article>
+<article class="item" id="i04">
+      <div class="item-num"><span>№</span>04</div>
+      <div class="item-body">
+        <div class="meta-line">
+          <span class="domain">denic.de</span>
+          <span class="dot">·</span>
+          <span class="pts">▲ 432 points</span>
+          <span class="dot">·</span>
+          <span class="cmt">311 comments</span>
+        </div>
+        <h3 class="item-h"><a class="permalink" href="https://status.denic.de/pages/incident/592577eab611ce1e0d00046f/69fa60ef9d12f5057a974f38" target="_blank" rel="noopener">DNSSEC disruption affecting .de domains — Resolved.</a></h3>
+        <div class="take"><p>An entire ccTLD wobbling because of DNSSEC validation issues is exactly the operational footgun skeptics warned about for years. Read the comments for the actual postmortem energy.</p></div>
+        <div class="links">
+          <a class="lnk discuss" href="https://news.ycombinator.com/item?id=48027897" target="_blank" rel="noopener">Discussion →</a>
+          <a class="lnk source"  href="https://status.denic.de/pages/incident/592577eab611ce1e0d00046f/69fa60ef9d12f5057a974f38"  target="_blank" rel="noopener">Read source →</a>
+          <span class="tags"><span class="tag">dns</span> <span class="tag">incident</span> <span class="tag">infra</span></span>
+        </div>
+      </div>
+    </article>
+<article class="item" id="i05">
+      <div class="item-num"><span>№</span>05</div>
+      <div class="item-body">
+        <div class="meta-line">
+          <span class="domain">blog.cloudflare.com</span>
+          <span class="dot">·</span>
+          <span class="pts">▲ 386 points</span>
+          <span class="dot">·</span>
+          <span class="cmt">178 comments</span>
+        </div>
+        <h3 class="item-h"><a class="permalink" href="https://blog.cloudflare.com/agents-stripe-projects/" target="_blank" rel="noopener">Agents can now create Cloudflare accounts, buy domains, and deploy.</a></h3>
+        <div class="take"><p>Cloudflare + Stripe handing agents a credit card and a deploy button. Either the future of solo software or a beautifully crafted abuse vector. Probably both.</p></div>
+        <div class="links">
+          <a class="lnk discuss" href="https://news.ycombinator.com/item?id=48031684" target="_blank" rel="noopener">Discussion →</a>
+          <a class="lnk source"  href="https://blog.cloudflare.com/agents-stripe-projects/"  target="_blank" rel="noopener">Read source →</a>
+          <span class="tags"><span class="tag">agents</span> <span class="tag">infra</span> <span class="tag">stripe</span></span>
+        </div>
+      </div>
+    </article>
+<article class="item" id="i06">
+      <div class="item-num"><span>№</span>06</div>
+      <div class="item-body">
+        <div class="meta-line">
+          <span class="domain">blog.google</span>
+          <span class="dot">·</span>
+          <span class="pts">▲ 354 points</span>
+          <span class="dot">·</span>
+          <span class="cmt">102 comments</span>
+        </div>
+        <h3 class="item-h"><a class="permalink" href="https://blog.google/innovation-and-ai/technology/developers-tools/multi-token-prediction-gemma-4/" target="_blank" rel="noopener">Accelerating Gemma 4: faster inference with multi-token prediction drafters.</a></h3>
+        <div class="take"><p>Speculative decoding is finally going mainstream-vendor-blessed. If you run local inference, the drafter approach is the most practical 2× you'll get this year.</p></div>
+        <div class="links">
+          <a class="lnk discuss" href="https://news.ycombinator.com/item?id=48024540" target="_blank" rel="noopener">Discussion →</a>
+          <a class="lnk source"  href="https://blog.google/innovation-and-ai/technology/developers-tools/multi-token-prediction-gemma-4/"  target="_blank" rel="noopener">Read source →</a>
+          <span class="tags"><span class="tag">ml</span> <span class="tag">inference</span> <span class="tag">gemma</span></span>
+        </div>
+      </div>
+    </article>
+<article class="item" id="i07">
+      <div class="item-num"><span>№</span>07</div>
+      <div class="item-body">
+        <div class="meta-line">
+          <span class="domain">nonogra.ph</span>
+          <span class="dot">·</span>
+          <span class="pts">▲ 318 points</span>
+          <span class="dot">·</span>
+          <span class="cmt">144 comments</span>
+        </div>
+        <h3 class="item-h"><a class="permalink" href="https://nonogra.ph/write-some-software-give-it-away-for-free-05-05-2026" target="_blank" rel="noopener">Write some software, give it away for free.</a></h3>
+        <div class="take"><p>A quietly defiant essay against the everything-must-be-a-startup brain rot. The kind of post that makes you want to ship the dumb little tool you've been sitting on.</p></div>
+        <div class="links">
+          <a class="lnk discuss" href="https://news.ycombinator.com/item?id=48028842" target="_blank" rel="noopener">Discussion →</a>
+          <a class="lnk source"  href="https://nonogra.ph/write-some-software-give-it-away-for-free-05-05-2026"  target="_blank" rel="noopener">Read source →</a>
+          <span class="tags"><span class="tag">essay</span> <span class="tag">open-source</span></span>
+        </div>
+      </div>
+    </article>
+<article class="item" id="i08">
+      <div class="item-num"><span>№</span>08</div>
+      <div class="item-body">
+        <div class="meta-line">
+          <span class="domain">red-squares.cian.lol</span>
+          <span class="dot">·</span>
+          <span class="pts">▲ 289 points</span>
+          <span class="dot">·</span>
+          <span class="cmt">88 comments</span>
+        </div>
+        <h3 class="item-h"><a class="permalink" href="https://red-squares.cian.lol/" target="_blank" rel="noopener">Show HN: Red Squares — GitHub outages as contributions.</a></h3>
+        <div class="take"><p>Inverts the contribution graph into an outage graph. Pure shitpost-as-art, and a sneaky-good visualization of GitHub's reliability over time.</p></div>
+        <div class="links">
+          <a class="lnk discuss" href="https://news.ycombinator.com/item?id=48034587" target="_blank" rel="noopener">Discussion →</a>
+          <a class="lnk source"  href="https://red-squares.cian.lol/"  target="_blank" rel="noopener">Read source →</a>
+          <span class="tags"><span class="tag">show-hn</span> <span class="tag">viz</span> <span class="tag">github</span></span>
+        </div>
+      </div>
+    </article>
+<article class="item" id="i09">
+      <div class="item-num"><span>№</span>09</div>
+      <div class="item-body">
+        <div class="meta-line">
+          <span class="domain">letsdatascience.com</span>
+          <span class="dot">·</span>
+          <span class="pts">▲ 274 points</span>
+          <span class="dot">·</span>
+          <span class="cmt">412 comments</span>
+        </div>
+        <h3 class="item-h"><a class="permalink" href="https://letsdatascience.com/news/telus-uses-ai-to-alter-call-agent-accents-a3868f63" target="_blank" rel="noopener">Telus uses AI to alter call-agent accents.</a></h3>
+        <div class="take"><p>Customer-service "accent neutralization" was already ethically queasy when humans were trained to do it. Real-time AI doing it at scale is a whole new conversation about consent, identity, and which side of the call gets a choice.</p></div>
+        <div class="links">
+          <a class="lnk discuss" href="https://news.ycombinator.com/item?id=48031109" target="_blank" rel="noopener">Discussion →</a>
+          <a class="lnk source"  href="https://letsdatascience.com/news/telus-uses-ai-to-alter-call-agent-accents-a3868f63"  target="_blank" rel="noopener">Read source →</a>
+          <span class="tags"><span class="tag">ai</span> <span class="tag">ethics</span> <span class="tag">telecom</span></span>
+        </div>
+      </div>
+    </article>
+<article class="item" id="i10">
+      <div class="item-num"><span>№</span>10</div>
+      <div class="item-body">
+        <div class="meta-line">
+          <span class="domain">starlabs.systems</span>
+          <span class="dot">·</span>
+          <span class="pts">▲ 246 points</span>
+          <span class="dot">·</span>
+          <span class="cmt">167 comments</span>
+        </div>
+        <h3 class="item-h"><a class="permalink" href="https://us.starlabs.systems/pages/starfighter" target="_blank" rel="noopener">StarFighter 16-Inch.</a></h3>
+        <div class="take"><p>A genuinely high-end Linux-first laptop with coreboot. Niche, but the spec sheet is the closest thing to a Framework-meets-ThinkPad anyone's shipped this year.</p></div>
+        <div class="links">
+          <a class="lnk discuss" href="https://news.ycombinator.com/item?id=48031261" target="_blank" rel="noopener">Discussion →</a>
+          <a class="lnk source"  href="https://us.starlabs.systems/pages/starfighter"  target="_blank" rel="noopener">Read source →</a>
+          <span class="tags"><span class="tag">hardware</span> <span class="tag">linux</span></span>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section class="mentions" id="mentions">
+    <h3>Honorable mentions</h3>
+    <ul>
+      <li>
+          <div class="m-h"><a href="https://openrss.org/blog/youtube-your-feeds-are-broken" target="_blank" rel="noopener">YouTube, your RSS feeds are broken.</a></div>
+          <div class="m-meta"><span class="dom">openrss.org</span> <span class="dot">·</span> <a class="lnk" href="https://news.ycombinator.com/item?id=48030964" target="_blank" rel="noopener">discuss</a></div>
+          <div class="m-blurb">Slow strangulation of one of YouTube's last open interfaces.</div>
+        </li>
+<li>
+          <div class="m-h"><a href="https://www.aaedmusa.com/projects/cara2" target="_blank" rel="noopener">CARA 2.0 — "I built a better robot dog."</a></div>
+          <div class="m-meta"><span class="dom">aaedmusa.com</span> <span class="dot">·</span> <a class="lnk" href="https://news.ycombinator.com/item?id=48005432" target="_blank" rel="noopener">discuss</a></div>
+          <div class="m-blurb">Solo-built quadruped, the writeup is the good kind of show-off.</div>
+        </li>
+<li>
+          <div class="m-h"><a href="https://www.youtube.com/watch?v=6JhK8iCQuqI" target="_blank" rel="noopener">The 555 Timer is 55 years old.</a></div>
+          <div class="m-meta"><span class="dom">youtube.com</span> <span class="dot">·</span> <a class="lnk" href="https://news.ycombinator.com/item?id=48024129" target="_blank" rel="noopener">discuss</a></div>
+          <div class="m-blurb">EEVblog tribute to the chip that refuses to die.</div>
+        </li>
+<li>
+          <div class="m-h"><a href="https://investors.micron.com/news-releases/news-release-details/industry-leading-245tb-micron-6600-ion-data-center-ssd-now" target="_blank" rel="noopener">245TB Micron 6600 ION SSD.</a></div>
+          <div class="m-meta"><span class="dom">micron.com</span> <span class="dot">·</span> <a class="lnk" href="https://news.ycombinator.com/item?id=48031867" target="_blank" rel="noopener">discuss</a></div>
+          <div class="m-blurb">Quarter-petabyte per drive, casually.</div>
+        </li>
+<li>
+          <div class="m-h"><a href="https://katedaviesdesigns.com/2026/04/29/knitting-bullshit/" target="_blank" rel="noopener">Knitting bullshit.</a></div>
+          <div class="m-meta"><span class="dom">katedaviesdesigns.com</span> <span class="dot">·</span> <a class="lnk" href="https://news.ycombinator.com/item?id=48032461" target="_blank" rel="noopener">discuss</a></div>
+          <div class="m-blurb">AI-generated patterns flooding craft marketplaces; same enshittification story, new domain.</div>
+        </li>
+    </ul>
+  </section>
+
+  <footer class="colophon">
+    <div>
+      Set in <strong>Instrument Serif</strong> &amp; <strong>Source Serif&nbsp;4</strong><br>
+      Hand-curated for long-form reading
+    </div>
+    <div class="stamp">Read deeply<em>not the algorithm</em></div>
+    <div class="right">
+      HN Digest © MMXXVI<br>
+      Curated for <strong>Anuj</strong> by Chintu 🐄
+    </div>
+  </footer>
+</div>
+
+<script>
+  // Reader-mode toggle (Safari-Reader-style)
+  (function(){
+    const btn = document.querySelector('.reader-toggle');
+    const KEY = 'digest-reader-mode';
+    const apply = on => {
+      document.body.classList.toggle('reader', on);
+      btn.querySelector('.icon').textContent = on ? '✕' : 'Aa';
+      btn.querySelector('.label').textContent = on ? 'Exit'  : 'Reader';
+    };
+    apply(localStorage.getItem(KEY) === '1');
+    btn.addEventListener('click', () => {
+      const on = !document.body.classList.contains('reader');
+      localStorage.setItem(KEY, on ? '1' : '0');
+      apply(on);
+    });
+  })();
+
+  const thread = document.getElementById('thread');
+  const onScroll = () => {
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    thread.style.width = max > 0 ? (h.scrollTop / max * 100) + '%' : '0%';
+  };
+  document.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.item').forEach(el=>{ el.classList.remove('in'); io.observe(el); });
+</script>
+</body>
+</html>

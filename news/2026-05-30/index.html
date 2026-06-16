@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>dAILY /HN — Saturday · 30 May 2026</title>
+<meta name="description" content="A dead-economy essay sets the room on fire, New Glenn sets itself on fire, GTA 6 unionises, and California asks for the SAT back." />
+<meta name="theme-color" content="#0a0a09" />
+<meta property="og:title" content="dAILY /HN — Saturday · 30 May 2026" />
+<meta property="og:description" content="A dead-economy essay sets the room on fire, New Glenn sets itself on fire, GTA 6 unionises, and California asks for the SAT back." />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="anujsh.com" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:url" content="https://anujsh.com/news/" />
+<meta property="article:author" content="Anuj Sharma" />
+<meta property="article:published_time" content="2026-05-30" />
+<meta property="article:section" content="Technology" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@waahbete" />
+<meta name="twitter:creator" content="@waahbete" />
+<meta name="twitter:title" content="dAILY /HN — Saturday · 30 May 2026" />
+<meta name="twitter:description" content="A dead-economy essay sets the room on fire, New Glenn sets itself on fire, GTA 6 unionises, and California asks for the SAT back." />
+<meta name="author" content="Anuj Sharma" />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+<meta name="keywords" content="hacker news, daily digest, tech news, curated, Saturday · 30 May 2026" />
+<link rel="canonical" href="https://anujsh.com/news/" />
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%230a0a09'/><text x='16' y='22' font-family='monospace' font-weight='800' font-size='16' text-anchor='middle' fill='%23f4f4ee'>d</text></svg>" />
+<style>
+  :root {
+    --bg: #0a0a09;
+    --bg-2: #111110;
+    --card: #141413;
+    --card-2: #1a1a18;
+    --line: #232321;
+    --line-2: #2c2c29;
+    --fg: #f4f4ee;
+    --muted: #a8a8a0;
+    --muted-2: #6f6f68;
+    --muted-3: #4a4a45;
+    --accent: #ff6a36;
+    --blue: #93c5fd;
+    --pos: #4ade80;
+    --warn: #f4d975;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg); color: var(--fg);
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  .mono, .mono * {
+    font-family: ui-monospace, "JetBrains Mono", "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-feature-settings: "tnum" 1, "ss01" 1;
+  }
+  ::selection { background: var(--accent); color: white; }
+
+  .wrap {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 18px 18px 80px;
+  }
+  @media (min-width: 900px) {
+    .wrap { max-width: 760px; padding: 28px 28px 96px; }
+  }
+
+  /* ── topbar ── */
+  .topbar {
+    display: flex; align-items: center;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 22px;
+  }
+  .brand { display: flex; align-items: center; gap: 8px; }
+  .brand a { color: var(--fg); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+  .brand .slug {
+    color: var(--muted-2); font-size: 14px; margin-top: 2px;
+    font-family: ui-monospace, "JetBrains Mono", "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    letter-spacing: 0.02em;
+  }
+  .topbar .right { margin-left: auto; }
+  .issue {
+    color: var(--muted-2);
+    font-family: ui-monospace, "JetBrains Mono", "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .issue b { color: var(--fg); font-weight: 600; }
+
+  /* ── highlights ── */
+  .h-label {
+    font-family: ui-monospace, "JetBrains Mono", "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted-2); margin-bottom: 10px;
+  }
+  .highlights {
+    display: flex; gap: 10px;
+    overflow-x: auto;
+    margin: 0 -18px 28px;
+    padding: 0 18px 6px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+  }
+  .highlights::-webkit-scrollbar { height: 6px; }
+  .highlights::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 3px; }
+  .h-card {
+    flex: 0 0 86%;
+    background: var(--card);
+    border: 1px solid var(--line-2);
+    border-radius: 14px;
+    padding: 14px;
+    scroll-snap-align: start;
+    display: flex; flex-direction: column; gap: 10px;
+    min-height: 168px;
+  }
+  @media (min-width: 900px) {
+    .h-card { flex-basis: 47%; }
+  }
+  .h-card a { color: inherit; text-decoration: none; }
+  .h-card a:hover h3 { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+  .h-card h3 {
+    margin: 0;
+    font-family: ui-monospace, "JetBrains Mono", "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 16px; line-height: 1.35; font-weight: 600;
+    letter-spacing: -0.005em;
+  }
+  .h-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: ui-monospace, "JetBrains Mono", "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600;
+  }
+  .h-tag.miss { color: var(--accent); }
+  .h-tag.rise { color: var(--blue); }
+  .h-tag.warn { color: var(--warn); }
+  .h-tag svg { width: 12px; height: 12px; stroke: currentColor; fill: currentColor; opacity: 0.95; }
+  .h-tag.miss svg, .h-tag.warn svg { fill: currentColor; stroke: none; }
+  .h-meta {
+    margin-top: auto;
+    display: flex; align-items: center; gap: 10px;
+    color: var(--muted-2);
+    font-size: 12px;
+    font-family: ui-monospace, "JetBrains Mono", "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  }
+
+  .stack { display: inline-flex; align-items: center; }
+  .stack .av {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--line-2);
+    border: 2px solid var(--card);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 9px; font-weight: 700; color: var(--fg);
+    margin-left: -7px; overflow: hidden;
+  }
+  .stack .av:first-child { margin-left: 0; }
+  .stack .av.hn { background: var(--accent); color: white; }
+  .stack .av.more { background: var(--card-2); color: var(--muted); font-size: 8px; }
+  .pill {
+    display: inline-flex; align-items: center; padding: 1px 8px; border-radius: 999px;
+    background: var(--card-2); border: 1px solid var(--line-2);
+    color: var(--muted); font-size: 11px;
+    font-family: ui-monospace, "JetBrains Mono", "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  .pill.fire { color: var(--accent); border-color: rgba(255,106,54,.45); }
+
+  /* ── section header ── */
+  .sec-h { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+  .sec-h h2 { margin: 0; font-size: 22px; letter-spacing: -0.015em; font-weight: 700; }
+  .sec-h .when { color: var(--muted); font-size: 18px; font-weight: 400; }
+  .tagline { color: var(--muted); font-size: 14px; line-height: 1.55; max-width: 60ch; margin: 4px 0 14px; }
+  .stats-strip {
+    display: flex; flex-wrap: wrap; gap: 6px 12px;
+    color: var(--muted-2);
+    font-family: ui-monospace, "JetBrains Mono", "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase;
+    padding: 8px 0 16px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 4px;
+  }
+  .stats-strip .k { color: var(--muted); }
+  .stats-strip .v { color: var(--fg); margin-left: 4px; }
+  .stats-strip .sep { color: var(--line-2); }
+  .stats-strip .filed { color: var(--muted); }
+
+  /* ── lead full ── */
+  .lead-full {
+    padding: 28px 0 32px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 4px;
+  }
+  .lead-meta {
+    display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center;
+    color: var(--muted-2);
+    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .lead-meta .rank { color: var(--accent); font-weight: 600; letter-spacing: 0.16em; }
+  .lead-meta .domain { color: var(--blue); }
+  .lead-meta .sep { color: var(--line-2); }
+  .lead-h {
+    margin: 0 0 14px;
+    font-size: clamp(24px, 3.8vw, 34px);
+    line-height: 1.18;
+    letter-spacing: -0.01em;
+    font-weight: 700;
+    text-wrap: balance;
+  }
+  .lead-h a { color: var(--fg); text-decoration: none; }
+  .lead-h a:hover { text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px; }
+  .pull {
+    margin: 16px 0;
+    padding: 14px 16px 14px 18px;
+    border-left: 3px solid var(--accent);
+    background: linear-gradient(90deg, rgba(255,106,54,.08), transparent 80%);
+    color: var(--fg);
+    font-size: 17px; line-height: 1.45;
+    display: flex; gap: 12px; align-items: flex-start;
+  }
+  .pull svg { width: 18px; height: 18px; fill: var(--accent); flex-shrink: 0; margin-top: 4px; }
+  .lead-take { color: var(--muted); font-size: 15px; line-height: 1.65; max-width: 65ch; }
+  .lead-take p { margin: 0 0 12px; }
+  .lead-take p:last-child { margin-bottom: 0; }
+
+  /* ── feed ── */
+  .feed { list-style: none; margin: 0; padding: 0; }
+  .item {
+    display: flex; gap: 14px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: flex-start;
+  }
+  .item .rank {
+    width: 28px; flex-shrink: 0;
+    color: var(--muted-2);
+    font-size: 14px; font-weight: 500;
+    padding-top: 2px;
+    line-height: 1.4;
+  }
+  .item .body { flex: 1; min-width: 0; }
+  .item .headline { color: var(--fg); text-decoration: none; }
+  .item .headline:hover h3 { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+  h3.h {
+    font-size: 16px; line-height: 1.32;
+    letter-spacing: -0.005em;
+    margin: 0 0 8px; font-weight: 600;
+  }
+  .item .take { color: var(--muted); font-size: 14px; line-height: 1.55; margin-bottom: 10px; }
+  .item .take p { margin: 0 0 6px; }
+  .item .take p:last-child { margin-bottom: 0; }
+  .meta {
+    display: flex; align-items: center; flex-wrap: wrap;
+    gap: 4px 12px;
+    font-size: 12px; color: var(--muted-2);
+    margin-bottom: 10px;
+  }
+  .meta .ico { display: inline-flex; align-items: center; gap: 4px; }
+  .meta svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .meta .domain { color: var(--blue); margin-left: auto; }
+
+  /* ── action chips ── */
+  .links { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  a.lnk {
+    display: inline-flex; align-items: center;
+    font-family: ui-monospace, "JetBrains Mono", "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 4px 9px; border-radius: 6px;
+    color: var(--muted);
+    border: 1px solid var(--line-2);
+    background: var(--card);
+    text-decoration: none;
+    transition: color .15s, background .15s, border-color .15s;
+  }
+  a.lnk:hover { color: var(--fg); background: var(--card-2); border-color: var(--muted-3); }
+  a.lnk.discuss:hover { color: white; background: var(--accent); border-color: var(--accent); }
+  a.lnk.source:hover  { color: var(--bg); background: var(--blue); border-color: var(--blue); }
+
+  /* ── mentions / up & coming ── */
+  .uac { margin: 28px 0 0; padding: 18px 0 4px; border-top: 1px solid var(--line); }
+  .uac-h { display: flex; align-items: baseline; gap: 8px; margin-bottom: 14px; }
+  .uac-h h2 {
+    margin: 0; font-size: 14px;
+    font-family: ui-monospace, "JetBrains Mono", "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); font-weight: 600;
+  }
+  .uac-h .arr { color: var(--accent); }
+  .uac ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
+  .uac li { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; line-height: 1.5; }
+  .uac .lab {
+    flex-shrink: 0; min-width: 90px; max-width: 110px;
+    font-size: 11px; color: var(--muted-2);
+    text-transform: lowercase; letter-spacing: 0.04em;
+    padding-top: 1px;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .uac .m-body { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  .uac a { color: var(--fg); text-decoration: none; }
+  .uac a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .uac .m-blurb { color: var(--muted); font-size: 13px; }
+  .uac .m-discuss {
+    align-self: flex-start;
+    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--muted-2); text-decoration: none;
+  }
+  .uac .m-discuss:hover { color: var(--accent); }
+
+  /* ── footer ── */
+  .footer-note {
+    margin-top: 36px; padding-top: 18px;
+    border-top: 1px dashed var(--line-2);
+    text-align: center;
+    color: var(--muted-3);
+    font-family: ui-monospace, "JetBrains Mono", "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px; letter-spacing: 0.06em;
+  }
+  .footer-note b { color: var(--muted-2); font-weight: 500; }
+  .footer-note a { color: var(--muted-2); text-decoration: none; }
+  .footer-note a:hover { color: var(--accent); }
+
+  /* reading-progress thread */
+  #thread {
+    position: fixed; top: 0; left: 0;
+    height: 2px; width: 0%;
+    background: var(--accent);
+    z-index: 50;
+    transition: width .12s linear;
+    box-shadow: 0 0 8px rgba(255,106,54,.5);
+  }
+</style>
+</head>
+<body>
+<div id="thread"></div>
+<div class="wrap">
+  <div class="topbar">
+    <div class="brand">
+      <a href="/hn/" aria-label="dAILY home">
+        <svg width="86" height="22" viewBox="0 0 86 22" aria-label="dAILY">
+          <g fill="currentColor">
+            <rect x="0"  y="0"  width="3" height="22"/>
+            <rect x="0"  y="0"  width="9" height="3"/>
+            <rect x="0"  y="19" width="9" height="3"/>
+            <rect x="6"  y="3"  width="3" height="16"/>
+            <rect x="13" y="0"  width="9" height="3"/>
+            <rect x="13" y="3"  width="3" height="19"/>
+            <rect x="19" y="3"  width="3" height="19"/>
+            <rect x="13" y="10" width="9" height="3"/>
+            <rect x="26" y="0"  width="3" height="22"/>
+            <rect x="33" y="0"  width="3" height="22"/>
+            <rect x="33" y="19" width="9" height="3"/>
+            <rect x="46" y="0"  width="3" height="11"/>
+            <rect x="55" y="0"  width="3" height="11"/>
+            <rect x="49" y="11" width="6" height="3"/>
+            <rect x="50" y="14" width="3" height="8"/>
+          </g>
+        </svg>
+        <span class="slug">/HN</span>
+      </a>
+    </div>
+    <div class="right issue">ISSUE&nbsp;<b>№115</b></div>
+  </div>
+
+  <div class="h-label"><span>Highlights</span></div>
+
+  <div class="highlights" role="list">
+<div class="h-card lead-card" role="listitem">
+      <div class="h-tag miss"><svg viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg> STORY OF THE DAY</div>
+      <a href="https://www.owenmcgrann.com/the-dead-economy-theory/" target="_blank" rel="noopener">
+        <h3>The dead economy theory</h3>
+      </a>
+      <div class="h-meta">
+        <div class="stack"><span class="av hn" title="Hacker News">H</span><span class="av" style="background:#a78bfa;color:#fff" title="owenmcgrann.com">O</span></div>
+        <span class="pill fire">▲ 677</span>
+        <span class="pill">💬 862</span>
+      </div>
+    </div>
+<div class="h-card" role="listitem">
+      <div class="h-tag rise"><svg viewBox="0 0 24 24"><path d="m3 17 6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg> MOST DISCUSSED</div>
+      <a href="https://www.latimes.com/california/story/uc-faculty-sat-stem-math" target="_blank" rel="noopener">
+        <h3>Citing 'severe' math deficits, UC faculty demand a return to SAT tests for STEM</h3>
+      </a>
+      <div class="h-meta">
+        <div class="stack"><span class="av hn" title="Hacker News">H</span><span class="av" style="background:#14b8a6;color:#fff" title="latimes.com">L</span></div>
+        <span class="pill">💬 661</span>
+      </div>
+    </div>
+<div class="h-card" role="listitem">
+      <div class="h-tag warn"><svg viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg> #1 LIKED</div>
+      <a href="https://www.rockstarintel.com/gta-6-developers-unionize/" target="_blank" rel="noopener">
+        <h3>GTA 6 developers unionize</h3>
+      </a>
+      <div class="h-meta">
+        <div class="stack"><span class="av hn" title="Hacker News">H</span><span class="av" style="background:#f43f5e;color:#fff" title="rockstarintel.com">R</span></div>
+        <span class="pill fire">▲ 561</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-h">
+    <h2>Top Stories,</h2>
+    <span class="when">Saturday · 30 May 2026.</span>
+  </div>
+  <p class="tagline">A dead-economy essay sets the room on fire, New Glenn sets itself on fire, GTA 6 unionises, and California asks for the SAT back.</p>
+
+  <div class="stats-strip mono">
+    <span><span class="k">SCANNED:</span><span class="v">58</span></span>
+    <span class="sep">|</span>
+    <span><span class="k">TOP:</span><span class="v">▲ 1,729</span></span>
+    <span class="sep">|</span>
+    <span><span class="k">COMMENTS:</span><span class="v">3,945</span></span>
+    <span class="sep">|</span>
+    <span><span class="k">READ:</span><span class="v">6m</span></span>
+    <span class="sep">|</span>
+    <span class="filed">FILED 30 May 2026 · 07:00 IST</span>
+  </div>
+
+  <article class="lead-full" id="lead">
+      <div class="lead-meta mono">
+        <span class="rank">№ 01 · STORY OF THE DAY</span>
+        <span class="sep">·</span>
+        <span class="domain">owenmcgrann.com</span>
+        <span class="sep">·</span>
+        <span>▲ 677</span>
+        <span class="sep">·</span>
+        <span>💬 862</span>
+      </div>
+      <h2 class="lead-h">
+        <a href="https://www.owenmcgrann.com/the-dead-economy-theory/" target="_blank" rel="noopener">The dead economy theory</a>
+      </h2>
+      <blockquote class="pull"><svg viewBox="0 0 24 24"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg><span>If the headline indicators are healthy and the lived experience isn't, the indicators are wrong — or measuring a different economy from the one you live in.</span></blockquote>
+      <div class="lead-take"><p>McGrann's central claim is unpleasantly tidy: the U.S. economy is technically alive — GDP is fine, equities are fine, unemployment is fine — and yet the median household's experience of work, housing, healthcare, and the social contract has degraded in ways the aggregate numbers refuse to register. He argues this isn't a paradox; it's the predictable end-state of an economy whose growth has concentrated upward for long enough that the dashboard and the dining table have decoupled.</p>
+<p>Whether or not you buy the framing, the essay is the kind of writing HN rewards when it shows up: clear thesis, real numbers, no policy snake-oil at the end. Worth reading twice — once for the argument, once to ask which of your own working assumptions about 'the economy' are downstream of a dashboard that may not be measuring what you think it measures. The 862-comment thread is half people violently agreeing and half people doing the exact behaviour the essay describes.</p></div>
+      <div class="links">
+        <a class="lnk discuss" href="https://news.ycombinator.com/item?id=46100002" target="_blank" rel="noopener">Discussion →</a>
+        <a class="lnk source"  href="https://www.owenmcgrann.com/the-dead-economy-theory/"  target="_blank" rel="noopener">Read source →</a>
+      </div>
+    </article>
+
+  <ul class="feed">
+<li class="item" id="i02">
+      <div class="rank mono">2</div>
+      <div class="body">
+        <a class="headline" href="https://twitter.com/i/status/blueorigin-new-glenn-anomaly" target="_blank" rel="noopener">
+          <h3 class="h">Blue Origin's New Glenn blows up during static fire test</h3>
+        </a>
+        <div class="take"><p>A scheduled hold-down test of the second-stage engines turned into a full RUD on the pad, with vehicle and a meaningful chunk of test infrastructure lost. No injuries reported. Early footage suggests an oxidiser-side failure, but the company's only official line so far is 'anomaly under investigation'.</p>
+<p>The optics are bad — New Glenn was finally building a flight cadence after years of delays — and the schedule pain is real, because rebuilding the test stand is on the critical path for the next two contracted launches. SpaceX will keep their grin private; the rest of the industry should not, because a single-provider heavy-lift market is good for nobody.</p></div>
+        <div class="meta mono">
+          <div class="stack"><span class="av hn" title="Hacker News">H</span><span class="av" style="background:#6366f1;color:#fff" title="twitter.com">T</span></div>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>470</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>524</span>
+          <span class="domain">twitter.com</span>
+        </div>
+        <div class="links">
+          <a class="lnk discuss" href="https://news.ycombinator.com/item?id=46100052" target="_blank" rel="noopener">Discussion →</a>
+          <a class="lnk source"  href="https://twitter.com/i/status/blueorigin-new-glenn-anomaly"  target="_blank" rel="noopener">Read source →</a>
+        </div>
+      </div>
+    </li>
+<li class="item" id="i03">
+      <div class="rank mono">3</div>
+      <div class="body">
+        <a class="headline" href="https://www.rockstarintel.com/gta-6-developers-unionize/" target="_blank" rel="noopener">
+          <h3 class="h">GTA 6 developers unionize</h3>
+        </a>
+        <div class="take"><p>Rockstar's North American development staff have voted to form a union — the first wall-to-wall recognition at a tier-1 game studio in the U.S. The vote follows years of organising rounds at smaller studios (Activision QA, ZeniMax, Sega) that suddenly look, in hindsight, like the on-ramp to exactly this.</p>
+<p>Rockstar is, by revenue and cultural footprint, the closest thing the game industry has to a flagship. A union here changes the negotiating baseline for every studio that ships a AAA title, not just for crunch but for IP, severance, and AI-tooling clauses. Watch what Take-Two does next; the rest of the industry will copy that response.</p></div>
+        <div class="meta mono">
+          <div class="stack"><span class="av hn" title="Hacker News">H</span><span class="av" style="background:#f43f5e;color:#fff" title="rockstarintel.com">R</span></div>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>561</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>391</span>
+          <span class="domain">rockstarintel.com</span>
+        </div>
+        <div class="links">
+          <a class="lnk discuss" href="https://news.ycombinator.com/item?id=46099900" target="_blank" rel="noopener">Discussion →</a>
+          <a class="lnk source"  href="https://www.rockstarintel.com/gta-6-developers-unionize/"  target="_blank" rel="noopener">Read source →</a>
+        </div>
+      </div>
+    </li>
+<li class="item" id="i04">
+      <div class="rank mono">4</div>
+      <div class="body">
+        <a class="headline" href="https://obeli.sk/blog/sqlite-durable-workflows" target="_blank" rel="noopener">
+          <h3 class="h">SQLite is all you need for durable workflows</h3>
+        </a>
+        <div class="take"><p>A clean, opinionated walkthrough of building a Temporal-style durable workflow engine on top of SQLite — event sourcing, idempotent replay, leases, the lot — in a single embedded process. The author is honest about where the design breaks (multi-writer at scale, cross-machine recovery) and equally honest about how rarely small teams actually need that.</p>
+<p>Useful as a counterweight to the default 2026 instinct of reaching for a managed orchestrator the moment 'durable' enters a design doc. For a surprising number of internal tools, the boring answer — one file, transactions, and discipline — is also the correct one.</p></div>
+        <div class="meta mono">
+          <div class="stack"><span class="av hn" title="Hacker News">H</span><span class="av" style="background:#c084fc;color:#fff" title="obeli.sk">O</span></div>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>349</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>199</span>
+          <span class="domain">obeli.sk</span>
+        </div>
+        <div class="links">
+          <a class="lnk discuss" href="https://news.ycombinator.com/item?id=46099800" target="_blank" rel="noopener">Discussion →</a>
+          <a class="lnk source"  href="https://obeli.sk/blog/sqlite-durable-workflows"  target="_blank" rel="noopener">Read source →</a>
+        </div>
+      </div>
+    </li>
+<li class="item" id="i05">
+      <div class="rank mono">5</div>
+      <div class="body">
+        <a class="headline" href="https://www.liquid.ai/blog/8b-a1b-moe" target="_blank" rel="noopener">
+          <h3 class="h">Liquid AI reveals 8B-A1B MoE trained on 38T tokens</h3>
+        </a>
+        <div class="take"><p>Liquid's new release is an 8-billion-parameter mixture-of-experts model with one billion active at inference, trained on a genuinely large 38-trillion-token corpus. Benchmarks place it within striking distance of much larger dense models on reasoning and coding tasks, and well ahead on inference cost-per-token.</p>
+<p>The interesting part is not the leaderboard — it's the trajectory. Sparse activation plus aggressive data scaling is increasingly the route to 'good enough at a fraction of the cost', and it is starting to look like the default architecture for the next generation of self-hosted, mid-tier models.</p></div>
+        <div class="meta mono">
+          <div class="stack"><span class="av hn" title="Hacker News">H</span><span class="av" style="background:#ec4899;color:#fff" title="liquid.ai">L</span></div>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>147</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>51</span>
+          <span class="domain">liquid.ai</span>
+        </div>
+        <div class="links">
+          <a class="lnk discuss" href="https://news.ycombinator.com/item?id=46099700" target="_blank" rel="noopener">Discussion →</a>
+          <a class="lnk source"  href="https://www.liquid.ai/blog/8b-a1b-moe"  target="_blank" rel="noopener">Read source →</a>
+        </div>
+      </div>
+    </li>
+<li class="item" id="i06">
+      <div class="rank mono">6</div>
+      <div class="body">
+        <a class="headline" href="https://github.com/home-assistant/core/issues/vw-block" target="_blank" rel="noopener">
+          <h3 class="h">Volkswagen blocks Home Assistant by requiring client assertion</h3>
+        </a>
+        <div class="take"><p>Volkswagen has rolled out a server-side change that demands a signed client assertion from any client talking to its car API, effectively shutting out the Home Assistant integration that thousands of VW/Audi owners use to read state and control their own vehicles. There is no documented developer path to get a legitimate assertion.</p>
+<p>It is the same playbook automakers keep running: collect telemetry from the customer, lock the customer out of their own data, then sell the data back as a subscription. Right-to-repair and 'right-to-read' arguments converge here, and this is the kind of case lawmakers will actually understand because the affected users are loud, organised, and on GitHub.</p></div>
+        <div class="meta mono">
+          <div class="stack"><span class="av hn" title="Hacker News">H</span><span class="av" style="background:#ec4899;color:#fff" title="github.com">G</span></div>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>371</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>180</span>
+          <span class="domain">github.com</span>
+        </div>
+        <div class="links">
+          <a class="lnk discuss" href="https://news.ycombinator.com/item?id=46099600" target="_blank" rel="noopener">Discussion →</a>
+          <a class="lnk source"  href="https://github.com/home-assistant/core/issues/vw-block"  target="_blank" rel="noopener">Read source →</a>
+        </div>
+      </div>
+    </li>
+<li class="item" id="i07">
+      <div class="rank mono">7</div>
+      <div class="body">
+        <a class="headline" href="https://mastrojs.github.io/is-ai-causing-a-repeat-of-frontends-lost-decade/" target="_blank" rel="noopener">
+          <h3 class="h">Is AI causing a repeat of frontend's lost decade?</h3>
+        </a>
+        <div class="take"><p>The thesis: frontend already lived through one decade where churn (Angular → React → Vue → Svelte, then framework-of-the-week) outran any real productivity gain, and the LLM-powered scaffolding boom is doing it again — only this time the throwaway code is being generated faster than the team can read it, let alone maintain it.</p>
+<p>Reasonable people will disagree on whether AI is making this worse or better, but the diagnostic checklist in the post is sharp: are you choosing tools you can debug, generating code you can read, and producing systems someone other than the original author can maintain? Those questions did not get less important when the autocomplete got smarter.</p></div>
+        <div class="meta mono">
+          <div class="stack"><span class="av hn" title="Hacker News">H</span><span class="av" style="background:#22d3ee;color:#0a0a09" title="mastrojs.github.io">M</span></div>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>289</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>247</span>
+          <span class="domain">mastrojs.github.io</span>
+        </div>
+        <div class="links">
+          <a class="lnk discuss" href="https://news.ycombinator.com/item?id=46099500" target="_blank" rel="noopener">Discussion →</a>
+          <a class="lnk source"  href="https://mastrojs.github.io/is-ai-causing-a-repeat-of-frontends-lost-decade/"  target="_blank" rel="noopener">Read source →</a>
+        </div>
+      </div>
+    </li>
+<li class="item" id="i08">
+      <div class="rank mono">8</div>
+      <div class="body">
+        <a class="headline" href="https://www.latimes.com/california/story/uc-faculty-sat-stem-math" target="_blank" rel="noopener">
+          <h3 class="h">Citing 'severe' math deficits, UC faculty demand a return to SAT tests for STEM</h3>
+        </a>
+        <div class="take"><p>Four years after the University of California system dropped standardised testing entirely, a coalition of faculty in math-heavy departments are asking for the SAT back — not as a magic predictor, but as a triage signal for which incoming students need remediation before they hit calculus. They are pointing to internal placement data showing a sharp rise in students unable to clear pre-calc requirements.</p>
+<p>The politics here are radioactive — the original test-optional move was made partly on equity grounds and partly under legal pressure — but the underlying empirical question is fair: when you remove a signal, what fills the void? At UC's scale, 'nothing' is not a sustainable answer.</p></div>
+        <div class="meta mono">
+          <div class="stack"><span class="av hn" title="Hacker News">H</span><span class="av" style="background:#14b8a6;color:#fff" title="latimes.com">L</span></div>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>464</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>661</span>
+          <span class="domain">latimes.com</span>
+        </div>
+        <div class="links">
+          <a class="lnk discuss" href="https://news.ycombinator.com/item?id=46099400" target="_blank" rel="noopener">Discussion →</a>
+          <a class="lnk source"  href="https://www.latimes.com/california/story/uc-faculty-sat-stem-math"  target="_blank" rel="noopener">Read source →</a>
+        </div>
+      </div>
+    </li>
+<li class="item" id="i09">
+      <div class="rank mono">9</div>
+      <div class="body">
+        <a class="headline" href="https://www.theregister.com/2026/05/29/microsoft_zero_day_feud/" target="_blank" rel="noopener">
+          <h3 class="h">Microsoft 0-day feud escalates as researcher threatens another exploit dump</h3>
+        </a>
+        <div class="take"><p>Continuation of last week's GitHub takedown saga: the researcher whose Windows zero-day repos were yanked is now threatening a coordinated dump of additional exploits unless Microsoft restores access and clarifies its coordinated-disclosure terms. Microsoft has stayed publicly silent and is reportedly readying mitigations.</p>
+<p>Set aside the personalities for a moment and the underlying tension is the actual story: a vendor that also owns the world's largest code-hosting platform has structural power over the researchers auditing its products. Until that conflict gets resolved by policy — not by individual flame wars — expect more of these standoffs.</p></div>
+        <div class="meta mono">
+          <div class="stack"><span class="av hn" title="Hacker News">H</span><span class="av" style="background:#f43f5e;color:#fff" title="theregister.com">T</span></div>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>170</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>54</span>
+          <span class="domain">theregister.com</span>
+        </div>
+        <div class="links">
+          <a class="lnk discuss" href="https://news.ycombinator.com/item?id=46099300" target="_blank" rel="noopener">Discussion →</a>
+          <a class="lnk source"  href="https://www.theregister.com/2026/05/29/microsoft_zero_day_feud/"  target="_blank" rel="noopener">Read source →</a>
+        </div>
+      </div>
+    </li>
+<li class="item" id="i10">
+      <div class="rank mono">10</div>
+      <div class="body">
+        <a class="headline" href="https://koenvangilst.nl/blog/mistral-ai-now-summit-notes" target="_blank" rel="noopener">
+          <h3 class="h">Notes from the Mistral AI Now Summit</h3>
+        </a>
+        <div class="take"><p>Detailed, on-the-ground notes from Mistral's two-day developer summit: new agentic primitives, a meaningfully cheaper hosted-model tier, and a clear pivot toward European data-sovereignty pitches aimed at enterprise. Less performative than OpenAI's stage shows, more useful per minute.</p>
+<p>The interesting strategic shift is that Mistral is no longer trying to win on raw frontier capability — they are trying to win on 'good enough, cheaper, in your jurisdiction'. That is a sensible market to own in 2026, and one the U.S. labs are structurally bad at competing for.</p></div>
+        <div class="meta mono">
+          <div class="stack"><span class="av hn" title="Hacker News">H</span><span class="av" style="background:#84cc16;color:#0a0a09" title="koenvangilst.nl">K</span></div>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>309</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>109</span>
+          <span class="domain">koenvangilst.nl</span>
+        </div>
+        <div class="links">
+          <a class="lnk discuss" href="https://news.ycombinator.com/item?id=46099200" target="_blank" rel="noopener">Discussion →</a>
+          <a class="lnk source"  href="https://koenvangilst.nl/blog/mistral-ai-now-summit-notes"  target="_blank" rel="noopener">Read source →</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+  <section class="uac">
+  <div class="uac-h"><span class="arr">↑</span><h2>Up &amp; coming</h2></div>
+  <ul>
+<li>
+        <span class="lab mono">jeffgeerling.com</span>
+        <div class="m-body">
+          <a href="https://www.jeffgeerling.com/blog/2026/framework-12-review" target="_blank" rel="noopener">It's hard to justify buying a Framework 12</a>
+          <span class="m-blurb">Geerling's honest take on Framework's smallest laptop: lovely concept, awkward price, and a use case that mostly belongs to a tablet or a Pi.</span>
+          <a class="m-discuss mono" href="https://news.ycombinator.com/item?id=46099100" target="_blank" rel="noopener">discuss →</a>
+        </div>
+      </li>
+<li>
+        <span class="lab mono">techcrunch.com</span>
+        <div class="m-body">
+          <a href="https://techcrunch.com/2026/05/29/robinhood-ai-agents-trading/" target="_blank" rel="noopener">Robinhood now lets your AI agents trade stocks</a>
+          <span class="m-blurb">Programmable agent trading on a retail brokerage. What could possibly go wrong, asks the 160-comment thread, in 160 different ways.</span>
+          <a class="m-discuss mono" href="https://news.ycombinator.com/item?id=46099000" target="_blank" rel="noopener">discuss →</a>
+        </div>
+      </li>
+<li>
+        <span class="lab mono">dutchreview.com</span>
+        <div class="m-body">
+          <a href="https://dutchreview.com/culture/tulip-mania/" target="_blank" rel="noopener">Tulip mania: when a single flower was worth more than a house (2025)</a>
+          <span class="m-blurb">Recurring HN comfort read, brought back into rotation this week for reasons one can probably guess from the AI valuations a few items up.</span>
+          <a class="m-discuss mono" href="https://news.ycombinator.com/item?id=46098900" target="_blank" rel="noopener">discuss →</a>
+        </div>
+      </li>
+<li>
+        <span class="lab mono">github.com</span>
+        <div class="m-body">
+          <a href="https://github.com/tinyvllm/tiny-vllm" target="_blank" rel="noopener">Show HN: Tiny-vLLM — high performance LLM inference engine in C++ and CUDA</a>
+          <span class="m-blurb">A from-scratch C++/CUDA inference engine aimed at clarity over feature parity. Great codebase to read if you want to actually understand how vLLM works.</span>
+          <a class="m-discuss mono" href="https://news.ycombinator.com/item?id=46098800" target="_blank" rel="noopener">discuss →</a>
+        </div>
+      </li>
+  </ul>
+</section>
+
+  <div class="footer-note">
+    <b>dAILY</b> /HN · in the spirit of <a href="https://di.gg" target="_blank" rel="noopener">di.gg</a> · curated for Anuj
+  </div>
+</div>
+<script>
+  // reading-progress thread
+  (function () {
+    const t = document.getElementById('thread');
+    function set() {
+      const h = document.documentElement;
+      const max = (h.scrollHeight - h.clientHeight) || 1;
+      const p = Math.max(0, Math.min(1, h.scrollTop / max));
+      t.style.width = (p * 100).toFixed(2) + '%';
+    }
+    window.addEventListener('scroll', set, { passive: true });
+    window.addEventListener('resize', set);
+    set();
+  })();
+</script>
+</body>
+</html>

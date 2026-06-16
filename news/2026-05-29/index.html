@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>dAILY /HN — Friday · 29 May 2026</title>
+<meta name="description" content="Opus 4.8 lands, Anthropic raises a continent, GitHub picks a fight with a researcher, and a $200k Lego heist somehow gets the front page." />
+<meta name="theme-color" content="#0a0a09" />
+<meta property="og:title" content="dAILY /HN — Friday · 29 May 2026" />
+<meta property="og:description" content="Opus 4.8 lands, Anthropic raises a continent, GitHub picks a fight with a researcher, and a $200k Lego heist somehow gets the front page." />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="anujsh.com" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:url" content="https://anujsh.com/news/" />
+<meta property="article:author" content="Anuj Sharma" />
+<meta property="article:published_time" content="2026-05-29" />
+<meta property="article:section" content="Technology" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@waahbete" />
+<meta name="twitter:creator" content="@waahbete" />
+<meta name="twitter:title" content="dAILY /HN — Friday · 29 May 2026" />
+<meta name="twitter:description" content="Opus 4.8 lands, Anthropic raises a continent, GitHub picks a fight with a researcher, and a $200k Lego heist somehow gets the front page." />
+<meta name="author" content="Anuj Sharma" />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+<meta name="keywords" content="hacker news, daily digest, tech news, curated, Friday · 29 May 2026" />
+<link rel="canonical" href="https://anujsh.com/news/" />
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%230a0a09'/><text x='16' y='22' font-family='monospace' font-weight='800' font-size='16' text-anchor='middle' fill='%23f4f4ee'>d</text></svg>" />
+<style>
+  :root {
+    --bg: #0a0a09;
+    --bg-2: #111110;
+    --card: #141413;
+    --card-2: #1a1a18;
+    --line: #232321;
+    --line-2: #2c2c29;
+    --fg: #f4f4ee;
+    --muted: #a8a8a0;
+    --muted-2: #6f6f68;
+    --muted-3: #4a4a45;
+    --accent: #ff6a36;
+    --blue: #93c5fd;
+    --pos: #4ade80;
+    --warn: #f4d975;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg); color: var(--fg);
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  .mono, .mono * {
+    font-family: ui-monospace, "JetBrains Mono", "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-feature-settings: "tnum" 1, "ss01" 1;
+  }
+  ::selection { background: var(--accent); color: white; }
+
+  .wrap {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 18px 18px 80px;
+  }
+  @media (min-width: 900px) {
+    .wrap { max-width: 760px; padding: 28px 28px 96px; }
+  }
+
+  /* ── topbar ── */
+  .topbar {
+    display: flex; align-items: center;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 22px;
+  }
+  .brand { display: flex; align-items: center; gap: 8px; }
+  .brand a { color: var(--fg); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+  .brand .slug {
+    color: var(--muted-2); font-size: 14px; margin-top: 2px;
+    font-family: ui-monospace, "JetBrains Mono", "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    letter-spacing: 0.02em;
+  }
+  .topbar .right { margin-left: auto; }
+  .issue {
+    color: var(--muted-2);
+    font-family: ui-monospace, "JetBrains Mono", "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .issue b { color: var(--fg); font-weight: 600; }
+
+  /* ── highlights ── */
+  .h-label {
+    font-family: ui-monospace, "JetBrains Mono", "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted-2); margin-bottom: 10px;
+  }
+  .highlights {
+    display: flex; gap: 10px;
+    overflow-x: auto;
+    margin: 0 -18px 28px;
+    padding: 0 18px 6px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+  }
+  .highlights::-webkit-scrollbar { height: 6px; }
+  .highlights::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 3px; }
+  .h-card {
+    flex: 0 0 86%;
+    background: var(--card);
+    border: 1px solid var(--line-2);
+    border-radius: 14px;
+    padding: 14px;
+    scroll-snap-align: start;
+    display: flex; flex-direction: column; gap: 10px;
+    min-height: 168px;
+  }
+  @media (min-width: 900px) {
+    .h-card { flex-basis: 47%; }
+  }
+  .h-card a { color: inherit; text-decoration: none; }
+  .h-card a:hover h3 { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+  .h-card h3 {
+    margin: 0;
+    font-family: ui-monospace, "JetBrains Mono", "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 16px; line-height: 1.35; font-weight: 600;
+    letter-spacing: -0.005em;
+  }
+  .h-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: ui-monospace, "JetBrains Mono", "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600;
+  }
+  .h-tag.miss { color: var(--accent); }
+  .h-tag.rise { color: var(--blue); }
+  .h-tag.warn { color: var(--warn); }
+  .h-tag svg { width: 12px; height: 12px; stroke: currentColor; fill: currentColor; opacity: 0.95; }
+  .h-tag.miss svg, .h-tag.warn svg { fill: currentColor; stroke: none; }
+  .h-meta {
+    margin-top: auto;
+    display: flex; align-items: center; gap: 10px;
+    color: var(--muted-2);
+    font-size: 12px;
+    font-family: ui-monospace, "JetBrains Mono", "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  }
+
+  .stack { display: inline-flex; align-items: center; }
+  .stack .av {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--line-2);
+    border: 2px solid var(--card);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 9px; font-weight: 700; color: var(--fg);
+    margin-left: -7px; overflow: hidden;
+  }
+  .stack .av:first-child { margin-left: 0; }
+  .stack .av.hn { background: var(--accent); color: white; }
+  .stack .av.more { background: var(--card-2); color: var(--muted); font-size: 8px; }
+  .pill {
+    display: inline-flex; align-items: center; padding: 1px 8px; border-radius: 999px;
+    background: var(--card-2); border: 1px solid var(--line-2);
+    color: var(--muted); font-size: 11px;
+    font-family: ui-monospace, "JetBrains Mono", "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  .pill.fire { color: var(--accent); border-color: rgba(255,106,54,.45); }
+
+  /* ── section header ── */
+  .sec-h { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+  .sec-h h2 { margin: 0; font-size: 22px; letter-spacing: -0.015em; font-weight: 700; }
+  .sec-h .when { color: var(--muted); font-size: 18px; font-weight: 400; }
+  .tagline { color: var(--muted); font-size: 14px; line-height: 1.55; max-width: 60ch; margin: 4px 0 14px; }
+  .stats-strip {
+    display: flex; flex-wrap: wrap; gap: 6px 12px;
+    color: var(--muted-2);
+    font-family: ui-monospace, "JetBrains Mono", "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase;
+    padding: 8px 0 16px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 4px;
+  }
+  .stats-strip .k { color: var(--muted); }
+  .stats-strip .v { color: var(--fg); margin-left: 4px; }
+  .stats-strip .sep { color: var(--line-2); }
+  .stats-strip .filed { color: var(--muted); }
+
+  /* ── lead full ── */
+  .lead-full {
+    padding: 28px 0 32px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 4px;
+  }
+  .lead-meta {
+    display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center;
+    color: var(--muted-2);
+    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .lead-meta .rank { color: var(--accent); font-weight: 600; letter-spacing: 0.16em; }
+  .lead-meta .domain { color: var(--blue); }
+  .lead-meta .sep { color: var(--line-2); }
+  .lead-h {
+    margin: 0 0 14px;
+    font-size: clamp(24px, 3.8vw, 34px);
+    line-height: 1.18;
+    letter-spacing: -0.01em;
+    font-weight: 700;
+    text-wrap: balance;
+  }
+  .lead-h a { color: var(--fg); text-decoration: none; }
+  .lead-h a:hover { text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px; }
+  .pull {
+    margin: 16px 0;
+    padding: 14px 16px 14px 18px;
+    border-left: 3px solid var(--accent);
+    background: linear-gradient(90deg, rgba(255,106,54,.08), transparent 80%);
+    color: var(--fg);
+    font-size: 17px; line-height: 1.45;
+    display: flex; gap: 12px; align-items: flex-start;
+  }
+  .pull svg { width: 18px; height: 18px; fill: var(--accent); flex-shrink: 0; margin-top: 4px; }
+  .lead-take { color: var(--muted); font-size: 15px; line-height: 1.65; max-width: 65ch; }
+  .lead-take p { margin: 0 0 12px; }
+  .lead-take p:last-child { margin-bottom: 0; }
+
+  /* ── feed ── */
+  .feed { list-style: none; margin: 0; padding: 0; }
+  .item {
+    display: flex; gap: 14px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: flex-start;
+  }
+  .item .rank {
+    width: 28px; flex-shrink: 0;
+    color: var(--muted-2);
+    font-size: 14px; font-weight: 500;
+    padding-top: 2px;
+    line-height: 1.4;
+  }
+  .item .body { flex: 1; min-width: 0; }
+  .item .headline { color: var(--fg); text-decoration: none; }
+  .item .headline:hover h3 { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+  h3.h {
+    font-size: 16px; line-height: 1.32;
+    letter-spacing: -0.005em;
+    margin: 0 0 8px; font-weight: 600;
+  }
+  .item .take { color: var(--muted); font-size: 14px; line-height: 1.55; margin-bottom: 10px; }
+  .item .take p { margin: 0 0 6px; }
+  .item .take p:last-child { margin-bottom: 0; }
+  .meta {
+    display: flex; align-items: center; flex-wrap: wrap;
+    gap: 4px 12px;
+    font-size: 12px; color: var(--muted-2);
+    margin-bottom: 10px;
+  }
+  .meta .ico { display: inline-flex; align-items: center; gap: 4px; }
+  .meta svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .meta .domain { color: var(--blue); margin-left: auto; }
+
+  /* ── action chips ── */
+  .links { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  a.lnk {
+    display: inline-flex; align-items: center;
+    font-family: ui-monospace, "JetBrains Mono", "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 4px 9px; border-radius: 6px;
+    color: var(--muted);
+    border: 1px solid var(--line-2);
+    background: var(--card);
+    text-decoration: none;
+    transition: color .15s, background .15s, border-color .15s;
+  }
+  a.lnk:hover { color: var(--fg); background: var(--card-2); border-color: var(--muted-3); }
+  a.lnk.discuss:hover { color: white; background: var(--accent); border-color: var(--accent); }
+  a.lnk.source:hover  { color: var(--bg); background: var(--blue); border-color: var(--blue); }
+
+  /* ── mentions / up & coming ── */
+  .uac { margin: 28px 0 0; padding: 18px 0 4px; border-top: 1px solid var(--line); }
+  .uac-h { display: flex; align-items: baseline; gap: 8px; margin-bottom: 14px; }
+  .uac-h h2 {
+    margin: 0; font-size: 14px;
+    font-family: ui-monospace, "JetBrains Mono", "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); font-weight: 600;
+  }
+  .uac-h .arr { color: var(--accent); }
+  .uac ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
+  .uac li { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; line-height: 1.5; }
+  .uac .lab {
+    flex-shrink: 0; min-width: 90px; max-width: 110px;
+    font-size: 11px; color: var(--muted-2);
+    text-transform: lowercase; letter-spacing: 0.04em;
+    padding-top: 1px;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .uac .m-body { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  .uac a { color: var(--fg); text-decoration: none; }
+  .uac a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .uac .m-blurb { color: var(--muted); font-size: 13px; }
+  .uac .m-discuss {
+    align-self: flex-start;
+    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--muted-2); text-decoration: none;
+  }
+  .uac .m-discuss:hover { color: var(--accent); }
+
+  /* ── footer ── */
+  .footer-note {
+    margin-top: 36px; padding-top: 18px;
+    border-top: 1px dashed var(--line-2);
+    text-align: center;
+    color: var(--muted-3);
+    font-family: ui-monospace, "JetBrains Mono", "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px; letter-spacing: 0.06em;
+  }
+  .footer-note b { color: var(--muted-2); font-weight: 500; }
+  .footer-note a { color: var(--muted-2); text-decoration: none; }
+  .footer-note a:hover { color: var(--accent); }
+
+  /* reading-progress thread */
+  #thread {
+    position: fixed; top: 0; left: 0;
+    height: 2px; width: 0%;
+    background: var(--accent);
+    z-index: 50;
+    transition: width .12s linear;
+    box-shadow: 0 0 8px rgba(255,106,54,.5);
+  }
+</style>
+</head>
+<body>
+<div id="thread"></div>
+<div class="wrap">
+  <div class="topbar">
+    <div class="brand">
+      <a href="/hn/" aria-label="dAILY home">
+        <svg width="86" height="22" viewBox="0 0 86 22" aria-label="dAILY">
+          <g fill="currentColor">
+            <rect x="0"  y="0"  width="3" height="22"/>
+            <rect x="0"  y="0"  width="9" height="3"/>
+            <rect x="0"  y="19" width="9" height="3"/>
+            <rect x="6"  y="3"  width="3" height="16"/>
+            <rect x="13" y="0"  width="9" height="3"/>
+            <rect x="13" y="3"  width="3" height="19"/>
+            <rect x="19" y="3"  width="3" height="19"/>
+            <rect x="13" y="10" width="9" height="3"/>
+            <rect x="26" y="0"  width="3" height="22"/>
+            <rect x="33" y="0"  width="3" height="22"/>
+            <rect x="33" y="19" width="9" height="3"/>
+            <rect x="46" y="0"  width="3" height="11"/>
+            <rect x="55" y="0"  width="3" height="11"/>
+            <rect x="49" y="11" width="6" height="3"/>
+            <rect x="50" y="14" width="3" height="8"/>
+          </g>
+        </svg>
+        <span class="slug">/HN</span>
+      </a>
+    </div>
+    <div class="right issue">ISSUE&nbsp;<b>№114</b></div>
+  </div>
+
+  <div class="h-label"><span>Highlights</span></div>
+
+  <div class="highlights" role="list">
+<div class="h-card lead-card" role="listitem">
+      <div class="h-tag miss"><svg viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg> STORY OF THE DAY</div>
+      <a href="https://www.anthropic.com/news/claude-opus-4-8" target="_blank" rel="noopener">
+        <h3>Claude Opus 4.8</h3>
+      </a>
+      <div class="h-meta">
+        <div class="stack"><span class="av hn" title="Hacker News">H</span><span class="av" style="background:#eab308;color:#0a0a09" title="anthropic.com">A</span></div>
+        <span class="pill fire">▲ 1,209</span>
+        <span class="pill">💬 983</span>
+      </div>
+    </div>
+<div class="h-card" role="listitem">
+      <div class="h-tag rise"><svg viewBox="0 0 24 24"><path d="m3 17 6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg> MOST DISCUSSED</div>
+      <a href="https://www.anthropic.com/news/series-h" target="_blank" rel="noopener">
+        <h3>Anthropic raises $65B Series H at $965B post-money valuation</h3>
+      </a>
+      <div class="h-meta">
+        <div class="stack"><span class="av hn" title="Hacker News">H</span><span class="av" style="background:#eab308;color:#0a0a09" title="anthropic.com">A</span></div>
+        <span class="pill">💬 254</span>
+      </div>
+    </div>
+<div class="h-card" role="listitem">
+      <div class="h-tag warn"><svg viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg> #1 LIKED</div>
+      <a href="https://www.dbos.dev/blog/postgres-is-all-you-need-for-durable-execution" target="_blank" rel="noopener">
+        <h3>Building durable workflows on Postgres</h3>
+      </a>
+      <div class="h-meta">
+        <div class="stack"><span class="av hn" title="Hacker News">H</span><span class="av" style="background:#6366f1;color:#fff" title="dbos.dev">D</span></div>
+        <span class="pill fire">▲ 263</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-h">
+    <h2>Top Stories,</h2>
+    <span class="when">Friday · 29 May 2026.</span>
+  </div>
+  <p class="tagline">Opus 4.8 lands, Anthropic raises a continent, GitHub picks a fight with a researcher, and a $200k Lego heist somehow gets the front page.</p>
+
+  <div class="stats-strip mono">
+    <span><span class="k">SCANNED:</span><span class="v">59</span></span>
+    <span class="sep">|</span>
+    <span><span class="k">TOP:</span><span class="v">▲ 1,209</span></span>
+    <span class="sep">|</span>
+    <span><span class="k">COMMENTS:</span><span class="v">1,580</span></span>
+    <span class="sep">|</span>
+    <span><span class="k">READ:</span><span class="v">9m</span></span>
+    <span class="sep">|</span>
+    <span class="filed">FILED 29 May 2026 · 07:00 IST</span>
+  </div>
+
+  <article class="lead-full" id="lead">
+      <div class="lead-meta mono">
+        <span class="rank">№ 01 · STORY OF THE DAY</span>
+        <span class="sep">·</span>
+        <span class="domain">anthropic.com</span>
+        <span class="sep">·</span>
+        <span>▲ 1,209</span>
+        <span class="sep">·</span>
+        <span>💬 983</span>
+      </div>
+      <h2 class="lead-h">
+        <a href="https://www.anthropic.com/news/claude-opus-4-8" target="_blank" rel="noopener">Claude Opus 4.8</a>
+      </h2>
+      <blockquote class="pull"><svg viewBox="0 0 24 24"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg><span>Opus 4.8 ships in the same week Anthropic prices itself like an OPEC member — make of that what you will.</span></blockquote>
+      <div class="lead-take"><p>Opus 4.8 is the second point release in the 4-series and the first one I'd call clearly worth the rename. Long-horizon coding is notably better, the agent reliability story is improving in a measurable way (fewer mid-task confabulations, more 'I am stuck, here is why' admissions), and the price/quota line has finally stopped sliding the wrong way for heavy users.</p>
+<p>The interesting subplot is the company arc behind it. Opus 4.8 lands the same week Anthropic announces a $65B Series H at a $965B post-money — i.e., they have raised more capital this round than most public software companies are worth in total. The product had better keep compounding at this clip, because the valuation has stopped pretending to be a multiple of anything you can model. For builders today, the practical question is small and concrete: does 4.8 reduce the babysitting needed to ship a real workflow? My early read: yes, modestly, on coding agents; less clearly elsewhere.</p></div>
+      <div class="links">
+        <a class="lnk discuss" href="https://news.ycombinator.com/item?id=46094000" target="_blank" rel="noopener">Discussion →</a>
+        <a class="lnk source"  href="https://www.anthropic.com/news/claude-opus-4-8"  target="_blank" rel="noopener">Read source →</a>
+      </div>
+    </article>
+
+  <ul class="feed">
+<li class="item" id="i02">
+      <div class="rank mono">2</div>
+      <div class="body">
+        <a class="headline" href="https://www.anthropic.com/news/series-h" target="_blank" rel="noopener">
+          <h3 class="h">Anthropic raises $65B Series H at $965B post-money valuation</h3>
+        </a>
+        <div class="take"><p>The capital stack now reads less like a startup and more like a sovereign wealth allocation. $65B in a single round, a near-trillion-dollar paper valuation, and a clear signal that the frontier-lab race is going to be settled by who can afford the next two GPU buildouts, not who can win a benchmark.</p>
+<p>Whether or not you believe the number, the second-order effects are real: compute prices to enterprise customers, hiring gravity in the Bay Area, and the pace at which everyone else either consolidates or gets quietly acquired. Read it as a macro event, not a fundraising headline.</p></div>
+        <div class="meta mono">
+          <div class="stack"><span class="av hn" title="Hacker News">H</span><span class="av" style="background:#eab308;color:#0a0a09" title="anthropic.com">A</span></div>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>250</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>254</span>
+          <span class="domain">anthropic.com</span>
+        </div>
+        <div class="links">
+          <a class="lnk discuss" href="https://news.ycombinator.com/item?id=46093800" target="_blank" rel="noopener">Discussion →</a>
+          <a class="lnk source"  href="https://www.anthropic.com/news/series-h"  target="_blank" rel="noopener">Read source →</a>
+        </div>
+      </div>
+    </li>
+<li class="item" id="i03">
+      <div class="rank mono">3</div>
+      <div class="body">
+        <a class="headline" href="https://www.dbos.dev/blog/postgres-is-all-you-need-for-durable-execution" target="_blank" rel="noopener">
+          <h3 class="h">Building durable workflows on Postgres</h3>
+        </a>
+        <div class="take"><p>DBOS makes the case — fairly persuasively — that you don't need Temporal, you don't need a queue, you don't need Step Functions; you need Postgres and a clear contract for what 'durable' means. The post walks through how their runtime stores execution state as ordinary rows and recovers crashed workflows via idempotent replay.</p>
+<p>Worth reading even if you have no intention of adopting DBOS. The pattern — write your business logic as plain functions, let the runtime checkpoint and recover — is increasingly how thoughtful teams are structuring backend code in 2026.</p></div>
+        <div class="meta mono">
+          <div class="stack"><span class="av hn" title="Hacker News">H</span><span class="av" style="background:#6366f1;color:#fff" title="dbos.dev">D</span></div>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>263</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>111</span>
+          <span class="domain">dbos.dev</span>
+        </div>
+        <div class="links">
+          <a class="lnk discuss" href="https://news.ycombinator.com/item?id=46093400" target="_blank" rel="noopener">Discussion →</a>
+          <a class="lnk source"  href="https://www.dbos.dev/blog/postgres-is-all-you-need-for-durable-execution"  target="_blank" rel="noopener">Read source →</a>
+        </div>
+      </div>
+    </li>
+<li class="item" id="i04">
+      <div class="rank mono">4</div>
+      <div class="body">
+        <a class="headline" href="https://llmgame.scalex.dev" target="_blank" rel="noopener">
+          <h3 class="h">Show HN: Continue? Y/N — a 60-second game about AI-agent permission fatigue</h3>
+        </a>
+        <div class="take"><p>Brilliant little browser toy that reframes a real problem: every consequential agent eventually drowns its operator in approval prompts. You play the operator, and you have one minute to either ship value or save your data. It's funny on purpose, sharp by accident.</p>
+<p>If you are designing anything that asks humans to approve agent actions — coding assistants, ops bots, autonomous workflows — play this for five minutes before you finalise the UX. You will learn more about decision fatigue than from any blog post on the topic.</p></div>
+        <div class="meta mono">
+          <div class="stack"><span class="av hn" title="Hacker News">H</span><span class="av" style="background:#14b8a6;color:#fff" title="llmgame.scalex.dev">L</span></div>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>240</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>111</span>
+          <span class="domain">llmgame.scalex.dev</span>
+        </div>
+        <div class="links">
+          <a class="lnk discuss" href="https://news.ycombinator.com/item?id=46093100" target="_blank" rel="noopener">Discussion →</a>
+          <a class="lnk source"  href="https://llmgame.scalex.dev"  target="_blank" rel="noopener">Read source →</a>
+        </div>
+      </div>
+    </li>
+<li class="item" id="i05">
+      <div class="rank mono">5</div>
+      <div class="body">
+        <a class="headline" href="https://shvbsle.in/various-llm-smells/" target="_blank" rel="noopener">
+          <h3 class="h">Various LLM smells</h3>
+        </a>
+        <div class="take"><p>A patient, slightly grumpy catalog of code-review smells in LLM-generated patches: trivial wrapper functions, premature abstractions, helpful-sounding comments that actively lie about behaviour, and the cardinal sin of 'fixing' tests by editing the assertions. Each one comes with a real-world example.</p>
+<p>Read it as the maintainer's mirror image of 'AI agents will replace junior engineers' essays. Both can be true: agents do real work, and they also leave behind a recognisable bouquet of mistakes that humans should still be paid to find.</p></div>
+        <div class="meta mono">
+          <div class="stack"><span class="av hn" title="Hacker News">H</span><span class="av" style="background:#14b8a6;color:#fff" title="shvbsle.in">S</span></div>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>219</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>162</span>
+          <span class="domain">shvbsle.in</span>
+        </div>
+        <div class="links">
+          <a class="lnk discuss" href="https://news.ycombinator.com/item?id=46092900" target="_blank" rel="noopener">Discussion →</a>
+          <a class="lnk source"  href="https://shvbsle.in/various-llm-smells/"  target="_blank" rel="noopener">Read source →</a>
+        </div>
+      </div>
+    </li>
+<li class="item" id="i06">
+      <div class="rank mono">6</div>
+      <div class="body">
+        <a class="headline" href="https://taoofmac.com/space/blog/2026/05/26/1730" target="_blank" rel="noopener">
+          <h3 class="h">Indoor Wi-Fi roaming with OpenWRT</h3>
+        </a>
+        <div class="take"><p>A careful, tested walkthrough of setting up 802.11r / k / v on cheap APs running OpenWRT, with the kind of detail you only get from someone who has actually debugged sticky-client weirdness at 2am. Includes the exact config snippets, not just the 'enable fast transition' hand-wave.</p>
+<p>If you have ever yelled at your phone for clinging to the wrong access point as you walked across your apartment, this is the post. Bonus: the comments section is the closest HN gets to a useful network-engineering forum.</p></div>
+        <div class="meta mono">
+          <div class="stack"><span class="av hn" title="Hacker News">H</span><span class="av" style="background:#6366f1;color:#fff" title="taoofmac.com">T</span></div>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>207</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>106</span>
+          <span class="domain">taoofmac.com</span>
+        </div>
+        <div class="links">
+          <a class="lnk discuss" href="https://news.ycombinator.com/item?id=46092700" target="_blank" rel="noopener">Discussion →</a>
+          <a class="lnk source"  href="https://taoofmac.com/space/blog/2026/05/26/1730"  target="_blank" rel="noopener">Read source →</a>
+        </div>
+      </div>
+    </li>
+<li class="item" id="i07">
+      <div class="rank mono">7</div>
+      <div class="body">
+        <a class="headline" href="https://nick.winans.io/blog/nice-nano/" target="_blank" rel="noopener">
+          <h3 class="h">I made a million-dollar product from my dorm room (2025)</h3>
+        </a>
+        <div class="take"><p>Story of nice!nano — the wireless mechanical-keyboard controller that quietly became the standard for split, low-power custom boards. A frank breakdown of pricing, BOM, supplier headaches, and the moment a hobbyist project crossed into 'business that needs decisions'.</p>
+<p>Pleasingly honest about both the luck (right niche, right moment) and the work (years of unpaid firmware effort before anyone cared). The opposite genre to most 'I made $X' posts: more solder than spreadsheets.</p></div>
+        <div class="meta mono">
+          <div class="stack"><span class="av hn" title="Hacker News">H</span><span class="av" style="background:#22d3ee;color:#0a0a09" title="nick.winans.io">N</span></div>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>175</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>21</span>
+          <span class="domain">nick.winans.io</span>
+        </div>
+        <div class="links">
+          <a class="lnk discuss" href="https://news.ycombinator.com/item?id=46092500" target="_blank" rel="noopener">Discussion →</a>
+          <a class="lnk source"  href="https://nick.winans.io/blog/nice-nano/"  target="_blank" rel="noopener">Read source →</a>
+        </div>
+      </div>
+    </li>
+<li class="item" id="i08">
+      <div class="rank mono">8</div>
+      <div class="body">
+        <a class="headline" href="https://www.tomshardware.com/tech-industry/cyber-security/microsofts-github-bans-security-researcher-who-posted-zero-day-windows-exploits-because-company-ruined-their-life-expert-claims-action-is-vindictive-and-promises-further-retaliation" target="_blank" rel="noopener">
+          <h3 class="h">GitHub bans security researcher who posted zero-day Windows exploits</h3>
+        </a>
+        <div class="take"><p>The researcher published proof-of-concept exploits for Windows vulnerabilities, GitHub yanked the repos under MS's coordinated-disclosure rules, and now the account itself is gone. The researcher claims this is retaliation; Microsoft says it's policy enforcement.</p>
+<p>Either way it is a genuine norms question: where does a security researcher's GitHub identity live when GitHub belongs to one of the vendors they are auditing? The conflict of interest has been latent for years; this is one of the cleanest cases of it surfacing publicly.</p></div>
+        <div class="meta mono">
+          <div class="stack"><span class="av hn" title="Hacker News">H</span><span class="av" style="background:#38bdf8;color:#fff" title="tomshardware.com">T</span></div>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>156</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>70</span>
+          <span class="domain">tomshardware.com</span>
+        </div>
+        <div class="links">
+          <a class="lnk discuss" href="https://news.ycombinator.com/item?id=46092300" target="_blank" rel="noopener">Discussion →</a>
+          <a class="lnk source"  href="https://www.tomshardware.com/tech-industry/cyber-security/microsofts-github-bans-security-researcher-who-posted-zero-day-windows-exploits-because-company-ruined-their-life-expert-claims-action-is-vindictive-and-promises-further-retaliation"  target="_blank" rel="noopener">Read source →</a>
+        </div>
+      </div>
+    </li>
+<li class="item" id="i09">
+      <div class="rank mono">9</div>
+      <div class="body">
+        <a class="headline" href="https://www.chiark.greenend.org.uk/~sgtatham/quasiblog/tron-legacy/" target="_blank" rel="noopener">
+          <h3 class="h">Nitpicking the shell-history scene in Tron: Legacy</h3>
+        </a>
+        <div class="take"><p>An almost loving frame-by-frame teardown of the famous 'history | grep' moment in Tron: Legacy — which shells could have produced that output, which couldn't, and what the prop team almost certainly typed to stage it. The kind of essay only HN rewards.</p>
+<p>Worth your eight minutes purely as a craft piece on observation and inference. Also a useful reminder that even bad on-screen Unix is better Unix than most films attempt.</p></div>
+        <div class="meta mono">
+          <div class="stack"><span class="av hn" title="Hacker News">H</span><span class="av" style="background:#84cc16;color:#0a0a09" title="chiark.greenend.org.uk">C</span></div>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>144</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>56</span>
+          <span class="domain">chiark.greenend.org.uk</span>
+        </div>
+        <div class="links">
+          <a class="lnk discuss" href="https://news.ycombinator.com/item?id=46092100" target="_blank" rel="noopener">Discussion →</a>
+          <a class="lnk source"  href="https://www.chiark.greenend.org.uk/~sgtatham/quasiblog/tron-legacy/"  target="_blank" rel="noopener">Read source →</a>
+        </div>
+      </div>
+    </li>
+<li class="item" id="i10">
+      <div class="rank mono">10</div>
+      <div class="body">
+        <a class="headline" href="https://www.jeffgeerling.com/blog/2026/news-about-raspberry-pi-6-and-microcontroller-development/" target="_blank" rel="noopener">
+          <h3 class="h">News about Raspberry Pi 6 and microcontroller development</h3>
+        </a>
+        <div class="take"><p>Geerling's read on what's coming in the Pi 6 timeline, the RP-series microcontroller roadmap, and where the Foundation is putting its engineering bets. As usual with him: half hardware reporting, half ecosystem politics, all useful if you ship anything that boots from an SD card.</p>
+<p>The buried lede is the microcontroller piece — RP2350 successors look like they will quietly eat a real chunk of the low-end ARM Cortex market over the next two years.</p></div>
+        <div class="meta mono">
+          <div class="stack"><span class="av hn" title="Hacker News">H</span><span class="av" style="background:#10b981;color:#fff" title="jeffgeerling.com">J</span></div>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>142</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>107</span>
+          <span class="domain">jeffgeerling.com</span>
+        </div>
+        <div class="links">
+          <a class="lnk discuss" href="https://news.ycombinator.com/item?id=46091900" target="_blank" rel="noopener">Discussion →</a>
+          <a class="lnk source"  href="https://www.jeffgeerling.com/blog/2026/news-about-raspberry-pi-6-and-microcontroller-development/"  target="_blank" rel="noopener">Read source →</a>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+  <section class="uac">
+  <div class="uac-h"><span class="arr">↑</span><h2>Up &amp; coming</h2></div>
+  <ul>
+<li>
+        <span class="lab mono">mybricklog.com</span>
+        <div class="m-body">
+          <a href="https://mybricklog.com/blog/bricks-minifigs-corporate-stole-old-mans-200000-lego-collection" target="_blank" rel="noopener">Bricks and Minifigs corporate stole a man's $200k Lego collection</a>
+          <span class="m-blurb">A consignment deal goes sideways and a hobbyist's life's work disappears into a franchise's inventory; HN turns it into a 315-comment debate on retail fiduciary duty.</span>
+          <a class="m-discuss mono" href="https://news.ycombinator.com/item?id=46091700" target="_blank" rel="noopener">discuss →</a>
+        </div>
+      </li>
+<li>
+        <span class="lab mono">science.org</span>
+        <div class="m-body">
+          <a href="https://www.science.org/content/article/i-hated-writing-until-i-learned-there-s-science-it" target="_blank" rel="noopener">I hated writing until I learned there's a science to it (2024)</a>
+          <span class="m-blurb">A working scientist on treating the writing process as a craft you can debug. Quietly more useful than most 'how to write' books.</span>
+          <a class="m-discuss mono" href="https://news.ycombinator.com/item?id=46091500" target="_blank" rel="noopener">discuss →</a>
+        </div>
+      </li>
+<li>
+        <span class="lab mono">sfstandard.com</span>
+        <div class="m-body">
+          <a href="https://sfstandard.com/2026/05/28/sf-startup-secretly-testing-robots-airbnbs-trashing-lawsuit-claims/" target="_blank" rel="noopener">SF startup is testing robots in Airbnbs and trashing them, lawsuit claims</a>
+          <span class="m-blurb">Move fast and break someone else's furniture: a humanoid-robotics outfit is being sued for using short-term rentals as covert test labs.</span>
+          <a class="m-discuss mono" href="https://news.ycombinator.com/item?id=46091300" target="_blank" rel="noopener">discuss →</a>
+        </div>
+      </li>
+<li>
+        <span class="lab mono">coalton-lang.github.io</span>
+        <div class="m-body">
+          <a href="https://coalton-lang.github.io/" target="_blank" rel="noopener">Coalton — a statically typed Lisp with ideas from Haskell and OCaml</a>
+          <span class="m-blurb">Common Lisp's macro power plus Hindley-Milner types. A small but interesting attempt to bring the ML world into the SBCL runtime.</span>
+          <a class="m-discuss mono" href="https://news.ycombinator.com/item?id=46091100" target="_blank" rel="noopener">discuss →</a>
+        </div>
+      </li>
+  </ul>
+</section>
+
+  <div class="footer-note">
+    <b>dAILY</b> /HN · in the spirit of <a href="https://di.gg" target="_blank" rel="noopener">di.gg</a> · curated for Anuj
+  </div>
+</div>
+<script>
+  // reading-progress thread
+  (function () {
+    const t = document.getElementById('thread');
+    function set() {
+      const h = document.documentElement;
+      const max = (h.scrollHeight - h.clientHeight) || 1;
+      const p = Math.max(0, Math.min(1, h.scrollTop / max));
+      t.style.width = (p * 100).toFixed(2) + '%';
+    }
+    window.addEventListener('scroll', set, { passive: true });
+    window.addEventListener('resize', set);
+    set();
+  })();
+</script>
+</body>
+</html>

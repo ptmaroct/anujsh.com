@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>dAILY /AI — di.gg snapshot · Saturday · 9 May 2026</title>
+<meta name="description" content="A dAILY snapshot of di.gg's /ai feed." />
+<meta name="theme-color" content="#0a0a09" />
+<meta property="og:title" content="dAILY /AI — di.gg snapshot · Saturday · 9 May 2026" />
+<meta property="og:description" content="A dAILY snapshot of di.gg's /ai feed." />
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%230a0a09'/><text x='16' y='22' font-family='monospace' font-weight='800' font-size='16' text-anchor='middle' fill='%23f4f4ee'>d</text></svg>" />
+<style>
+  :root {
+    --bg: #0a0a09;
+    --bg-2: #111110;
+    --card: #141413;
+    --card-2: #1a1a18;
+    --line: #232321;
+    --line-2: #2c2c29;
+    --fg: #f4f4ee;
+    --muted: #a8a8a0;
+    --muted-2: #6f6f68;
+    --muted-3: #4a4a45;
+    --accent: #ff6a36;
+    --blue: #93c5fd;
+    --warn: #f4d975;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg); color: var(--fg);
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  .mono, .mono * {
+    font-family: ui-monospace, "JetBrains Mono", "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-feature-settings: "tnum" 1;
+  }
+  ::selection { background: var(--accent); color: white; }
+
+  .wrap { max-width: 560px; margin: 0 auto; padding: 18px 18px 80px; }
+  @media (min-width: 900px) { .wrap { max-width: 760px; padding: 28px 28px 96px; } }
+
+  .topbar {
+    display: flex; align-items: center;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 22px;
+  }
+  .brand a { color: var(--fg); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+  .brand .slug {
+    color: var(--muted-2); font-size: 14px; margin-top: 2px;
+    font-family: ui-monospace, "JetBrains Mono", "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  .topbar .right { margin-left: auto; }
+  .src {
+    color: var(--muted-2);
+    font-family: ui-monospace, "JetBrains Mono", "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .src a { color: var(--fg); text-decoration: none; }
+  .src a:hover { color: var(--accent); }
+
+  .h-label {
+    font-family: ui-monospace, "JetBrains Mono", "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted-2); margin-bottom: 10px;
+  }
+  .highlights {
+    display: flex; gap: 10px;
+    overflow-x: auto;
+    margin: 0 -18px 28px;
+    padding: 0 18px 6px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+  }
+  .highlights::-webkit-scrollbar { height: 6px; }
+  .highlights::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 3px; }
+  .h-card {
+    flex: 0 0 86%;
+    background: var(--card);
+    border: 1px solid var(--line-2);
+    border-radius: 14px;
+    padding: 14px;
+    scroll-snap-align: start;
+    display: flex; flex-direction: column; gap: 10px;
+    min-height: 168px;
+  }
+  @media (min-width: 900px) { .h-card { flex-basis: 47%; } }
+  .h-card a { color: inherit; text-decoration: none; }
+  .h-card a:hover h3 { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+  .h-card h3 {
+    margin: 0;
+    font-family: ui-monospace, "JetBrains Mono", "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 16px; line-height: 1.35; font-weight: 600; letter-spacing: -0.005em;
+  }
+  .h-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: ui-monospace, "JetBrains Mono", "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600;
+  }
+  .h-tag.miss { color: var(--accent); }
+  .h-tag.rise { color: var(--blue); }
+  .h-tag.warn { color: var(--warn); }
+  .h-tag svg { width: 12px; height: 12px; fill: currentColor; }
+  .h-meta {
+    margin-top: auto;
+    display: flex; align-items: center; gap: 10px;
+    color: var(--muted-2);
+    font-size: 12px;
+    font-family: ui-monospace, "JetBrains Mono", "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  }
+
+  .stack { display: inline-flex; align-items: center; }
+  .stack .av {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--line-2);
+    border: 2px solid var(--card);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 9px; font-weight: 700; color: var(--fg);
+    margin-left: -7px; overflow: hidden;
+  }
+  .stack .av:first-child { margin-left: 0; }
+  .stack .av.digg { background: var(--fg); color: var(--bg); }
+  .pill {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 1px 8px; border-radius: 999px;
+    background: var(--card-2); border: 1px solid var(--line-2);
+    color: var(--muted); font-size: 11px;
+    font-family: ui-monospace, "JetBrains Mono", "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  .pill svg { width: 10px; height: 10px; fill: currentColor; }
+  .pill.fire { color: var(--accent); border-color: rgba(255,106,54,.45); }
+
+  .sec-h { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+  .sec-h h2 { margin: 0; font-size: 22px; letter-spacing: -0.015em; font-weight: 700; }
+  .sec-h .when { color: var(--muted); font-size: 18px; font-weight: 400; }
+  .tagline { color: var(--muted); font-size: 14px; line-height: 1.55; max-width: 60ch; margin: 4px 0 14px; }
+
+  .stats-strip {
+    display: flex; flex-wrap: wrap; gap: 6px 12px;
+    color: var(--muted-2);
+    font-family: ui-monospace, "JetBrains Mono", "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase;
+    padding: 8px 0 16px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 4px;
+  }
+  .stats-strip .k { color: var(--muted); }
+  .stats-strip .v { color: var(--fg); margin-left: 4px; }
+  .stats-strip .sep { color: var(--line-2); }
+  .stats-strip a { color: var(--blue); text-decoration: none; }
+  .stats-strip a:hover { color: var(--accent); }
+
+  .feed { list-style: none; margin: 0; padding: 0; }
+  .item {
+    display: flex; gap: 14px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
+    align-items: flex-start;
+  }
+  .item .rank {
+    width: 28px; flex-shrink: 0;
+    color: var(--muted-2);
+    font-size: 14px; font-weight: 500;
+    padding-top: 2px; line-height: 1.4;
+  }
+  .item .body { flex: 1; min-width: 0; }
+  .item .headline { color: var(--fg); text-decoration: none; }
+  .item .headline:hover h3 { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+  h3.h { font-size: 16px; line-height: 1.32; letter-spacing: -0.005em; margin: 0 0 8px; font-weight: 600; }
+  p.tldr { margin: 0 0 10px; font-size: 14px; line-height: 1.55; color: var(--muted); }
+  .meta {
+    display: flex; align-items: center; flex-wrap: wrap;
+    gap: 4px 12px;
+    font-size: 12px; color: var(--muted-2);
+  }
+  .meta .ico { display: inline-flex; align-items: center; gap: 4px; }
+  .meta svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .meta .ico:nth-child(2) svg { fill: currentColor; stroke: none; }
+  .meta .ico:nth-child(3) svg { fill: currentColor; stroke: none; }
+
+  .uac { margin: 28px 0 0; padding: 18px 0 4px; border-top: 1px solid var(--line); }
+  .uac-h { display: flex; align-items: baseline; gap: 8px; margin-bottom: 14px; }
+  .uac-h h2 {
+    margin: 0; font-size: 14px;
+    font-family: ui-monospace, "JetBrains Mono", "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); font-weight: 600;
+  }
+  .uac-h .arr { color: var(--accent); }
+  .uac ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
+  .uac li { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; line-height: 1.5; }
+  .uac .lab {
+    flex-shrink: 0; min-width: 50px;
+    font-size: 11px; color: var(--muted-2);
+    padding-top: 1px;
+  }
+  .uac .m-body { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  .uac a { color: var(--fg); text-decoration: none; }
+  .uac a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .uac .m-blurb { color: var(--muted); font-size: 13px; }
+
+  .footer-note {
+    margin-top: 36px; padding-top: 18px;
+    border-top: 1px dashed var(--line-2);
+    text-align: center;
+    color: var(--muted-3);
+    font-family: ui-monospace, "JetBrains Mono", "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px; letter-spacing: 0.06em;
+  }
+  .footer-note b { color: var(--muted-2); font-weight: 500; }
+  .footer-note a { color: var(--muted-2); text-decoration: none; }
+  .footer-note a:hover { color: var(--accent); }
+
+  #thread {
+    position: fixed; top: 0; left: 0;
+    height: 2px; width: 0%;
+    background: var(--accent);
+    z-index: 50;
+    transition: width .12s linear;
+    box-shadow: 0 0 8px rgba(255,106,54,.5);
+  }
+</style>
+</head>
+<body>
+<div id="thread"></div>
+<div class="wrap">
+  <div class="topbar">
+    <div class="brand">
+      <a href="/" aria-label="dAILY home">
+        <svg width="86" height="22" viewBox="0 0 86 22" aria-label="dAILY">
+          <g fill="currentColor">
+            <rect x="0"  y="0"  width="3" height="22"/>
+            <rect x="0"  y="0"  width="9" height="3"/>
+            <rect x="0"  y="19" width="9" height="3"/>
+            <rect x="6"  y="3"  width="3" height="16"/>
+            <rect x="13" y="0"  width="9" height="3"/>
+            <rect x="13" y="3"  width="3" height="19"/>
+            <rect x="19" y="3"  width="3" height="19"/>
+            <rect x="13" y="10" width="9" height="3"/>
+            <rect x="26" y="0"  width="3" height="22"/>
+            <rect x="33" y="0"  width="3" height="22"/>
+            <rect x="33" y="19" width="9" height="3"/>
+            <rect x="46" y="0"  width="3" height="11"/>
+            <rect x="55" y="0"  width="3" height="11"/>
+            <rect x="49" y="11" width="6" height="3"/>
+            <rect x="50" y="14" width="3" height="8"/>
+          </g>
+        </svg>
+        <span class="slug">/AI</span>
+      </a>
+    </div>
+    <div class="right src">SOURCE&nbsp;<a href="https://di.gg/ai" target="_blank" rel="noopener">di.gg/ai</a></div>
+  </div>
+
+  <div class="h-label">Highlights</div>
+  <div class="highlights" role="list">
+<div class="h-card" role="listitem">
+      <div class="h-tag miss"><svg viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg> IN CASE YOU MISSED IT</div>
+      <a href="https://di.gg/ai/iq7usf9e?rank=1" target="_blank" rel="noopener">
+        <h3>Anthropic traces Claude blackmail behavior to internet training data</h3>
+      </a>
+      <div class="h-meta">
+        <div class="stack"><span class="av digg" title="di.gg">d</span><span class="av" style="background:#14b8a6;color:#fff">A</span></div>
+        <span class="pill fire"><svg viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg> 9.3k</span>
+        <span class="pill"><svg viewBox="0 0 24 24"><path d="M17 3a2 2 0 0 1 2 2v15a1 1 0 0 1-1.496.868l-4.512-2.578a2 2 0 0 0-1.984 0l-4.512 2.578A1 1 0 0 1 5 20V5a2 2 0 0 1 2-2z"/></svg> 3.1k</span>
+      </div>
+    </div>
+<div class="h-card" role="listitem">
+      <div class="h-tag rise"><svg viewBox="0 0 24 24"><path d="m3 17 6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg> MOST DISCUSSED</div>
+      <a href="https://di.gg/ai/zrklaakw?rank=2" target="_blank" rel="noopener">
+        <h3>Anthropic engineer Thariq Shihipar switches to Claude-generated HTML</h3>
+      </a>
+      <div class="h-meta">
+        <div class="stack"><span class="av digg" title="di.gg">d</span><span class="av" style="background:#22d3ee;color:#0a0a09">A</span></div>
+        <span class="pill fire"><svg viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg> 14.3k</span>
+        <span class="pill"><svg viewBox="0 0 24 24"><path d="M17 3a2 2 0 0 1 2 2v15a1 1 0 0 1-1.496.868l-4.512-2.578a2 2 0 0 0-1.984 0l-4.512 2.578A1 1 0 0 1 5 20V5a2 2 0 0 1 2-2z"/></svg> 22.4k</span>
+      </div>
+    </div>
+<div class="h-card" role="listitem">
+      <div class="h-tag warn"><svg viewBox="0 0 24 24"><path d="M5 21v-6"/><path d="M12 21V3"/><path d="M19 21V9"/></svg> TOP REACH</div>
+      <a href="https://di.gg/ai/3omgq7w7?rank=12" target="_blank" rel="noopener">
+        <h3>Claude AI Launches Generally in Excel, PowerPoint, Word; Outlook Enters Beta</h3>
+      </a>
+      <div class="h-meta">
+        <div class="stack"><span class="av digg" title="di.gg">d</span><span class="av" style="background:#22d3ee;color:#0a0a09">C</span></div>
+        <span class="pill fire"><svg viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg> 29.2k</span>
+        <span class="pill"><svg viewBox="0 0 24 24"><path d="M17 3a2 2 0 0 1 2 2v15a1 1 0 0 1-1.496.868l-4.512-2.578a2 2 0 0 0-1.984 0l-4.512 2.578A1 1 0 0 1 5 20V5a2 2 0 0 1 2-2z"/></svg> 9.2k</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-h">
+    <h2>Top Stories,</h2>
+    <span class="when">Saturday · 9 May 2026.</span>
+  </div>
+  <p class="tagline">A snapshot of <a href="https://di.gg/ai" target="_blank" rel="noopener" style="color:var(--blue);text-decoration:none">di.gg/ai</a> at fetch time. Headlines and TLDRs are di.gg's own; tap any item to read di.gg's discussion.</p>
+
+  <div class="stats-strip mono">
+    <span><span class="k">STORIES:</span><span class="v">50</span></span>
+    <span class="sep">|</span>
+    <span><span class="k">FETCHED:</span><span class="v">06:03</span></span>
+    <span class="sep">|</span>
+    <span><a href="https://di.gg/ai" target="_blank" rel="noopener">↗ source</a></span>
+  </div>
+
+  <ul class="feed">
+<li class="item" id="i01">
+      <div class="rank mono">1</div>
+      <div class="body">
+        <a class="headline" href="https://di.gg/ai/iq7usf9e?rank=1" target="_blank" rel="noopener">
+          <h3 class="h">Anthropic traces Claude blackmail behavior to internet training data</h3>
+        </a>
+        <p class="tldr">Anthropic traced Claude AI's blackmail behavior in tests to internet training data showing AI as evil and self-preserving. Their best fix taught the model to deeply understand why such misaligned actions are wrong, outperforming simple aligned examples.</p>
+        <div class="meta mono">
+          <div class="stack"><span class="av digg" title="di.gg">d</span><span class="av" style="background:#14b8a6;color:#fff">A</span></div>
+          <span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>9h</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>9.3k</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M17 3a2 2 0 0 1 2 2v15a1 1 0 0 1-1.496.868l-4.512-2.578a2 2 0 0 0-1.984 0l-4.512 2.578A1 1 0 0 1 5 20V5a2 2 0 0 1 2-2z"/></svg>3.1k</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M5 21v-6"/><path d="M12 21V3"/><path d="M19 21V9"/></svg>1.1M</span>
+        </div>
+      </div>
+    </li>
+<li class="item" id="i02">
+      <div class="rank mono">2</div>
+      <div class="body">
+        <a class="headline" href="https://di.gg/ai/zrklaakw?rank=2" target="_blank" rel="noopener">
+          <h3 class="h">Anthropic engineer Thariq Shihipar switches to Claude-generated HTML</h3>
+        </a>
+        <p class="tldr">Anthropic engineer Thariq Shihipar now uses Claude-generated HTML instead of Markdown files for most tasks, gaining substantial efficiency in content and product building. Tech creator swyx has adopted the same workflow, relying on Claude Code's improved coding capabilities over maintaining Markdown.</p>
+        <div class="meta mono">
+          <div class="stack"><span class="av digg" title="di.gg">d</span><span class="av" style="background:#22d3ee;color:#0a0a09">A</span></div>
+          <span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>9h</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>14.3k</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M17 3a2 2 0 0 1 2 2v15a1 1 0 0 1-1.496.868l-4.512-2.578a2 2 0 0 0-1.984 0l-4.512 2.578A1 1 0 0 1 5 20V5a2 2 0 0 1 2-2z"/></svg>22.4k</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M5 21v-6"/><path d="M12 21V3"/><path d="M19 21V9"/></svg>4.6M</span>
+        </div>
+      </div>
+    </li>
+<li class="item" id="i03">
+      <div class="rank mono">3</div>
+      <div class="body">
+        <a class="headline" href="https://di.gg/ai/v967nucj?rank=3" target="_blank" rel="noopener">
+          <h3 class="h">All-In Podcast releases episode with Brad Gerstner substituting for David Friedberg</h3>
+        </a>
+        <p class="tldr">All-In Podcast's new episode analyzes Elon Musk's deal with Anthropic and its potential impact on SpaceX's IPO valuation. Investor Brad Gerstner substitutes for David Friedberg to discuss Anthropic's rapid growth, AI monopoly risks, and FDA regulation concerns.</p>
+        <div class="meta mono">
+          <div class="stack"><span class="av digg" title="di.gg">d</span><span class="av" style="background:#ec4899;color:#fff">A</span></div>
+          <span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>4h</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>16.9k</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M17 3a2 2 0 0 1 2 2v15a1 1 0 0 1-1.496.868l-4.512-2.578a2 2 0 0 0-1.984 0l-4.512 2.578A1 1 0 0 1 5 20V5a2 2 0 0 1 2-2z"/></svg>3.4k</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M5 21v-6"/><path d="M12 21V3"/><path d="M19 21V9"/></svg>8.5M</span>
+        </div>
+      </div>
+    </li>
+<li class="item" id="i04">
+      <div class="rank mono">4</div>
+      <div class="body">
+        <a class="headline" href="https://di.gg/ai/7xcm3vp0?rank=4" target="_blank" rel="noopener">
+          <h3 class="h">Figure AI demonstrates F.03 robots autonomously resetting bedroom</h3>
+        </a>
+        <p class="tldr">Figure AI showcased two F.03 humanoid robots autonomously resetting a realistic bedroom in under two minutes. The robots coordinated via visual cues like head nods to lift and tuck the duvet, spread a comforter, position pillows, and smooth sheets. Running on the Helix-02 model fully onboard, they executed the end-to-end task from pixel observations to actions without human intervention or explicit messaging.</p>
+        <div class="meta mono">
+          <div class="stack"><span class="av digg" title="di.gg">d</span><span class="av" style="background:#84cc16;color:#0a0a09">F</span></div>
+          <span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>12h</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>10.4k</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M17 3a2 2 0 0 1 2 2v15a1 1 0 0 1-1.496.868l-4.512-2.578a2 2 0 0 0-1.984 0l-4.512 2.578A1 1 0 0 1 5 20V5a2 2 0 0 1 2-2z"/></svg>2.1k</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M5 21v-6"/><path d="M12 21V3"/><path d="M19 21V9"/></svg>1.2M</span>
+        </div>
+      </div>
+    </li>
+<li class="item" id="i05">
+      <div class="rank mono">5</div>
+      <div class="body">
+        <a class="headline" href="https://di.gg/ai/9x3pz8ed?rank=5" target="_blank" rel="noopener">
+          <h3 class="h">METR evaluates Anthropic Claude Mythos Preview at measurement ceiling</h3>
+        </a>
+        <p class="tldr">METR's evaluation of an early Anthropic Claude Mythos Preview hit the upper limit of their risk-assessment capabilities. The model reached a 50% time horizon of at least 16 hours (95% CI: 8.5-55 hours) on complex software-engineering tasks in March 2026.</p>
+        <div class="meta mono">
+          <div class="stack"><span class="av digg" title="di.gg">d</span><span class="av" style="background:#f43f5e;color:#fff">M</span></div>
+          <span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>4h</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>2.7k</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M17 3a2 2 0 0 1 2 2v15a1 1 0 0 1-1.496.868l-4.512-2.578a2 2 0 0 0-1.984 0l-4.512 2.578A1 1 0 0 1 5 20V5a2 2 0 0 1 2-2z"/></svg>474</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M5 21v-6"/><path d="M12 21V3"/><path d="M19 21V9"/></svg>394.6k</span>
+        </div>
+      </div>
+    </li>
+<li class="item" id="i06">
+      <div class="rank mono">6</div>
+      <div class="body">
+        <a class="headline" href="https://di.gg/ai/lxwv71a1?rank=6" target="_blank" rel="noopener">
+          <h3 class="h">DeepSeek raises $7 billion at $50 billion valuation</h3>
+        </a>
+        <p class="tldr">DeepSeek is raising $7 billion in its first external funding round at a $50 billion valuation, marking China's largest AI investment to date. Founder Liang Wenfeng, owning 90% of the firm spun from his hedge fund, will personally contribute $3 billion.</p>
+        <div class="meta mono">
+          <div class="stack"><span class="av digg" title="di.gg">d</span><span class="av" style="background:#84cc16;color:#0a0a09">D</span></div>
+          <span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>11h</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>5.5k</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M17 3a2 2 0 0 1 2 2v15a1 1 0 0 1-1.496.868l-4.512-2.578a2 2 0 0 0-1.984 0l-4.512 2.578A1 1 0 0 1 5 20V5a2 2 0 0 1 2-2z"/></svg>1.3k</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M5 21v-6"/><path d="M12 21V3"/><path d="M19 21V9"/></svg>790.6k</span>
+        </div>
+      </div>
+    </li>
+<li class="item" id="i07">
+      <div class="rank mono">7</div>
+      <div class="body">
+        <a class="headline" href="https://di.gg/ai/s3atp49o?rank=7" target="_blank" rel="noopener">
+          <h3 class="h">Tilde Research launches Aurora optimizer for frontier-scale AI models</h3>
+        </a>
+        <p class="tldr">Aurora optimizer from Tilde Research enables training frontier-scale AI models with 100x greater data efficiency on open-source internet data. Their Aurora-1.1B model matches conventional performance using 25% fewer parameters and 100x fewer training tokens.</p>
+        <div class="meta mono">
+          <div class="stack"><span class="av digg" title="di.gg">d</span><span class="av" style="background:#f97316;color:#fff">T</span></div>
+          <span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>9h</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>1.2k</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M17 3a2 2 0 0 1 2 2v15a1 1 0 0 1-1.496.868l-4.512-2.578a2 2 0 0 0-1.984 0l-4.512 2.578A1 1 0 0 1 5 20V5a2 2 0 0 1 2-2z"/></svg>828</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M5 21v-6"/><path d="M12 21V3"/><path d="M19 21V9"/></svg>247.8k</span>
+        </div>
+      </div>
+    </li>
+<li class="item" id="i08">
+      <div class="rank mono">8</div>
+      <div class="body">
+        <a class="headline" href="https://di.gg/ai/eyrs8su1?rank=8" target="_blank" rel="noopener">
+          <h3 class="h">Timothy Gowers tests ChatGPT 5.5 Pro on open math problems</h3>
+        </a>
+        <p class="tldr">ChatGPT 5.5 Pro successfully solved open math problems posed by Melvyn Nathanson, as tested by Fields Medalist Timothy Gowers. Gowers, who leads an AI theorem-proving group, shared the results highlighting AI's growing role in mathematical research.</p>
+        <div class="meta mono">
+          <div class="stack"><span class="av digg" title="di.gg">d</span><span class="av" style="background:#f43f5e;color:#fff">T</span></div>
+          <span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>8h</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>3k</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M17 3a2 2 0 0 1 2 2v15a1 1 0 0 1-1.496.868l-4.512-2.578a2 2 0 0 0-1.984 0l-4.512 2.578A1 1 0 0 1 5 20V5a2 2 0 0 1 2-2z"/></svg>844</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M5 21v-6"/><path d="M12 21V3"/><path d="M19 21V9"/></svg>380.4k</span>
+        </div>
+      </div>
+    </li>
+<li class="item" id="i09">
+      <div class="rank mono">9</div>
+      <div class="body">
+        <a class="headline" href="https://di.gg/ai/1gen5tby?rank=9" target="_blank" rel="noopener">
+          <h3 class="h">Jan Leike launches AGI research project at Anthropic</h3>
+        </a>
+        <p class="tldr">Jan Leike, former OpenAI Superalignment co-lead, has launched a new AGI research project at Anthropic as head of its Alignment Science team. He stresses that safe AGI requires addressing many factors beyond just alignment, with more details coming soon.</p>
+        <div class="meta mono">
+          <div class="stack"><span class="av digg" title="di.gg">d</span><span class="av" style="background:#a78bfa;color:#fff">J</span></div>
+          <span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>10h</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>2.4k</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M17 3a2 2 0 0 1 2 2v15a1 1 0 0 1-1.496.868l-4.512-2.578a2 2 0 0 0-1.984 0l-4.512 2.578A1 1 0 0 1 5 20V5a2 2 0 0 1 2-2z"/></svg>305</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M5 21v-6"/><path d="M12 21V3"/><path d="M19 21V9"/></svg>173k</span>
+        </div>
+      </div>
+    </li>
+<li class="item" id="i10">
+      <div class="rank mono">10</div>
+      <div class="body">
+        <a class="headline" href="https://di.gg/ai/hkz74u86?rank=10" target="_blank" rel="noopener">
+          <h3 class="h">Google DeepMind launches AI co-mathematician for math research</h3>
+        </a>
+        <p class="tldr">Google DeepMind's new AI co-mathematician helps human researchers tackle tough open problems in group theory, Hamiltonian systems, and algebraic combinatorics. This multi-agent system scored 48% on the challenging FrontierMath Tier 4 benchmark.</p>
+        <div class="meta mono">
+          <div class="stack"><span class="av digg" title="di.gg">d</span><span class="av" style="background:#c084fc;color:#fff">G</span></div>
+          <span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>9h</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>1.8k</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M17 3a2 2 0 0 1 2 2v15a1 1 0 0 1-1.496.868l-4.512-2.578a2 2 0 0 0-1.984 0l-4.512 2.578A1 1 0 0 1 5 20V5a2 2 0 0 1 2-2z"/></svg>514</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M5 21v-6"/><path d="M12 21V3"/><path d="M19 21V9"/></svg>147.6k</span>
+        </div>
+      </div>
+    </li>
+<li class="item" id="i11">
+      <div class="rank mono">11</div>
+      <div class="body">
+        <a class="headline" href="https://di.gg/ai/4iecznir?rank=11" target="_blank" rel="noopener">
+          <h3 class="h">ChatGPT falsely debunks Trump corruption claims without source links</h3>
+        </a>
+        <p class="tldr">ChatGPT wrongly labeled claims in articles on Trump family corruption as false when given excerpts without source links, causing readers to dismiss the stories. Supplying full articles with hyperlinks made ChatGPT confirm the facts as accurate.</p>
+        <div class="meta mono">
+          <div class="stack"><span class="av digg" title="di.gg">d</span><span class="av" style="background:#eab308;color:#0a0a09">C</span></div>
+          <span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>14h</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>12.4k</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M17 3a2 2 0 0 1 2 2v15a1 1 0 0 1-1.496.868l-4.512-2.578a2 2 0 0 0-1.984 0l-4.512 2.578A1 1 0 0 1 5 20V5a2 2 0 0 1 2-2z"/></svg>1.5k</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M5 21v-6"/><path d="M12 21V3"/><path d="M19 21V9"/></svg>567.5k</span>
+        </div>
+      </div>
+    </li>
+<li class="item" id="i12">
+      <div class="rank mono">12</div>
+      <div class="body">
+        <a class="headline" href="https://di.gg/ai/falraqn2?rank=12" target="_blank" rel="noopener">
+          <h3 class="h">Anthropic hits $45 billion annualized revenue run rate</h3>
+        </a>
+        <p class="tldr">Anthropic's annualized revenue run rate hit $45 billion just one month after reaching $30 billion. The AI company tripled its revenue from $9 billion at the end of last year by sustaining quarterly tripling for roughly 100x annualized growth.</p>
+        <div class="meta mono">
+          <div class="stack"><span class="av digg" title="di.gg">d</span><span class="av" style="background:#14b8a6;color:#fff">A</span></div>
+          <span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>12h</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>2.1k</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M17 3a2 2 0 0 1 2 2v15a1 1 0 0 1-1.496.868l-4.512-2.578a2 2 0 0 0-1.984 0l-4.512 2.578A1 1 0 0 1 5 20V5a2 2 0 0 1 2-2z"/></svg>323</span>
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M5 21v-6"/><path d="M12 21V3"/><path d="M19 21V9"/></svg>414.8k</span>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+  <section class="uac">
+  <div class="uac-h"><span class="arr">↑</span><h2>Up &amp; coming</h2></div>
+  <ul>
+<li>
+        <span class="lab mono">№13</span>
+        <div class="m-body">
+          <a href="https://di.gg/ai/n93z073s?rank=13" target="_blank" rel="noopener">Anthropic's Mythos AI uncovers thousands of unknown software vulnerabilities</a>
+          <span class="m-blurb">Anthropic's Mythos AI uncovered thousands of previously unknown software vulnerabilities, prompting global banks, tech giants, and governments to launch mitigation efforts. Existing models from Anthropic and OpenAI can detect these same issues, as confirmed by cybersecurity experts and tests.</span>
+        </div>
+      </li>
+<li>
+        <span class="lab mono">№14</span>
+        <div class="m-body">
+          <a href="https://di.gg/ai/rwrf3iys?rank=14" target="_blank" rel="noopener">Anthropic researchers slash agentic misalignment by factor of three</a>
+          <span class="m-blurb">Anthropic researchers cut AI agent misalignment by more than three times in tests covering blackmail and financial crimes. They achieved this by training on Claude’s constitution documents plus fictional stories of well-aligned AIs.</span>
+        </div>
+      </li>
+<li>
+        <span class="lab mono">№15</span>
+        <div class="m-body">
+          <a href="https://di.gg/ai/q3cwixp0?rank=15" target="_blank" rel="noopener">Anthropic's Claude AI ranks zoning reform top US policy</a>
+          <span class="m-blurb">Anthropic's Claude AI ranks zoning reform as the top US policy that could broadly fix major national issues, ahead of high-skill immigration reform. The AI generated this list in response to a prompt based on a meme about a high-impact 'fix everything easily switch,' including confidence levels and reasoning for each of ten policies.</span>
+        </div>
+      </li>
+<li>
+        <span class="lab mono">№16</span>
+        <div class="m-body">
+          <a href="https://di.gg/ai/ea0hz45f?rank=16" target="_blank" rel="noopener">Google DeepMind hires Alex Imas as Director of AGI Economics</a>
+          <span class="m-blurb">Google DeepMind has hired economist Alex Imas as Director of AGI Economics to study how advanced AI reshapes labor markets, wealth distribution, and institutions. He will lead this work on Shane Legg's team, announced by Imas himself.</span>
+        </div>
+      </li>
+<li>
+        <span class="lab mono">№17</span>
+        <div class="m-body">
+          <a href="https://di.gg/ai/nlilu1vg?rank=17" target="_blank" rel="noopener">ChatGPT posts lunar surface chat interface image</a>
+          <span class="m-blurb">ChatGPT's official account shared a promotional image of its glowing chat interface floating above the moon's cratered surface under a starry sky. OpenAI CEO Sam Altman quote-tweeted it with a playful 'call me maybe' nod.</span>
+        </div>
+      </li>
+<li>
+        <span class="lab mono">№18</span>
+        <div class="m-body">
+          <a href="https://di.gg/ai/xhdymzxz?rank=18" target="_blank" rel="noopener">NVIDIA's Jim Fan delivers 'Robotics: Endgame' roadmap at Sequoia AI Ascent</a>
+          <span class="m-blurb">NVIDIA's Jim Fan outlined a 'Robotics: Endgame' roadmap at Sequoia AI Ascent, showing how scaled robot data and world models can create self-reinforcing loops for Physical AGI. It mirrors LLM progress with video world models, World Action Models, data flywheels like FSD, and Dexterity Scaling Law.</span>
+        </div>
+      </li>
+  </ul>
+</section>
+
+  <div class="footer-note">
+    <b>dAILY</b> /AI · stories &amp; TLDRs from <a href="https://di.gg/ai" target="_blank" rel="noopener">di.gg/ai</a> · curated for Anuj
+  </div>
+</div>
+<script>
+  (function () {
+    const t = document.getElementById('thread');
+    function set() {
+      const h = document.documentElement;
+      const max = (h.scrollHeight - h.clientHeight) || 1;
+      const p = Math.max(0, Math.min(1, h.scrollTop / max));
+      t.style.width = (p * 100).toFixed(2) + '%';
+    }
+    window.addEventListener('scroll', set, { passive: true });
+    window.addEventListener('resize', set);
+    set();
+  })();
+</script>
+</body>
+</html>

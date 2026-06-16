@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>Hacker News Digest — Thursday · 7 May 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:        #f7f4ec;
+    --paper-2:      #efe9d9;
+    --ink:          #16120d;
+    --ink-2:        #3a3329;
+    --ink-3:        #6a604f;
+    --rule:         #1d150c;
+    --rule-soft:    #d3c9b1;
+    --orange:       #b9461b;
+    --orange-warm:  #d65b30;
+    --slate:        #1f3d63;
+    --slate-2:      #335a86;
+    --highlight:    #f4d975;
+    --shadow-soft:  0 1px 0 rgba(20,16,12,.06);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  html{
+    background: var(--paper);
+    background-image:
+      radial-gradient(1300px 700px at 8% -10%, rgba(185,70,27,.045), transparent 55%),
+      radial-gradient(1100px 600px at 110% 8%, rgba(31,61,99,.05), transparent 60%);
+    color: var(--ink);
+    font-family: "Source Serif 4", Georgia, serif;
+    font-optical-sizing: auto;
+    font-variation-settings: "opsz" 14;
+    font-size: 19px;
+    line-height: 1.68;
+    font-feature-settings: "onum","liga","kern","ss01";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    hanging-punctuation: first last;
+  }
+  body{ position:relative; min-height:100vh; }
+
+  ::selection{ background: var(--highlight); color: var(--ink) }
+
+  /* ── links ── */
+  a{ color: var(--slate); text-decoration: none;
+     border-bottom: 1px solid color-mix(in srgb, var(--slate) 25%, transparent);
+     transition: color .18s, border-color .18s, background-color .18s; }
+  a:hover{ color: var(--orange); border-bottom-color: var(--orange); }
+
+  a.lnk{
+    font-family:"JetBrains Mono", ui-monospace, monospace;
+    font-size: 11.5px; letter-spacing:.14em; text-transform:uppercase;
+    color: var(--ink-2); border-bottom:none;
+    padding: 4px 10px; margin-right:6px;
+    background: transparent; border:1px solid var(--rule-soft);
+    transition: all .18s ease;
+    display:inline-flex; align-items:center; gap:6px;
+  }
+  a.lnk:hover{ background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  a.lnk.discuss:hover{ background: var(--orange); border-color: var(--orange); color:#fff }
+  a.lnk.source:hover { background: var(--slate); border-color: var(--slate); color:#fff }
+
+  a.permalink{ color: var(--ink); border-bottom: 1px solid transparent; }
+  a.permalink:hover{ color: var(--orange); border-bottom-color: var(--orange); }
+
+  /* ── reading-progress thread ── */
+  #thread{ position:fixed; top:0; left:0; height:2px; width:0%; background:var(--orange); z-index:50; transition:width .12s linear; box-shadow:0 0 8px rgba(185,70,27,.5) }
+
+  /* ── meta strip / sticky ── */
+  .stripe{
+    position: sticky; top: 0; z-index: 30;
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule-soft);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .stripe-inner{
+    max-width: 1140px; margin: 0 auto; padding: 12px 28px;
+    display:flex; justify-content:space-between; align-items:center; gap:20px;
+    font-family:"JetBrains Mono", monospace;
+    font-size: 11.5px; letter-spacing:.18em; text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .stripe .left{ display:flex; gap:14px; align-items:center; flex-wrap:wrap }
+  .stripe .dot{ width:6px;height:6px;border-radius:50%; background:var(--orange); display:inline-block;
+                box-shadow: 0 0 0 3px rgba(185,70,27,.16); animation: pulse 2.4s ease-in-out infinite }
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 3px rgba(185,70,27,.16)} 50%{box-shadow:0 0 0 6px rgba(185,70,27,.04)}}
+  .stripe .nav{ display:flex; gap:14px; opacity:.85 }
+  .stripe .nav a{ border:none; color: var(--ink-2) }
+  .stripe .nav a:hover{ color: var(--orange) }
+
+  /* ── shell ── */
+  .frame{ max-width: 1140px; margin: 0 auto; padding: 28px 28px 120px; }
+
+  /* ── masthead ── */
+  header.mast{
+    padding: 56px 0 36px;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .mast .eyebrow{
+    display:flex; align-items:center; gap:14px; margin-bottom: 18px;
+    font-family:"JetBrains Mono", monospace; font-size: 11.5px; letter-spacing:.22em; text-transform:uppercase; color: var(--orange);
+  }
+  .mast .eyebrow .rule{ flex:1; height:1px; background: var(--rule-soft); }
+  .mast h1{
+    margin: 0;
+    font-family: "Instrument Serif", Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(60px, 9vw, 132px);
+    line-height: .92;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .mast h1 em{
+    font-style: italic; color: var(--orange);
+    font-family: "Instrument Serif", serif;
+  }
+  .mast .tagline{
+    margin-top: 18px;
+    font-family: "Instrument Serif", serif; font-style: italic;
+    font-size: clamp(20px, 2.4vw, 26px); line-height: 1.4;
+    color: var(--ink-2); max-width: 60ch;
+  }
+  .mast .stat-strip{
+    margin-top: 32px;
+    display:grid; grid-template-columns: repeat(4, 1fr); gap: 32px;
+    border-top: 1px solid var(--rule-soft);
+    padding-top: 22px;
+  }
+  .stat-strip .s{ }
+  .stat-strip .s .v{
+    font-family: "Instrument Serif", serif;
+    font-size: clamp(40px, 4.6vw, 56px);
+    line-height: .9; color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+  .stat-strip .s .v em{ font-style: italic; color: var(--orange); padding-left: 2px }
+  .stat-strip .s .l{
+    font-family:"JetBrains Mono", monospace; font-size: 10.5px; letter-spacing:.22em; text-transform:uppercase; color: var(--ink-3);
+    margin-top: 6px;
+  }
+
+  /* ── shared item helpers ── */
+  .meta-line{
+    font-family:"JetBrains Mono", monospace; font-size: 11.5px; letter-spacing:.14em; text-transform:uppercase;
+    color: var(--ink-3); margin-bottom: 10px;
+    display:flex; flex-wrap:wrap; gap: 10px; align-items:center;
+  }
+  .meta-line .domain{ color: var(--orange); font-weight:500 }
+  .meta-line .dot{ opacity: .55 }
+  .meta-line .pts, .meta-line .cmt{ color: var(--ink-2) }
+
+  .tags{ display:inline-flex; gap:6px; margin-left:10px }
+  .tag{
+    font-family:"JetBrains Mono", monospace; font-size: 10px; letter-spacing:.12em; text-transform:uppercase;
+    color: var(--slate); padding: 3px 7px;
+    background: rgba(31,61,99,.07); border-radius: 1px;
+  }
+
+  /* ── lead item ── */
+  .lead{
+    padding: 56px 0;
+    border-bottom: 1px solid var(--rule-soft);
+    display: grid; grid-template-columns: minmax(0, 1fr); gap: 22px;
+    max-width: 78ch;
+  }
+  .lead-meta{
+    font-family:"JetBrains Mono", monospace; font-size: 11.5px; letter-spacing:.18em; text-transform:uppercase;
+    color: var(--ink-3); display:flex; flex-wrap:wrap; gap:10px; align-items:center;
+  }
+  .lead-meta .rank{ color: var(--orange); font-weight: 600 }
+  .lead-meta .dot{ opacity: .5 }
+  .lead-h{
+    margin: 4px 0 8px;
+    font-family: "Instrument Serif", serif;
+    font-weight: 400;
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1.0;
+    letter-spacing: -0.012em;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .lead-h a{ color: inherit; border:none }
+  .lead-h a:hover{ color: var(--orange) }
+
+  .pull{
+    margin: 18px 0 6px;
+    padding: 18px 0 18px 28px;
+    border-left: 3px solid var(--orange);
+    font-family: "Instrument Serif", serif;
+    font-style: italic;
+    font-size: clamp(22px, 2.4vw, 28px);
+    line-height: 1.35;
+    color: var(--ink); max-width: 60ch;
+    background: linear-gradient(90deg, rgba(244,217,117,.18) 0%, transparent 70%);
+  }
+  .pull .qmark{ color: var(--orange); font-size: 1.4em; line-height:0; vertical-align:-.18em; padding: 0 .04em }
+
+  .lead-take{ font-size: 19px; line-height: 1.72; color: var(--ink-2); max-width: 65ch; }
+  .lead-take p{ margin: 0 0 14px }
+  .lead-take p:first-child::first-letter{
+    font-family: "Instrument Serif", serif;
+    float: left; font-size: 4.6em; line-height: .82;
+    padding: 6px 12px 0 0; color: var(--orange);
+    font-style: italic;
+  }
+
+  /* ── items list ── */
+  .items{ padding: 32px 0 8px; }
+  .items-h{
+    display: flex; align-items: center; gap: 18px; margin-bottom: 22px;
+  }
+  .items-h h3{
+    font-family: "Instrument Serif", serif; font-weight: 400;
+    font-size: clamp(26px, 3vw, 34px); margin: 0; color: var(--ink);
+    letter-spacing:-0.01em;
+  }
+  .items-h h3 em{ font-style: italic; color: var(--orange) }
+  .items-h .rule{ flex: 1; height: 1px; background: var(--rule-soft); }
+  .items-h .ix{
+    font-family:"JetBrains Mono", monospace; font-size: 11px; letter-spacing:.22em; text-transform:uppercase; color: var(--ink-3);
+    white-space: nowrap;
+  }
+
+  .item{
+    display: grid;
+    grid-template-columns: 96px minmax(0, 1fr);
+    gap: 24px;
+    padding: 36px 0;
+    border-top: 1px solid var(--rule-soft);
+    transition: background .25s ease;
+  }
+  .item:hover{ background: rgba(244,217,117,.10) }
+  .item-num{
+    font-family: "Instrument Serif", serif;
+    font-size: 64px; line-height: .85; color: var(--orange);
+    font-style: italic; letter-spacing: -.03em;
+    user-select: none;
+  }
+  .item-num span{
+    display:block; font-family:"JetBrains Mono", monospace; font-style:normal;
+    font-size: 10.5px; letter-spacing:.22em; color: var(--ink-3);
+    margin-bottom: 4px;
+  }
+  .item-body{ min-width: 0 }
+  .item-h{
+    margin: 6px 0 12px;
+    font-family: "Instrument Serif", serif;
+    font-weight: 400;
+    font-size: clamp(26px, 2.8vw, 36px);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .item-h a{ color: inherit; border-bottom:none }
+  .item-h a:hover{ color: var(--orange) }
+  .take{
+    font-size: 18.5px; line-height: 1.7;
+    color: var(--ink-2);
+    max-width: 70ch;
+    margin-bottom: 18px;
+  }
+  .take p{ margin: 0 0 12px }
+
+  .links{ display:flex; flex-wrap:wrap; gap: 8px; align-items:center; margin-top: 6px }
+
+  /* ── mentions ── */
+  .mentions{
+    margin-top: 64px; padding-top: 36px;
+    border-top: 1px solid var(--rule-soft);
+  }
+  .mentions h3{
+    font-family: "Instrument Serif", serif; font-style: italic; font-weight: 400;
+    font-size: clamp(28px, 3.2vw, 38px); margin: 0 0 22px; color: var(--orange);
+    letter-spacing: -0.01em;
+  }
+  .mentions ul{
+    list-style: none; padding: 0; margin: 0;
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 40px;
+  }
+  .mentions li{
+    border-top: 1px solid var(--rule-soft); padding-top: 16px;
+  }
+  .mentions .m-h{
+    font-family: "Instrument Serif", serif; font-size: 22px; line-height: 1.2; margin-bottom: 6px;
+  }
+  .mentions .m-h a{ color: var(--ink); border-bottom: 1px solid transparent }
+  .mentions .m-h a:hover{ color: var(--orange); border-bottom-color: var(--orange) }
+  .mentions .m-meta{
+    font-family:"JetBrains Mono", monospace; font-size: 10.5px; letter-spacing:.18em; text-transform:uppercase;
+    color: var(--ink-3); margin-bottom: 8px;
+  }
+  .mentions .m-meta .dom{ color: var(--orange) }
+  .mentions .m-meta .dot{ opacity:.5; padding: 0 2px }
+  .mentions .m-meta a{ color: var(--ink-2); border:none }
+  .mentions .m-meta a:hover{ color: var(--orange) }
+  .mentions .m-blurb{ font-size: 17px; line-height: 1.55; color: var(--ink-2); max-width: 56ch }
+
+  /* ── colophon ── */
+  footer.colophon{
+    margin-top: 80px; padding-top: 28px;
+    border-top: 1px solid var(--rule-soft);
+    display: flex; justify-content: space-between; align-items: flex-end; gap: 24px;
+    font-family:"JetBrains Mono", monospace; font-size: 11px; letter-spacing:.16em; text-transform:uppercase;
+    color: var(--ink-3);
+  }
+  footer .right{ text-align: right }
+  footer strong{ color: var(--ink) }
+  footer .stamp{
+    color: var(--orange); border:1.5px solid var(--orange);
+    padding: 10px 14px; transform: rotate(-3deg); transform-origin: center;
+    font-weight: 600; line-height: 1.4; text-align:center;
+    box-shadow: 0 0 0 4px var(--paper), 0 0 0 5px rgba(185,70,27,.32);
+  }
+  footer .stamp em{ font-family: "Instrument Serif", serif; font-style: italic; font-size: 13px; letter-spacing: .04em; text-transform: none; color: var(--orange); display:block; margin-top:2px }
+
+  /* ── reveal ── */
+  @keyframes rise { from{ opacity:0; transform: translateY(14px) } to{ opacity:1; transform:none } }
+  header.mast, .lead, .items > .items-h{ animation: rise .9s ease both }
+  header.mast{ animation-delay:.05s }
+  .lead{ animation-delay:.18s }
+  .items > .items-h{ animation-delay:.30s }
+  .item{ opacity:0; transform: translateY(12px); transition: opacity .8s ease, transform .8s ease, background .25s ease }
+  .item.in{ opacity:1; transform:none }
+
+  /* ── responsive ── */
+  @media (max-width: 880px){
+    .frame{ padding: 20px 18px 80px }
+    .stripe-inner{ padding: 10px 18px; gap: 12px }
+    .stripe .nav{ display: none }
+    header.mast{ padding: 32px 0 24px }
+    .mast .stat-strip{ grid-template-columns: repeat(2, 1fr); gap: 22px }
+    .lead{ padding: 32px 0 }
+    .item{ grid-template-columns: 1fr; gap: 8px; padding: 28px 0 }
+    .item-num{ font-size: 36px; display:flex; align-items: baseline; gap: 10px }
+    .item-num span{ display:inline-block; margin: 0 }
+    .mentions{ margin-top: 40px }
+    .mentions ul{ grid-template-columns: 1fr; gap: 22px }
+    footer.colophon{ flex-direction: column; align-items: flex-start; gap: 18px }
+    footer .right{ text-align: left }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{ animation:none !important; transition:none !important }
+    .item{ opacity:1; transform:none }
+  }
+</style>
+</head>
+<body>
+
+<div id="thread"></div>
+
+<div class="stripe">
+  <div class="stripe-inner">
+    <div class="left">
+      <span class="dot" aria-hidden="true"></span>
+      <span><strong>HN</strong> Digest</span>
+      <span style="opacity:.55">·</span>
+      <span>Issue № 93</span>
+      <span style="opacity:.55">·</span>
+      <span>Thursday · 7 May 2026</span>
+    </div>
+    <nav class="nav">
+      <a href="#i01">Lead</a>
+      <a href="#all">Stories</a>
+      <a href="#mentions">Mentions</a>
+    </nav>
+  </div>
+</div>
+
+<div class="frame">
+
+  <header class="mast">
+    <div class="eyebrow">
+      <span>Filed 07 May 2026 · 18:00 IST</span>
+      <span class="rule"></span>
+      <span>≈ 6 min read</span>
+    </div>
+    <h1>Hacker <em>News</em>,<br>filed for reading.</h1>
+    <p class="tagline">Agents move into account creation, Chrome ships a 4 GB AI model on the quiet, and SQLite gets a librarian's blessing.</p>
+    <div class="stat-strip">
+      <div class="s"><div class="v">59<em>·</em></div><div class="l">items considered</div></div>
+      <div class="s"><div class="v">1.7k</div><div class="l">top score</div></div>
+      <div class="s"><div class="v">4.6k</div><div class="l">comments aggregated</div></div>
+      <div class="s"><div class="v">10<em>+</em></div><div class="l">curated for you</div></div>
+    </div>
+  </header>
+
+  <article class="lead">
+      <div class="lead-meta">
+        <span class="rank">№ 01 · STORY OF THE DAY</span>
+        <span class="dot">·</span>
+        <span>thatprivacyguy.com</span>
+        <span class="dot">·</span>
+        <span>▲ 1.7k pts · 1.1k comments</span>
+      </div>
+      <h2 class="lead-h">
+        <a href="https://www.thatprivacyguy.com/blog/chrome-silent-nano-install" target="_blank" rel="noopener">Google Chrome silently installs a 4 GB AI model on your device without consent</a>
+      </h2>
+      <blockquote class="pull">
+        <span class="qmark">“</span>If Gemini Nano is becoming a default Chrome dependency, 'it's just a browser' stops being true.<span class="qmark">”</span>
+      </blockquote>
+      <div class="lead-take"><p>A privacy researcher noticed Chrome quietly downloading a multi-gigabyte Gemini Nano model — no prompt, no toggle, no clear opt-out — and the comments confirm this is shipping broadly. Storage isn't the only cost: this is Google folding a private LLM into the install footprint of the world's default browser, on machines whose owners never agreed to host one.</p>
+<p>The defensible read is 'it enables on-device features' — and yes, local inference beats round-trips to a server farm. The harder question the thread keeps circling is consent precedent: once a 4 GB model lands without asking, the next 8 GB one doesn't need to either. For anyone shipping web apps, this also quietly turns 'does the user have an LLM' from a feature flag into an assumption.</p></div>
+      <div class="links">
+        <a class="lnk discuss" href="https://news.ycombinator.com/item?id=48019219" target="_blank" rel="noopener">Discussion →</a>
+        <a class="lnk source"  href="https://www.thatprivacyguy.com/blog/chrome-silent-nano-install"  target="_blank" rel="noopener">Read source →</a>
+        <span class="tags"><span class="tag">browsers</span> <span class="tag">ai</span> <span class="tag">consent</span> <span class="tag">privacy</span></span>
+      </div>
+    </article>
+
+  <section class="items" id="all">
+    <div class="items-h">
+      <h3>The rest of the thread, <em>filtered.</em></h3>
+      <span class="rule"></span>
+      <span class="ix">10 stories</span>
+    </div>
+    <article class="item" id="i02">
+      <div class="item-num"><span>№</span>02</div>
+      <div class="item-body">
+        <div class="meta-line">
+          <span class="domain">blog.cloudflare.com</span>
+          <span class="dot">·</span>
+          <span class="pts">▲ 636 points</span>
+          <span class="dot">·</span>
+          <span class="cmt">362 comments</span>
+        </div>
+        <h3 class="item-h"><a class="permalink" href="https://blog.cloudflare.com/agents-stripe-projects/" target="_blank" rel="noopener">Agents can now create Cloudflare accounts, buy domains, and deploy</a></h3>
+        <div class="take"><p>Cloudflare wired Stripe + their own signup flow into an MCP surface so an agent can spin up an account, buy a domain, and ship a Worker end-to-end. It's the first credible 'agent-as-customer' loop from a major infra vendor — and a preview of how every signup form gets gamed when the buyer is software. Abuse, attribution, and chargebacks will be the interesting bits, not the demo.</p></div>
+        <div class="links">
+          <a class="lnk discuss" href="https://news.ycombinator.com/item?id=48031684" target="_blank" rel="noopener">Discussion →</a>
+          <a class="lnk source"  href="https://blog.cloudflare.com/agents-stripe-projects/"  target="_blank" rel="noopener">Read source →</a>
+          <span class="tags"><span class="tag">agents</span> <span class="tag">infra</span> <span class="tag">cloudflare</span></span>
+        </div>
+      </div>
+    </article>
+<article class="item" id="i03">
+      <div class="item-num"><span>№</span>03</div>
+      <div class="item-body">
+        <div class="meta-line">
+          <span class="domain">simonwillison.net</span>
+          <span class="dot">·</span>
+          <span class="pts">▲ 640 points</span>
+          <span class="dot">·</span>
+          <span class="cmt">703 comments</span>
+        </div>
+        <h3 class="item-h"><a class="permalink" href="https://simonwillison.net/2026/May/6/vibe-coding-and-agentic-engineering/" target="_blank" rel="noopener">Vibe coding and agentic engineering are getting closer than I'd like</a></h3>
+        <div class="take"><p>Simon Willison's clearest piece yet on the collapsing distance between 'just vibe it' and 'production agentic engineering.' His worry: the same tooling now serves a teenager prototyping in a chat window and a senior dev shipping to prod, and the cultural and review practices haven't caught up. Worth reading slowly, even if you've heard the genre.</p></div>
+        <div class="links">
+          <a class="lnk discuss" href="https://news.ycombinator.com/item?id=48037128" target="_blank" rel="noopener">Discussion →</a>
+          <a class="lnk source"  href="https://simonwillison.net/2026/May/6/vibe-coding-and-agentic-engineering/"  target="_blank" rel="noopener">Read source →</a>
+          <span class="tags"><span class="tag">ai</span> <span class="tag">essay</span> <span class="tag">dev</span></span>
+        </div>
+      </div>
+    </article>
+<article class="item" id="i04">
+      <div class="item-num"><span>№</span>04</div>
+      <div class="item-body">
+        <div class="meta-line">
+          <span class="domain">thetypicalset.com</span>
+          <span class="dot">·</span>
+          <span class="pts">▲ 561 points</span>
+          <span class="dot">·</span>
+          <span class="cmt">380 comments</span>
+        </div>
+        <h3 class="item-h"><a class="permalink" href="https://www.thetypicalset.com/blog/thoughts-on-coding-agents" target="_blank" rel="noopener">The bottleneck was never the code</a></h3>
+        <div class="take"><p>A clean, mildly contrarian essay arguing that LLM-accelerated coding has revealed what was already true: writing code wasn't the slow part. Decisions, alignment, review, and the social cost of changing minds are. The author is unusually fair to both 'agents change everything' and 'most engineering work is unaffected' camps.</p></div>
+        <div class="links">
+          <a class="lnk discuss" href="https://news.ycombinator.com/item?id=48006967" target="_blank" rel="noopener">Discussion →</a>
+          <a class="lnk source"  href="https://www.thetypicalset.com/blog/thoughts-on-coding-agents"  target="_blank" rel="noopener">Read source →</a>
+          <span class="tags"><span class="tag">essay</span> <span class="tag">engineering</span> <span class="tag">ai</span></span>
+        </div>
+      </div>
+    </article>
+<article class="item" id="i05">
+      <div class="item-num"><span>№</span>05</div>
+      <div class="item-body">
+        <div class="meta-line">
+          <span class="domain">sqlite.org</span>
+          <span class="dot">·</span>
+          <span class="pts">▲ 352 points</span>
+          <span class="dot">·</span>
+          <span class="cmt">95 comments</span>
+        </div>
+        <h3 class="item-h"><a class="permalink" href="https://sqlite.org/locrsf.html" target="_blank" rel="noopener">SQLite Is a Library of Congress Recommended Storage Format</a></h3>
+        <div class="take"><p>The Library of Congress added SQLite to its formal list of recommended formats for long-term preservation — the same status as PDF/A and TIFF. A quiet but important institutional vote for 'a single file, a public schema, no server' as an archival primitive. If you're hoarding research data in JSON or CSV, this is your nudge.</p></div>
+        <div class="links">
+          <a class="lnk discuss" href="https://news.ycombinator.com/item?id=48042434" target="_blank" rel="noopener">Discussion →</a>
+          <a class="lnk source"  href="https://sqlite.org/locrsf.html"  target="_blank" rel="noopener">Read source →</a>
+          <span class="tags"><span class="tag">sqlite</span> <span class="tag">archival</span> <span class="tag">infra</span></span>
+        </div>
+      </div>
+    </article>
+<article class="item" id="i06">
+      <div class="item-num"><span>№</span>06</div>
+      <div class="item-body">
+        <div class="meta-line">
+          <span class="domain">digitalfoundry.net</span>
+          <span class="dot">·</span>
+          <span class="pts">▲ 1.5k points</span>
+          <span class="dot">·</span>
+          <span class="cmt">498 comments</span>
+        </div>
+        <h3 class="item-h"><a class="permalink" href="https://www.digitalfoundry.net/news/2026/05/valve-releases-steam-controller-cad-files-under-creative-commons-license" target="_blank" rel="noopener">Valve releases Steam Controller CAD files under Creative Commons</a></h3>
+        <div class="take"><p>Valve dropped the original Steam Controller's mechanical CAD under CC, ten years after the hardware shipped. A small but rare gesture from a hardware maker — making the input device hackable, modder-friendly, and eternally repairable. Expect a wave of touchpad-haptic experiments from the homebrew crowd.</p></div>
+        <div class="links">
+          <a class="lnk discuss" href="https://news.ycombinator.com/item?id=48037555" target="_blank" rel="noopener">Discussion →</a>
+          <a class="lnk source"  href="https://www.digitalfoundry.net/news/2026/05/valve-releases-steam-controller-cad-files-under-creative-commons-license"  target="_blank" rel="noopener">Read source →</a>
+          <span class="tags"><span class="tag">hardware</span> <span class="tag">open-source</span> <span class="tag">valve</span></span>
+        </div>
+      </div>
+    </article>
+<article class="item" id="i07">
+      <div class="item-num"><span>№</span>07</div>
+      <div class="item-body">
+        <div class="meta-line">
+          <span class="domain">us.starlabs.systems</span>
+          <span class="dot">·</span>
+          <span class="pts">▲ 659 points</span>
+          <span class="dot">·</span>
+          <span class="cmt">368 comments</span>
+        </div>
+        <h3 class="item-h"><a class="permalink" href="https://us.starlabs.systems/pages/starfighter" target="_blank" rel="noopener">StarFighter 16-Inch</a></h3>
+        <div class="take"><p>Star Labs' new 16-inch Linux-first laptop: open firmware (coreboot), socketed RAM, replaceable everything, and a configurable keyboard matrix. It's the kind of machine that gets argued about more than it gets bought, but the spec sheet is the strongest answer yet to 'where's the actually-repairable Linux laptop.'</p></div>
+        <div class="links">
+          <a class="lnk discuss" href="https://news.ycombinator.com/item?id=48031261" target="_blank" rel="noopener">Discussion →</a>
+          <a class="lnk source"  href="https://us.starlabs.systems/pages/starfighter"  target="_blank" rel="noopener">Read source →</a>
+          <span class="tags"><span class="tag">hardware</span> <span class="tag">linux</span> <span class="tag">right-to-repair</span></span>
+        </div>
+      </div>
+    </article>
+<article class="item" id="i08">
+      <div class="item-num"><span>№</span>08</div>
+      <div class="item-body">
+        <div class="meta-line">
+          <span class="domain">tilde.run</span>
+          <span class="dot">·</span>
+          <span class="pts">▲ 178 points</span>
+          <span class="dot">·</span>
+          <span class="cmt">119 comments</span>
+        </div>
+        <h3 class="item-h"><a class="permalink" href="https://tilde.run/" target="_blank" rel="noopener">Show HN: Tilde.run – Agent sandbox with a transactional, versioned filesystem</a></h3>
+        <div class="take"><p>A sandbox for AI agents where every filesystem write is a transaction you can branch, diff, and roll back — basically Git for runtime state, exposed to the agent. The right primitive for letting agents make a mess and then choosing whether the mess sticks. Worth a look if you're building anything multi-step.</p></div>
+        <div class="links">
+          <a class="lnk discuss" href="https://news.ycombinator.com/item?id=48037724" target="_blank" rel="noopener">Discussion →</a>
+          <a class="lnk source"  href="https://tilde.run/"  target="_blank" rel="noopener">Read source →</a>
+          <span class="tags"><span class="tag">show-hn</span> <span class="tag">agents</span> <span class="tag">dev-tools</span></span>
+        </div>
+      </div>
+    </article>
+<article class="item" id="i09">
+      <div class="item-num"><span>№</span>09</div>
+      <div class="item-body">
+        <div class="meta-line">
+          <span class="domain">shkspr.mobi</span>
+          <span class="dot">·</span>
+          <span class="pts">▲ 147 points</span>
+          <span class="dot">·</span>
+          <span class="cmt">33 comments</span>
+        </div>
+        <h3 class="item-h"><a class="permalink" href="https://shkspr.mobi/blog/2026/05/rss-feeds-send-me-more-traffic-than-google/" target="_blank" rel="noopener">RSS feeds send me more traffic than Google</a></h3>
+        <div class="take"><p>Terence Eden's traffic logs say RSS subscribers now beat Google referrals to his blog. One person's stats aren't a movement, but it's another data point for the 'open web by feed, not search' story that keeps refusing to die. Bring back the reader.</p></div>
+        <div class="links">
+          <a class="lnk discuss" href="https://news.ycombinator.com/item?id=48043964" target="_blank" rel="noopener">Discussion →</a>
+          <a class="lnk source"  href="https://shkspr.mobi/blog/2026/05/rss-feeds-send-me-more-traffic-than-google/"  target="_blank" rel="noopener">Read source →</a>
+          <span class="tags"><span class="tag">web</span> <span class="tag">essay</span> <span class="tag">rss</span></span>
+        </div>
+      </div>
+    </article>
+<article class="item" id="i10">
+      <div class="item-num"><span>№</span>10</div>
+      <div class="item-body">
+        <div class="meta-line">
+          <span class="domain">elonlit.com</span>
+          <span class="dot">·</span>
+          <span class="pts">▲ 205 points</span>
+          <span class="dot">·</span>
+          <span class="cmt">49 comments</span>
+        </div>
+        <h3 class="item-h"><a class="permalink" href="https://elonlit.com/scrivings/a-theory-of-deep-learning/" target="_blank" rel="noopener">A Theory of Deep Learning</a></h3>
+        <div class="take"><p>An ambitious, math-heavy attempt to give deep learning a unifying theoretical frame — closer to a manifesto than a paper. Even where the argument is shaky, the cataloguing of open questions (generalization, scaling, emergence) is unusually clear and worth bookmarking.</p></div>
+        <div class="links">
+          <a class="lnk discuss" href="https://news.ycombinator.com/item?id=48027455" target="_blank" rel="noopener">Discussion →</a>
+          <a class="lnk source"  href="https://elonlit.com/scrivings/a-theory-of-deep-learning/"  target="_blank" rel="noopener">Read source →</a>
+          <span class="tags"><span class="tag">ml</span> <span class="tag">theory</span> <span class="tag">essay</span></span>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section class="mentions" id="mentions">
+    <h3>Honorable mentions</h3>
+    <ul>
+      <li>
+          <div class="m-h"><a href="https://permacomputing.net/principles/" target="_blank" rel="noopener">Permacomputing Principles</a></div>
+          <div class="m-meta"><span class="dom">permacomputing.net</span> <span class="dot">·</span> <a class="lnk" href="https://news.ycombinator.com/item?id=48044638" target="_blank" rel="noopener">discuss</a></div>
+          <div class="m-blurb">A revised manifesto for computing that respects energy and lifespan limits — short, dense, and good for arguing with.</div>
+        </li>
+<li>
+          <div class="m-h"><a href="https://www.stvn.sh/writing/programming-still-sucks-fqffhyp" target="_blank" rel="noopener">Programming Still Sucks</a></div>
+          <div class="m-meta"><span class="dom">stvn.sh</span> <span class="dot">·</span> <a class="lnk" href="https://news.ycombinator.com/item?id=48040269" target="_blank" rel="noopener">discuss</a></div>
+          <div class="m-blurb">Cathartic rant on why most days at a keyboard still feel like fighting tooling, not solving problems.</div>
+        </li>
+<li>
+          <div class="m-h"><a href="http://halupedia.com/" target="_blank" rel="noopener">Show HN: Hallucinopedia</a></div>
+          <div class="m-meta"><span class="dom">halupedia.com</span> <span class="dot">·</span> <a class="lnk" href="https://news.ycombinator.com/item?id=48038257" target="_blank" rel="noopener">discuss</a></div>
+          <div class="m-blurb">A deliberately wrong wiki — every entry hallucinated by an LLM, used as a teaching aid for spotting confident nonsense.</div>
+        </li>
+<li>
+          <div class="m-h"><a href="https://www.anthropic.com/news/higher-limits-spacex" target="_blank" rel="noopener">Higher usage limits for Claude and a compute deal with SpaceX</a></div>
+          <div class="m-meta"><span class="dom">anthropic.com</span> <span class="dot">·</span> <a class="lnk" href="https://news.ycombinator.com/item?id=48037986" target="_blank" rel="noopener">discuss</a></div>
+          <div class="m-blurb">Anthropic raises Claude rate limits and announces a multi-year compute partnership with SpaceX's data-center arm.</div>
+        </li>
+    </ul>
+  </section>
+
+  <footer class="colophon">
+    <div>
+      Set in <strong>Instrument Serif</strong> &amp; <strong>Source Serif&nbsp;4</strong><br>
+      Hand-curated for long-form reading
+    </div>
+    <div class="stamp">Read deeply<em>not the algorithm</em></div>
+    <div class="right">
+      HN Digest © MMXXVI<br>
+      Curated for <strong>Anuj</strong> by Chintu 🐄
+    </div>
+  </footer>
+</div>
+
+<script>
+  const thread = document.getElementById('thread');
+  const onScroll = () => {
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    thread.style.width = max > 0 ? (h.scrollTop / max * 100) + '%' : '0%';
+  };
+  document.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.item').forEach(el=>{ el.classList.remove('in'); io.observe(el); });
+</script>
+</body>
+</html>

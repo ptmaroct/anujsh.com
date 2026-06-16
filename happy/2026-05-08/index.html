@@ -3,29 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<title>Whole&amp;some — Field Journal № 49 · Tuesday · 16 June MMXXVI</title>
-<meta name="description" content="A field journal of good news, pressed and labelled. Wildcats, wind power, and a Viking sword">
-<meta name="theme-color" content="#efe6cd" />
-<meta name="author" content="Anuj Sharma" />
-<meta name="robots" content="index,follow,max-image-preview:large" />
-<meta name="keywords" content="good news, wholesome, daily digest, field journal, Tuesday · 16 June MMXXVI" />
-<link rel="canonical" href="https://anujsh.com/happy/" />
-<meta property="og:title" content="Whole&amp;some — Field Journal № 49 · Tuesday · 16 June MMXXVI" />
-<meta property="og:description" content="A field journal of good news, pressed and labelled. Wildcats, wind power, and a Viking sword" />
-<meta property="og:type" content="article" />
-<meta property="og:site_name" content="anujsh.com" />
-<meta property="og:locale" content="en_US" />
-<meta property="og:url" content="https://anujsh.com/happy/" />
-<meta property="article:author" content="Anuj Sharma" />
-<meta property="article:published_time" content="2026-06-16" />
-<meta property="article:section" content="Good news" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:site" content="@waahbete" />
-<meta name="twitter:creator" content="@waahbete" />
-<meta name="twitter:title" content="Whole&amp;some — Field Journal № 49" />
-<meta name="twitter:description" content="Wildcats, wind power, and a Viking sword" />
-
-<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23efe6cd'/><text x='16' y='22' font-family='Georgia,serif' font-style='italic' font-size='18' text-anchor='middle' fill='%232a1722'>w</text></svg>" />
+<title>Whole&amp;some — Field Journal № 48 · Friday · 8 May MMXXVI</title>
+<meta name="description" content="A field journal of good news, pressed and labelled. Six small reasons the world keeps mending itself, filed before sunrise.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Italiana&family=EB+Garamond:ital,wght@0,400..700;1,400..700&family=Caveat:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -432,16 +411,18 @@ header.mast{
   grid-column: span 4;
   position:relative;
   padding:46px 26px 30px;
-  background:
-    radial-gradient(rgba(44,74,39,.20) .9px, transparent 1.1px) 0 0 / 9px 9px,
-    linear-gradient(180deg, rgba(63,98,56,.16), rgba(63,98,56,.05));
+  background: linear-gradient(180deg, rgba(63,98,56,.16), rgba(63,98,56,.05));
   border:1px solid var(--moss-deep);
   border-radius:2px;
   color:var(--ink); box-shadow: var(--shadow-spec);
   display:flex; flex-direction:column; gap:8px;
-  /* no overflow:hidden — the herbarium label tab needs to peek above the top edge */
+  overflow:hidden;
 }
-.stat .plate{ overflow:hidden }   /* image inside still clipped to its own box */
+.stat::before{
+  content:""; position:absolute; inset:0;
+  background-image: radial-gradient(var(--moss-deep) .9px, transparent 1.1px);
+  background-size: 9px 9px; opacity:.10; pointer-events:none;
+}
 .stat .tag{
   position:absolute; top:-14px; left:20px;
   background:var(--paper); padding:5px 12px;
@@ -917,12 +898,12 @@ body.reader .margins li{
   grid-template-columns: none !important;
   gap: 0 !important;
 }
-body.reader .margins .marker,
-body.reader .margins .arrow{
-  display: none !important;
-}
-body.reader .margins li > span:nth-child(2){
+body.reader .margins .marker{
   display: inline !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace !important;
+  font-size: 11px !important;
+  color: var(--r-muted) !important;
+  margin-right: 6px;
 }
 
 /* Longread → h3 + paragraph */
@@ -1003,9 +984,9 @@ body.reader .reader-toggle{
   <div class="crest">
     <div class="left">
       <span class="seal" aria-hidden="true"></span>
-      <span>Whole&amp;some · Field Journal № 49</span>
+      <span>Whole&amp;some · Field Journal № 48</span>
     </div>
-    <div>Tuesday · 16 June MMXXVI · Bengaluru · IST</div>
+    <div>Friday · 8 May MMXXVI · Bengaluru · IST</div>
   </div>
 
   <header class="mast">
@@ -1017,8 +998,8 @@ body.reader .reader-toggle{
         <circle class="inner" cx="50" cy="50" r="36"/>
         <path id="topArc" d="M 14,50 a 36,36 0 0,1 72,0" fill="none"/>
         <path id="botArc" d="M 14,50 a 36,36 0 0,0 72,0" fill="none"/>
-        <text><textPath href="#topArc" startOffset="50%" text-anchor="middle">PRESSED · 16 · VI · MMXXVI</textPath></text>
-        <text><textPath href="#botArc" startOffset="50%" text-anchor="middle">No. 49 · Bengaluru</textPath></text>
+        <text><textPath href="#topArc" startOffset="50%" text-anchor="middle">PRESSED · 08 · V · MMXXVI</textPath></text>
+        <text><textPath href="#botArc" startOffset="50%" text-anchor="middle">No. 48 · Bengaluru</textPath></text>
         <text x="50" y="54" text-anchor="middle" style="font-size:11px; letter-spacing:.06em; fill:var(--plum)">WHOLE</text>
         <text x="50" y="64" text-anchor="middle" style="font-size:11px; letter-spacing:.06em; fill:var(--plum)">&amp; SOME</text>
       </svg>
@@ -1026,12 +1007,12 @@ body.reader .reader-toggle{
 
     <div class="eyebrow">A field journal of good news</div>
     <h1>Whole<em>&amp;</em>some</h1>
-    <div class="tagline">Wildcats, wind power, and a Viking sword</div>
+    <div class="tagline">Six small reasons the world keeps mending itself, filed before sunrise.</div>
 
     <div class="credentials">
       <span>curated by <em>Chintu</em> 🐄</span>
       <span class="dot" aria-hidden="true"></span>
-      <span>vol. <em>iii</em> · issue <em>xlix</em></span>
+      <span>vol. <em>iii</em> · issue <em>xlviii</em></span>
       <span class="dot" aria-hidden="true"></span>
       <span>read · don't doomscroll</span>
     </div>
@@ -1060,16 +1041,16 @@ body.reader .reader-toggle{
 
   <section class="lead">
     <span class="label">Specimen № 01 · Lead</span>
-    <div class="place">REINTRODUCTION</div>
-    <h2><em>Bettongs</em> back in the outback</h2>
-    <div class="deck">Decades after local extinction, a handful return to Australia’s arid heart.</div>
-    
+    <div class="place">United States · Medicine</div>
+    <h2>A pancreatic cancer drug is set to <em>transform</em> treatment.</h2>
+    <div class="deck">Doctors are calling it a watershed moment for one of the deadliest cancers known to medicine.</div>
+    <figure class="plate hero"><img src="img/lead.jpg" alt="A pancreatic cancer drug is set to transform treatment." loading="lazy"><figcaption class="caption">specimen · lead</figcaption></figure>
     <div class="body">
-      <p>After vanishing from the landscape for generations, burrowing bettongs — small, rabbit-like marsupials — have been released back into the wild in outback Australia.</p>
-      <p>The reintroduction marks a quiet victory for conservationists working to restore lost species.</p>
+      <p>For decades, pancreatic cancer has been the cancer that didn't bend — survival rates barely moving while other tumours softened to therapy. A new targeted drug, reported this week by NBC News, is now showing the kind of response that oncologists rarely allow themselves to call a turning point.</p>
+      <p>Trial physicians are using the phrase "watershed moment" without flinching. The drug doesn't cure the disease, but it shifts the curve — measurably, durably — for patients who, until now, had been handed a near-vertical timeline.</p>
     </div>
-    <div class="why">Every rewilding story is a small proof that extinction isn’t always the end.</div>
-    <div class="src">Source · <a class="line" href="https://www.reddit.com/r/UpliftingNews/comments/1u7113e/decades_after_their_local_extinction_a_handful_of/" target="_blank" rel="noopener">r/UpliftingNews →</a></div>
+    <div class="why">Pancreatic cancer kills nearly 90% of those diagnosed within five years. Anything that meaningfully bends that line is, mathematically, an enormous amount of life clawed back.</div>
+    <div class="src">Source · <a class="line" href="https://www.reddit.com/r/UpliftingNews/comments/1t6p8au/a_watershed_moment_a_pancreatic_cancer_drug_is/" target="_blank" rel="noopener">NBC News via r/UpliftingNews →</a></div>
   </section>
 
   <div class="section-head">
@@ -1079,36 +1060,36 @@ body.reader .reader-toggle{
 
   <section class="specimens">
     <article class="spec wide">
-      <div class="tag"><span class="num">№ 02</span> · <span class="place">SCHOLARSHIPS</span></div>
+      <div class="tag"><span class="num">№ 02</span> · <span class="place">Costa Rica · Wildlife</span></div>
       
-      <h4>Georgia grad offered $17 million</h4>
-      <p class="body">A high school graduate in Georgia received scholarship offers totaling more than $17 million — a life-changing start.</p>
-      <p class="note">Talent meets opportunity. <a class="scrap" href="https://www.reddit.com/r/UpliftingNews/comments/1u6s9kr/high_school_graduate_in_georgia_offered_more_than/" target="_blank" rel="noopener">read it →</a></p>
+      <h4>Costa Rica <em>closes</em> its last state-run zoos.</h4>
+      <p class="body">Nearly 300 animals are being moved from concrete enclosures to sanctuaries, ending a decades-long policy debate about cages in a country that built its tourism economy around wildness.</p>
+      <p class="note">A nation that learned its forests were worth more standing now decides its animals are worth more roaming. <a class="scrap" href="https://www.reddit.com/r/UpliftingNews/comments/1t5wumr/costa_rica_closes_last_staterun_zoos_nearly_300/" target="_blank" rel="noopener">read it →</a></p>
     </article>
     <aside class="stat">
-      <div class="tag">№ 03 · CLEAN ENERGY</div>
-      <div class="figure">2 GW<small>cut</small></div>
-      
-      <p>Evening peak demand slashed by new wind, batteries and rooftop solar in Australia</p>
-      <div class="more"><a class="scrap" href="https://www.reddit.com/r/UpliftingNews/comments/1u6vg6j/in_2026_1_gigawatt_of_extra_wind_1_gw_of_utility/" target="_blank" rel="noopener">more →</a></div>
+      <div class="tag">№ 03 · Netherlands · Oceans</div>
+      <div class="figure">90<small>%</small></div>
+      <figure class="plate thumb" style="margin:8px -4px 6px; aspect-ratio: 16/10;"><img src="img/stat.jpg" alt="Share of floating ocean plastic a Dutch nonprofit now plans to intercept at the river mouth by 2040 — quietly, one waterway at a time." loading="lazy"></figure>
+      <p>Share of floating ocean plastic a Dutch nonprofit now plans to intercept at the river mouth by 2040 — quietly, one waterway at a time.</p>
+      <div class="more"><a class="scrap" href="https://www.positive.news/environment/young-inventor-plans-to-stop-90-of-floating-sea-plastic-by-2040/" target="_blank" rel="noopener">more →</a></div>
     </aside>
     <article class="spec half">
-      <div class="tag"><span class="num">№ 04</span> · <span class="place">ANCIENT FIND</span></div>
-      
-      <h4>6-year-old unearths 1,300-year-old <em>Viking</em> sword</h4>
-      <p class="body">During a school field trip, young Henrik found a Viking sword buried for over a millennium.</p>
-      <p class="note">Childhood wonder, preserved in steel. <a class="scrap" href="https://www.goodnewsnetwork.org/6-year-old-finds-ancient-viking-sword-on-school-field-trip-buried-for-1300-years/" target="_blank" rel="noopener">read it →</a></p>
+      <div class="tag"><span class="num">№ 04</span> · <span class="place">South Korea · Culture</span></div>
+      <figure class="plate card" style="margin-bottom:16px"><img src="img/s2.jpg" alt="Korea blocks AI-generated books from library deposits." loading="lazy"></figure>
+      <h4>Korea <em>blocks</em> AI-generated books from library deposits.</h4>
+      <p class="body">South Korea's national library system has ruled that machine-written titles will no longer count toward legal-deposit collections, drawing the first clean line in Asia between authored and generated work.</p>
+      <p class="note">Libraries, it turns out, are willing to be the grown-ups in the room. <a class="scrap" href="https://www.reddit.com/r/UpliftingNews/comments/1t6781d/breaking_news_korea_blocks_aigenerated_books_from/" target="_blank" rel="noopener">read it →</a></p>
     </article>
     <article class="spec half">
-      <div class="tag"><span class="num">№ 05</span> · <span class="place">ELEPHANT FREEDOM</span></div>
+      <div class="tag"><span class="num">№ 05</span> · <span class="place">California · Water</span></div>
       
-      <h4>Kariba’s long journey to <em>sanctuary</em></h4>
-      <p class="body">After 40 years in captivity, the lonely elephant Kariba is moving to Europe’s first elephant sanctuary in Portugal.</p>
-      <p class="note">Space to roam, and company at last. <a class="scrap" href="https://www.reddit.com/r/UpliftingNews/comments/1u6ojcq/kariba_has_spent_40_years_in_captivity_after/" target="_blank" rel="noopener">read it →</a></p>
+      <h4>San Diego's new desalination plant has water to spare.</h4>
+      <p class="body">The plant is producing so much fresh water that San Diego is now sending some of it to drought-pressed neighbours — turning a once-controversial coastal facility into a regional lifeline.</p>
+      <p class="note">The Pacific, it seems, has become a reservoir we forgot we owned. <a class="scrap" href="https://www.reddit.com/r/UpliftingNews/comments/1t64ju5/new_desalination_plant_gives_san_diego_so_much/" target="_blank" rel="noopener">read it →</a></p>
     </article>
     <div class="scrap-quote">
-      Less scrolling, more play
-      <cite>— UK government on banning social media for under-16s</cite>
+      They are calling it a watershed moment — and for once, the doctors are not the cautious ones.
+      <cite>— from this morning's lead</cite>
     </div>
   </section>
 
@@ -1118,24 +1099,34 @@ body.reader .reader-toggle{
       <span class="sub">things noted in the side of the page —</span>
       <ul>
         <li>
-          <span class="marker">▸ UK</span>
-          <span>Social media ban for kids <a class="line" href="https://www.positive.news/lifestyle/wellbeing/less-scrolling-more-play-uk-to-ban-social-media-for-kids/" target="_blank" rel="noopener">Positive News</a> joining Australia</span>
+          <span class="marker">▸ US</span>
+          <span>Chicago has its first <a class="line" href="https://www.reddit.com/r/UpliftingNews/comments/1t6swcf/meet_the_first_bald_eagle_born_in_chicago_in_over/" target="_blank" rel="noopener">bald eagle hatched within city limits in over a century</a>.</span>
           <span class="arrow">→</span>
         </li>
 <li>
-          <span class="marker">▸ China</span>
-          <span>262,000 fewer air pollution deaths <a class="line" href="https://www.goodnewsnetwork.org/ev-popularity-in-china-accounts-for-262000-fewer-deaths-from-air-pollution/" target="_blank" rel="noopener">Good News Network</a> thanks to EVs</span>
+          <span class="marker">▸ EU</span>
+          <span>Europe's first dedicated elephant sanctuary is now <a class="line" href="https://www.reddit.com/r/UpliftingNews/comments/1t6712j/rewilding_giants_captive_elephants_rehomed_in/" target="_blank" rel="noopener">rehoming captive giants from circuses and zoos</a>.</span>
+          <span class="arrow">→</span>
+        </li>
+<li>
+          <span class="marker">▸ US</span>
+          <span>A CPR instructor went into cardiac arrest mid-class — and <a class="line" href="https://www.reddit.com/r/UpliftingNews/comments/1t6aoem/he_was_teaching_cpr_then_went_into_cardiac_arrest/" target="_blank" rel="noopener">his students saved him</a>.</span>
+          <span class="arrow">→</span>
+        </li>
+<li>
+          <span class="marker">▸ CA</span>
+          <span>A team of Brampton high-schoolers <a class="line" href="https://www.reddit.com/r/UpliftingNews/comments/1t5wx53/defying_stereotypes_a_team_of_high_school/" target="_blank" rel="noopener">won the NASA Space Settlement Contest grand prize</a> — a Canadian first.</span>
           <span class="arrow">→</span>
         </li>
       </ul>
     </div>
 
     <aside class="longread">
-      <div class="tag">REASONS TO BE CHEERFUL</div>
-      
-      <h3>French companies inviting homeless people to sleep in their offices</h3>
-      <p>In Nantes, one marketing agency began offering its empty offices overnight to people sleeping rough — a small, human gesture that’s spreading.</p>
-      <div class="src">Source · <a class="line" href="https://reasonstobecheerful.world/offices-homeless-accommodation/" target="_blank" rel="noopener">Reasons to be Cheerful →</a></div>
+      <div class="tag">Bonus longread · weekly</div>
+      <figure class="plate"><img src="img/longread.jpg" alt="Endangered butterflies are thriving behind bars." loading="lazy"></figure>
+      <h3>Endangered butterflies are thriving behind bars.</h3>
+      <p>Outside a women's prison in Washington state, in a greenhouse run by inmates, trays of host plants cradle the eggs of a species that almost wasn't. The piece is a quiet study in two unlikely rehabilitations happening under the same roof — and in how care, given a place to land, tends to multiply.</p>
+      <div class="src">Source · <a class="line" href="https://reasonstobecheerful.world/prison-conservation-butterflies/" target="_blank" rel="noopener">Reasons to be Cheerful →</a></div>
     </aside>
   </section>
 
